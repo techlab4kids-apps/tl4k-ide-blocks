@@ -468,3 +468,28 @@ Blockly.Blocks['operator_mathop'] = {
     });
   }
 };
+Blockly.Blocks['operator_advlog'] = {
+  /**
+   * Block for better use of logarithm
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.OPERATORS_ADVLOG,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM1",
+        },
+        {
+          "type": "input_value",
+          "name": "NUM2"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
+
+

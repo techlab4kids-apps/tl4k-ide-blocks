@@ -5347,6 +5347,7 @@ Blockly.ScratchMsgs.locales["en"] =
     "OPERATORS_MATHOP_LOG": "log",
     "OPERATORS_MATHOP_EEXP": "e ^",
     "OPERATORS_MATHOP_10EXP": "10 ^",
+    "OPERATORS_MATHOP": "log %1 %2",
     "PROCEDURES_DEFINITION": "define %1",
     "SENSING_TOUCHINGOBJECT": "touching %1?",
     "SENSING_TOUCHINGOBJECT_POINTER": "mouse-pointer",
