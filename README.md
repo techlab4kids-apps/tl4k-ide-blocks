@@ -1,4 +1,4 @@
-# TurboWarp/scratch-blockss
+# TurboWarp/scratch-blocks
 
 ## Playgrounds
 
