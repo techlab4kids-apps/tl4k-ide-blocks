@@ -78,6 +78,7 @@ Blockly.Msg.DATA_INDEX_RANDOM = 'random';
 
 // Event blocks
 Blockly.Msg.EVENT_WHENFLAGCLICKED = 'when %1 clicked';
+Blockly.Msg.EVENT_WHENANYTHING = 'when %1';
 Blockly.Msg.EVENT_WHENTHISSPRITECLICKED = 'when this sprite clicked';
 Blockly.Msg.EVENT_WHENSTAGECLICKED = 'when stage clicked';
 Blockly.Msg.EVENT_WHENTOUCHINGOBJECT = 'when this sprite touches %1';

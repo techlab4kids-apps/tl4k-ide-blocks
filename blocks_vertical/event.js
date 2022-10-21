@@ -326,3 +326,26 @@ Blockly.Blocks['event_whenkeypressed'] = {
     });
   }
 };
+
+
+Blockly.Blocks['event_whenanything'] = {
+  /**
+   * Block for doing something when specified happens
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "event_whenanything",
+      "message0": Blockly.Msg.EVENT_WHENANYTHING,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "BOOL",
+          "check": "Boolean"
+        },
+      ],
+      "category": Blockly.Categories.event,
+      "extensions": ["colours_event", "shape_hat"]
+    });
+  }
+};
