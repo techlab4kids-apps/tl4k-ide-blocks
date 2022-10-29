@@ -1,8 +1,8 @@
-# TurboWarp/scratch-blocks
+# PenguinMod/scratch-blocks
 
-## Playgrounds
+<!-- ## Playgrounds
 
- - **Vertical blocks**: https://turbowarp.github.io/scratch-blocks/tests/vertical_playground_compressed.html
+ - **Vertical blocks**: https://turbowa arp.github.io/scratch-blocks/tests/vertical_playground_compressed.html -->
 
 <!--
 #### Scratch Blocks is a library for building creative computing interfaces.
