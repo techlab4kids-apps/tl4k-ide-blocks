@@ -1,6 +1,7 @@
 name: Rebuild
 on:
   workflow_dispatch:
+  push:
 jobs:
   rebuild:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
@@ -20,3 +21,9 @@ jobs:
         uses: actions/upload-artifact@v3.1.1
         with:
           path: output.zip
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2.0.1
+        with:
+          token: ${{ secrets.t }}
+          event-type: update
+          repository: PenguinMod/PenguinMod-Gui
