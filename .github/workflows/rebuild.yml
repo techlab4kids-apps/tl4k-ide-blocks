@@ -13,14 +13,6 @@ jobs:
         run: |
          npm install
          npm run prepublish
-      - name: Archive
-        uses: ihiroky/archive-action@v1
-        with:
-          root_dir: .
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
-        with:
-          path: output.zip
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.0.1
         with:
