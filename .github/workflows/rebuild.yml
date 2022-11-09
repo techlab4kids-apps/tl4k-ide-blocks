@@ -2,6 +2,8 @@ name: Rebuild
 on:
   workflow_dispatch:
   push:
+    branches:
+      - develop
 jobs:
   rebuild:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
@@ -9,10 +11,36 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      
       - name: Rebuild
         run: |
          npm install
-         npm run prepublish
+         npm run translate
+       
+      - name: Upload built files
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: built
+          path: dist/
+          
+      - name: Checkout to develop-builds
+        uses: actions/checkout@v3
+        with:
+          ref: develop-builds
+      
+      - name: Download built files
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: built
+          path: dist/
+      
+      - name: Commit
+        uses: EndBug/add-and-commit@v9.1.1
+        with:
+          message: "Build"
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
+        
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.0.1
         with:
