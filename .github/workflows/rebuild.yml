@@ -17,22 +17,37 @@ jobs:
          npm install
          npm run translate
        
-      - name: Upload built files
+      - name: Upload built-dist
         uses: actions/upload-artifact@v3.1.1
         with:
-          name: built
-          path: dist/
+          name: built-dist
+          path: dist
+      - name: Upload built-media
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: built-media
+          path: media
           
       - name: Checkout to develop-builds
         uses: actions/checkout@v3
         with:
           ref: develop-builds
       
-      - name: Download built files
+      - name: Clear out things
+        run: |
+          rm -rf dist/*
+          rm -rf media/*
+          
+      - name: Download built-dist
         uses: actions/download-artifact@v3.0.1
         with:
-          name: built
+          name: built-dist
           path: dist/
+      - name: Download built-media
+        uses: actions/download-artifact@v3.0.1
+        with:
+          name: built-media
+          path: media/
       
       - name: Commit
         uses: EndBug/add-and-commit@v9.1.1
