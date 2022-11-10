@@ -192,6 +192,7 @@ Blockly.Msg.OPERATORS_LT = '%1 < %2';
 Blockly.Msg.OPERATORS_EQUALS = '%1 = %2';
 Blockly.Msg.OPERATORS_AND = '%1 and %2';
 Blockly.Msg.OPERATORS_OR = '%1 or %2';
+Blockly.Msg.OPERATORS_OR = '%1 xor %2';
 Blockly.Msg.OPERATORS_NOT = 'not %1';
 Blockly.Msg.OPERATORS_JOIN = 'join %1 %2';
 Blockly.Msg.OPERATORS_JOIN_APPLE = 'apple';
@@ -217,7 +218,7 @@ Blockly.Msg.OPERATORS_MATHOP_LN = 'ln';
 Blockly.Msg.OPERATORS_MATHOP_LOG = 'log';
 Blockly.Msg.OPERATORS_MATHOP_EEXP = 'e ^';
 Blockly.Msg.OPERATORS_MATHOP_10EXP = '10 ^';
-Blockly.Msg.OPERATORS_ADVLOG = 'log %1 %2';
+Blockly.Msg.OPERATORS_ADVLOG = '%1 log %2';
 
 // Procedures blocks
 Blockly.Msg.PROCEDURES_DEFINITION = 'define %1';
