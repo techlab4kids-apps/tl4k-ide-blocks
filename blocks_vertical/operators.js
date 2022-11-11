@@ -272,32 +272,6 @@ Blockly.Blocks['operator_or'] = {
   }
 };
 
-Blockly.Blocks['operator_xor'] = {
-  /**
-   * Block for "xor" boolean comparator.
-   * @this Blockly.Block
-   */
-  init: function() {
-    this.jsonInit({
-      "message0": Blockly.Msg.OPERATORS_XOR,
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "OPERAND1",
-          "check": "Boolean"
-        },
-        {
-          "type": "input_value",
-          "name": "OPERAND2",
-          "check": "Boolean"
-        }
-      ],
-      "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_boolean"]
-    });
-  }
-};
-
 Blockly.Blocks['operator_not'] = {
   /**
    * Block for "not" unary boolean operator.
