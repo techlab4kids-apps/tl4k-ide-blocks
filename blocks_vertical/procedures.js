@@ -43,6 +43,8 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('proccode', this.procCode_);
   container.setAttribute('argumentids', JSON.stringify(this.argumentIds_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
+  container.setAttribute('global', JSON.stringify(this.global_));
+  container.setAttribute('return', JSON.stringify(this.return_));
   return container;
 };
 
@@ -58,6 +60,8 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
       JSON.parse(xmlElement.getAttribute('generateshadows'));
   this.argumentIds_ = JSON.parse(xmlElement.getAttribute('argumentids'));
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
+  this.global_ = JSON.parse(xmlElement.getAttribute('global'));
+  this.return_ = JSON.parse(xmlElement.getAttribute('return'));
   this.updateDisplay_();
 };
 
@@ -82,6 +86,8 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('argumentdefaults',
       JSON.stringify(this.argumentDefaults_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
+  container.setAttribute('global', JSON.stringify(this.global_));
+  container.setAttribute('return', JSON.stringify(this.return_));
   return container;
 };
 
@@ -94,6 +100,8 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
 Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlElement) {
   this.procCode_ = xmlElement.getAttribute('proccode');
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
+  this.global_ = JSON.parse(xmlElement.getAttribute('global'));
+  this.return_ = JSON.parse(xmlElement.getAttribute('return'));
 
   var prevArgIds = this.argumentIds_;
   var prevDisplayNames = this.displayNames_;
@@ -109,6 +117,17 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
 };
 
 // End of serialization and deserialization.
+
+/**
+ * Returns the proccode of current procedures_definition.
+ * @return {string} Procedure name.
+ */
+Blockly.ScratchBlocks.ProcedureUtils.getDefinitionProcCode = function() {
+  var input = this.getInput('custom_block');
+  // If this input does not exist.
+  if (!input) return null;
+  return input.connection.targetBlock().getProcCode();
+};
 
 // Shared by all three procedure blocks (procedures_declaration,
 // procedures_call, and procedures_prototype).
@@ -649,6 +668,28 @@ Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal = function() {
 };
 
 /**
+ * Externally-visible function to update a procedure declaration's shape.
+ * @public
+ */
+Blockly.ScratchBlocks.ProcedureUtils.updateProcedureShape = function() {
+  if (this.return_) {
+    this.setOutputShape(2);
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setOutput(true);
+  }
+  else {
+    this.setOutputShape(0);
+    this.setOutput(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
+  }
+  if (Blockly.WidgetDiv.owner_ && Blockly.WidgetDiv.owner_.resizeEditor_) {
+    Blockly.WidgetDiv.owner_.resizeEditor_();
+  }
+};
+
+/**
  * Externally-visible function to get the warp on procedure declaration.
  * @return {boolean} The value of the warp_ property.
  * @public
@@ -664,6 +705,22 @@ Blockly.ScratchBlocks.ProcedureUtils.getWarp = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.setWarp = function(warp) {
   this.warp_ = warp;
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.getGlobal = function() {
+  return this.global_;
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.setGlobal = function(global) {
+  this.global_ = global;
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.getReturn = function() {
+  return this.return_;
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.setReturn = function(ret) {
+  this.return_ = ret;
 };
 
 /**
@@ -784,7 +841,28 @@ Blockly.Blocks['procedures_definition'] = {
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
     });
-  }
+  },
+  getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getDefinitionProcCode
+};
+
+Blockly.Blocks['procedures_definition_return'] = {
+  /**
+   * Block for defining a procedure with return value.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.PROCEDURES_DEFINITION,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "custom_block"
+        }
+      ],
+      "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
+    });
+  },
+  getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getDefinitionProcCode
 };
 
 Blockly.Blocks['procedures_call'] = {
@@ -794,7 +872,39 @@ Blockly.Blocks['procedures_call'] = {
    */
   init: function() {
     this.jsonInit({
-      "extensions": ["colours_more", "shape_statement", "procedure_call_contextmenu"]
+      "extensions": ["colours_more2", "shape_statement", "procedure_call_contextmenu"]
+    });
+    this.procCode_ = '';
+    this.argumentIds_ = [];
+    this.warp_ = false;
+  },
+  // Shared.
+  getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
+  removeAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_,
+  disconnectOldBlocks_: Blockly.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
+  deleteShadows_: Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_,
+  createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
+
+  // Exist on all three blocks, but have different implementations.
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation,
+  populateArgument_: Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnCaller_,
+  addProcedureLabel_: Blockly.ScratchBlocks.ProcedureUtils.addLabelField_,
+
+  // Only exists on the external caller.
+  attachShadow_: Blockly.ScratchBlocks.ProcedureUtils.attachShadow_,
+  buildShadowDom_: Blockly.ScratchBlocks.ProcedureUtils.buildShadowDom_
+};
+
+Blockly.Blocks['procedures_call_return'] = {
+  /**
+   * Block for calling a procedure with return value.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "extensions": ["colours_more2", "output_number", "output_string", "procedure_call_contextmenu"]
     });
     this.procCode_ = '';
     this.argumentIds_ = [];
@@ -836,6 +946,47 @@ Blockly.Blocks['procedures_prototype'] = {
     this.argumentIds_ = [];
     this.argumentDefaults_ = [];
     this.warp_ = false;
+    this.global_ = false;
+    this.return_ = false;
+  },
+  // Shared.
+  getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
+  removeAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_,
+  disconnectOldBlocks_: Blockly.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
+  deleteShadows_: Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_,
+  createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
+
+  // Exist on all three blocks, but have different implementations.
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation,
+  populateArgument_: Blockly.ScratchBlocks.ProcedureUtils.populateArgumentOnPrototype_,
+  addProcedureLabel_: Blockly.ScratchBlocks.ProcedureUtils.addLabelField_,
+
+  // Only exists on procedures_prototype.
+  createArgumentReporter_: Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_,
+  updateArgumentReporterNames_: Blockly.ScratchBlocks.ProcedureUtils.updateArgumentReporterNames_
+};
+
+Blockly.Blocks['procedures_prototype_return'] = {
+  /**
+   * Block for calling a procedure with return value, for rendering inside
+   * define block.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "extensions": ["colours_more", "output_number", "output_string"]
+    });
+
+    /* Data known about the procedure. */
+    this.procCode_ = '';
+    this.displayNames_ = [];
+    this.argumentIds_ = [];
+    this.argumentDefaults_ = [];
+    this.warp_ = false;
+    this.global_ = false;
+    this.return_ = true;
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -863,7 +1014,7 @@ Blockly.Blocks['procedures_declaration'] = {
    */
   init: function() {
     this.jsonInit({
-      "extensions": ["colours_more", "shape_statement"]
+      "extensions": ["colours_more2", "shape_statement"]
     });
     /* Data known about the procedure. */
     this.procCode_ = '';
@@ -871,6 +1022,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.argumentIds_ = [];
     this.argumentDefaults_ = [];
     this.warp_ = false;
+    this.global_ = false;
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -894,9 +1046,14 @@ Blockly.Blocks['procedures_declaration'] = {
   focusLastEditor_: Blockly.ScratchBlocks.ProcedureUtils.focusLastEditor_,
   getWarp: Blockly.ScratchBlocks.ProcedureUtils.getWarp,
   setWarp: Blockly.ScratchBlocks.ProcedureUtils.setWarp,
+  getGlobal: Blockly.ScratchBlocks.ProcedureUtils.getGlobal,
+  setGlobal: Blockly.ScratchBlocks.ProcedureUtils.setGlobal,
+  getReturn: Blockly.ScratchBlocks.ProcedureUtils.getReturn,
+  setReturn: Blockly.ScratchBlocks.ProcedureUtils.setReturn,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
+  updateProcedureShape: Blockly.ScratchBlocks.ProcedureUtils.updateProcedureShape,
   onChangeFn: Blockly.ScratchBlocks.ProcedureUtils.updateDeclarationProcCode_
 };
 
@@ -968,4 +1125,43 @@ Blockly.Blocks['argument_editor_string_number'] = {
   },
   // Exist on declaration and arguments editors, with different implementations.
   removeFieldCallback: Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_
+};
+
+Blockly.Blocks['procedures_return'] = {
+  /**
+   * Block for returning a value from a function.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.PROCEDURES_RETURN,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "category": Blockly.Categories.more,
+      "extensions": ["colours_more", "shape_end"]
+    });
+  },
+  /**
+   * Called whenever anything on the workspace changes.
+   * Add warning if this flow block is not nested inside a loop.
+   * @param {!Blockly.Events.Abstract} _event Change event.
+   * @this {Blockly.Block}
+   */
+  onchange: function(_event) {
+    if (!this.workspace.isDragging || this.workspace.isDragging()) {
+      return;  // Don't change state at the start of a drag.
+    }
+    if (this.getRootBlock().type == 'procedures_definition_return') {
+      if (!this.isInFlyout) {
+        this.setDisabled(false);
+      }
+    }
+    else if (!this.isInFlyout && !this.getInheritedDisabled()) {
+      this.setDisabled(true);
+    }
+  }
 };
