@@ -62,6 +62,6 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2.0.1
         with:
-          token: ${{ secrets.t }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           event-type: update
           repository: PenguinMod/PenguinMod-Gui
