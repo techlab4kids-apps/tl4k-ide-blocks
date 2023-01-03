@@ -668,28 +668,6 @@ Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal = function() {
 };
 
 /**
- * Externally-visible function to update a procedure declaration's shape.
- * @public
- */
-Blockly.ScratchBlocks.ProcedureUtils.updateProcedureShape = function() {
-  if (this.return_) {
-    this.setOutputShape(2);
-    this.setPreviousStatement(false);
-    this.setNextStatement(false);
-    this.setOutput(true);
-  }
-  else {
-    this.setOutputShape(0);
-    this.setOutput(false);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-  }
-  if (Blockly.WidgetDiv.owner_ && Blockly.WidgetDiv.owner_.resizeEditor_) {
-    Blockly.WidgetDiv.owner_.resizeEditor_();
-  }
-};
-
-/**
  * Externally-visible function to get the warp on procedure declaration.
  * @return {boolean} The value of the warp_ property.
  * @public
@@ -872,7 +850,7 @@ Blockly.Blocks['procedures_call'] = {
    */
   init: function() {
     this.jsonInit({
-      "extensions": ["colours_more2", "shape_statement", "procedure_call_contextmenu"]
+      "extensions": ["colours_more", "shape_statement", "procedure_call_contextmenu"]
     });
     this.procCode_ = '';
     this.argumentIds_ = [];
@@ -904,7 +882,7 @@ Blockly.Blocks['procedures_call_return'] = {
    */
   init: function() {
     this.jsonInit({
-      "extensions": ["colours_more2", "output_number", "output_string", "procedure_call_contextmenu"]
+      "extensions": ["colours_more", "output_number", "output_string", "procedure_call_contextmenu"]
     });
     this.procCode_ = '';
     this.argumentIds_ = [];
@@ -1014,7 +992,7 @@ Blockly.Blocks['procedures_declaration'] = {
    */
   init: function() {
     this.jsonInit({
-      "extensions": ["colours_more2", "shape_statement"]
+      "extensions": ["colours_more", "shape_statement"]
     });
     /* Data known about the procedure. */
     this.procCode_ = '';
@@ -1053,7 +1031,6 @@ Blockly.Blocks['procedures_declaration'] = {
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
-  updateProcedureShape: Blockly.ScratchBlocks.ProcedureUtils.updateProcedureShape,
   onChangeFn: Blockly.ScratchBlocks.ProcedureUtils.updateDeclarationProcCode_
 };
 
@@ -1142,7 +1119,7 @@ Blockly.Blocks['procedures_return'] = {
         }
       ],
       "category": Blockly.Categories.more,
-      "extensions": ["colours_more", "shape_end"]
+      "extensions": ["colours_function", "shape_end"]
     });
   },
   /**
