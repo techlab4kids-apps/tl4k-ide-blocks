@@ -22681,4 +22681,4 @@ Blockly.ScratchMsgs.locales["zh-tw"] =
     "BROADCAST_MODAL_TITLE": "新的訊息",
     "DEFAULT_BROADCAST_MESSAGE_NAME": "message1"
 };
-// End of combined translationss
+// End of combined translations
