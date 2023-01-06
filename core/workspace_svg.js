@@ -1193,10 +1193,6 @@ Blockly.WorkspaceSvg.prototype.createVariable = function(name, opt_type, opt_id,
   return newVar;
 };
 
-Blockly.WorkspaceSvg.prototype.createProcedureFromMutation = function(mutation) {
-  Blockly.WorkspaceSvg.superClass_.createProcedureFromMutation.call(this, mutation);
-};
-
 /**
  * Update cached areas for this workspace.
  */

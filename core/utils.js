@@ -33,7 +33,6 @@
 goog.provide('Blockly.utils');
 
 goog.require('Blockly.Touch');
-goog.require('Blockly.constants');
 goog.require('goog.dom');
 goog.require('goog.events.BrowserFeature');
 goog.require('goog.math.Coordinate');
@@ -907,19 +906,4 @@ Blockly.utils.startsWith = function(str, prefix) {
  */
 Blockly.utils.toRadians = function(angleDegrees) {
   return angleDegrees * Math.PI / 180;
-};
-
-Blockly.utils.isProcedureDefinitionBlock = function(type) {
-  return (type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-      type == Blockly.PROCEDURES_DEFINITION_RETURN_BLOCK_TYPE);
-};
-
-Blockly.utils.isProcedurePrototypeBlock = function(type) {
-  return (type == Blockly.PROCEDURES_PROTOTYPE_BLOCK_TYPE ||
-      type == Blockly.PROCEDURES_PROTOTYPE_RETURN_BLOCK_TYPE);
-};
-
-Blockly.utils.isProcedureCallBlock = function(type) {
-  return (type == Blockly.PROCEDURES_CALL_BLOCK_TYPE ||
-      type == Blockly.PROCEDURES_CALL_RETURN_BLOCK_TYPE);
 };
