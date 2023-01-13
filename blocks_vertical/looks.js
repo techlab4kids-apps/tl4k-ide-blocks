@@ -174,7 +174,7 @@ Blockly.Blocks["looks_setShape"] = {
           "options":[
             ["minimum width","MIN_WIDTH"],
             ["maximum width","MAX_LINE_WIDTH"],
-            ["boarder line width","STROKE_WIDTH"],
+            ["border line width","STROKE_WIDTH"],
             ["padding size","PADDING"],
             ["corner radius","CORNER_RADIUS"],
             ["tail height","TAIL_HEIGHT"],
