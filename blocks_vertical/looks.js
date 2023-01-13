@@ -146,7 +146,7 @@ Blockly.Blocks["looks_setColor"] = {
           "type":"field_dropdown",
           "name":"prop",
           "options":[
-            ["boarder","BUBBLE_STROKE"],
+            ["border","BUBBLE_STROKE"],
             ["fill","BUBBLE_FILL"],
             ["text","TEXT_FILL"]
           ]
@@ -178,7 +178,8 @@ Blockly.Blocks["looks_setShape"] = {
             ["padding size","PADDING"],
             ["corner radius","CORNER_RADIUS"],
             ["tail height","TAIL_HEIGHT"],
-            ["font pading percent","FONT_HEIGHT_RATIO"]
+            ["font pading percent","FONT_HEIGHT_RATIO"],
+            ["text length limit","texlim"]
           ]
         },
         {
