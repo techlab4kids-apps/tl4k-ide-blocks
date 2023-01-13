@@ -116,6 +116,83 @@ Blockly.Blocks['looks_think'] = {
   }
 };
 
+Blockly.Blocks["looks_setFont"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"input_value",
+          "name":"font"
+        },
+        {
+          "type":"input_value",
+          "name":"size"
+        }
+      ],
+      "message0":"set font to %1 with font size %2",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"field_dropdown",
+          "name":"prop",
+          "options":[
+            ["boarder","BUBBLE_STROKE"],
+            ["fill","BUBBLE_FILL"],
+            ["text","TEXT_FILL"]
+          ]
+        },
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0":"set %1 color to %2",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_setShape"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline":true,
+      "args0":[
+        {
+          "type":"field_dropdown",
+          "name":"prop",
+          "options":[
+            ["minimum width","MIN_WIDTH"],
+            ["maximum width","MAX_LINE_WIDTH"],
+            ["boarder line width","STROKE_WIDTH"],
+            ["padding size","PADDING"],
+            ["corner radius","CORNER_RADIUS"],
+            ["tail height","TAIL_HEIGHT"],
+            ["font pading percent","FONT_HEIGHT_RATIO"]
+          ]
+        },
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0":"set text bubble %1 to %2",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_show'] = {
   /**
    * Show block.
