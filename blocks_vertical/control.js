@@ -529,3 +529,49 @@ Blockly.Blocks['control_all_at_once'] = {
     });
   }
 };
+
+Blockly.Blocks["control_backToGreenFlag"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "run %3",
+      "args0": [
+        {
+          "type": "field_image",
+          "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAACJ0lEQVRIid2Uy09TQRSHv2kv1VR5hhQQqwlYGtqCmtbHokhDTNQtEVz4B/gfmBCDXoyGmLj3kbBwY2LY6MpHWJDUoBukKsTKQ6I2paWGBipCo73jBii30BpI78ZfMpkzMznznTOPAwZLbFgt/ZWY011k9gzysSdZLICStdJXkPRjSns41hcH2Y7EjmAVmESKFyjyCaPqr50AzBtWbeAsEKDE0oy7w4rnfAXNbWU0nlY40CQwmX0kY73UBr4QGw5vu5vndg31Zy6wv3OGhecZfQbrajk3Rp2zXRdCqe0Irg5o8k8w+uwWR9VLmE13eaeNgarRqtoQ4jKKdpUy+wLy+3Hg2vaAQlIsbk51ZUjNJ/n8egBv5CBan2Bf5TL1nlkafGkWYz8YeVy94bIjwHpOpTY/vs7Nc1WAHQCNr5sXTLsA/EOaNBagabph8QEyYzAA3QkZkYGeUOAVyTlWUt/I/M5gLa/GpDjYXFryuumPaCsgMWsl+ilEfLoOSQTBClBBuW2GExcXsVi9hQFSF8RWQGT8MNCLwzXAYHc2nNabbQzdu4/TH6ThpBMhbDmef1iKhRgf8iHFo/wAeEpIfUgoZ/bD9SAB1Us42MPUiJOaxhBVh5YwKYKfib3MhZtYXS5B0sl79VUhQH4Nq6vADbzqHaJTbUQn3QjKECKOlG8Iqblh7apUsFayX661gjLgH/zPgPm1PlFMQPaSHa4HTIcnSFW8LSbAcP0F3uGqEimnx6MAAAAASUVORK5CYII=",
+          "width": 24,
+          "height": 24,
+          "flip_rtl": false
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["control_if_return_else_return"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "if %3 is true %4 is false %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "boolean",
+          "check": "Boolean"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT2"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "output_string"]
+    });
+  }
+};

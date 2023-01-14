@@ -492,4 +492,277 @@ Blockly.Blocks['operator_advlog'] = {
   }
 };
 
+Blockly.Blocks["operator_regexmatch"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "match %3 with regex %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "text"
+        },
+        {
+          "type": "input_value",
+          "name": "reg"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
 
+Blockly.Blocks["operator_replaceAll"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "in %3 replace all %4 with %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "text"
+        },
+        {
+          "type": "input_value",
+          "name": "term"
+        },
+        {
+          "type": "input_value",
+          "name": "res"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_getLettersFromIndexToIndexInText"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "letters from %3 to %4 in %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "INDEX1"
+        },
+        {
+          "type": "input_value",
+          "name": "INDEX2"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_readLineInMultilineText"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 %2read line %3 in %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "LINE"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_newLine"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "newline",
+      "args0": [],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_stringify"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%3 as string",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_lerpFunc"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "interpolate %3 to %4 by %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        },
+        {
+          "type": "input_value",
+          "name": "TWO"
+        },
+        {
+          "type": "input_value",
+          "name": "AMOUNT"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_advMath"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%3 %4 %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPTION",
+          "options": [
+            ["^", "^"],
+            ["root", "root"],
+            ["log", "log"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "TWO"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_constrainnumber"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "constrain %3 min %4 max %5",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "inp"
+        },
+        {
+          "type": "input_value",
+          "name": "min"
+        },
+        {
+          "type": "input_value",
+          "name": "max"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_setReplacer"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "replacer %3 to %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "REPLACER"
+        },
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_replaceWithReplacers"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "replace %3 with replacers",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "STRING"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_trueBoolean"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "true",
+      "args0": [],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_falseBoolean"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "false",
+      "args0": [],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_randomBoolean"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 %2random",
+      "args0": [],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};

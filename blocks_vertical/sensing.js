@@ -537,3 +537,114 @@ Blockly.Blocks['sensing_userid'] = {
     });
   }
 };
+
+Blockly.Blocks["sensing_regextest"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "test regex %4 with with text %3",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "text"
+        },
+        {
+          "type": "input_value",
+          "name": "reg"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_indexOfTextInText"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "index of %3 in %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT2"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_thing_is_number"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%3 is number?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_mobile"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "mobile?",
+      "args0": [],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_thing_is_text"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%3 is text?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+
+
+Blockly.Blocks["sensing_getspritewithattrib"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "get sprite with %3 set to %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "var"
+        },
+        {
+          "type": "input_value",
+          "name": "val"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
