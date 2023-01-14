@@ -745,7 +745,7 @@ Blockly.Blocks["operator_indexOfTextInText"] = {
         }
       ],
       "category": Blockly.Categories.operator,
-      "extensions": ["colours_operator", "output_number"]
+      "extensions": ["colours_operators", "output_number"]
     });
   }
 };
