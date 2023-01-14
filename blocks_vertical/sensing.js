@@ -542,7 +542,7 @@ Blockly.Blocks["sensing_regextest"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "test regex %4 with with text %3",
+      "message0": "test regex %2 with with text %1",
       "args0": [
         {
           "type": "input_value",
@@ -563,7 +563,7 @@ Blockly.Blocks["sensing_thing_is_number"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%3 is number?",
+      "message0": "%1 is number?",
       "args0": [
         {
           "type": "input_value",
@@ -592,7 +592,7 @@ Blockly.Blocks["sensing_thing_is_text"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%3 is text?",
+      "message0": "%1 is text?",
       "args0": [
         {
           "type": "input_value",
@@ -611,7 +611,7 @@ Blockly.Blocks["sensing_getspritewithattrib"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "get sprite with %3 set to %4",
+      "message0": "get sprite with %1 set to %2",
       "args0": [
         {
           "type": "input_value",

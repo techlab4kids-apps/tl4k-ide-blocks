@@ -496,7 +496,7 @@ Blockly.Blocks["operator_regexmatch"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "match %3 with regex %4",
+      "message0": "match %1 with regex %2",
       "args0": [
         {
           "type": "input_value",
@@ -517,7 +517,7 @@ Blockly.Blocks["operator_replaceAll"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "in %3 replace all %4 with %5",
+      "message0": "in %1 replace all %2 with %3",
       "args0": [
         {
           "type": "input_value",
@@ -542,7 +542,7 @@ Blockly.Blocks["operator_getLettersFromIndexToIndexInText"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "letters from %3 to %4 in %5",
+      "message0": "letters from %1 to %2 in %3",
       "args0": [
         {
           "type": "input_value",
@@ -567,7 +567,7 @@ Blockly.Blocks["operator_readLineInMultilineText"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 %2read line %3 in %4",
+      "message0": "read line %1 in %2",
       "args0": [
         {
           "type": "input_value",
@@ -600,7 +600,7 @@ Blockly.Blocks["operator_stringify"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%3 as string",
+      "message0": "%1 as string",
       "args0": [
         {
           "type": "input_value",
@@ -617,7 +617,7 @@ Blockly.Blocks["operator_lerpFunc"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "interpolate %3 to %4 by %5",
+      "message0": "interpolate %1 to %2 by %3",
       "args0": [
         {
           "type": "input_value",
@@ -642,7 +642,7 @@ Blockly.Blocks["operator_advMath"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%3 %4 %5",
+      "message0": "%1 %2 %3",
       "args0": [
         {
           "type": "input_value",
@@ -672,7 +672,7 @@ Blockly.Blocks["operator_constrainnumber"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "constrain %3 min %4 max %5",
+      "message0": "constrain %1 min %2 max %3",
       "args0": [
         {
           "type": "input_value",
@@ -685,44 +685,6 @@ Blockly.Blocks["operator_constrainnumber"] = {
         {
           "type": "input_value",
           "name": "max"
-        }
-      ],
-      "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "output_string"]
-    });
-  }
-};
-
-Blockly.Blocks["operator_setReplacer"] = {
-  init: function() {
-    this.jsonInit({
-      "inputsInline": true,
-      "message0": "replacer %3 to %4",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "REPLACER"
-        },
-        {
-          "type": "input_value",
-          "name": "VALUE"
-        }
-      ],
-      "category": Blockly.Categories.operators,
-      "extensions": ["colours_operators", "shape_statement"]
-    });
-  }
-};
-
-Blockly.Blocks["operator_replaceWithReplacers"] = {
-  init: function() {
-    this.jsonInit({
-      "inputsInline": true,
-      "message0": "replace %3 with replacers",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "STRING"
         }
       ],
       "category": Blockly.Categories.operators,
@@ -759,7 +721,7 @@ Blockly.Blocks["operator_randomBoolean"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 %2random",
+      "message0": "random",
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_boolean"]
@@ -771,7 +733,7 @@ Blockly.Blocks["operator_indexOfTextInText"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "index of %3 in %4",
+      "message0": "index of %1 in %2",
       "args0": [
         {
           "type": "input_value",

@@ -534,7 +534,7 @@ Blockly.Blocks["control_backToGreenFlag"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "run %3",
+      "message0": "run %1",
       "args0": [
         {
           "type": "field_image",
@@ -554,7 +554,7 @@ Blockly.Blocks["control_if_return_else_return"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "if %3 is true %4 is false %5",
+      "message0": "if %1 is true %2 is false %3",
       "args0": [
         {
           "type": "input_value",
