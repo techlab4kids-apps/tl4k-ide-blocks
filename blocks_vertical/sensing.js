@@ -559,27 +559,6 @@ Blockly.Blocks["sensing_regextest"] = {
   }
 };
 
-Blockly.Blocks["sensing_indexOfTextInText"] = {
-  init: function() {
-    this.jsonInit({
-      "inputsInline": true,
-      "message0": "index of %3 in %4",
-      "args0": [
-        {
-          "type": "input_value",
-          "name": "TEXT1"
-        },
-        {
-          "type": "input_value",
-          "name": "TEXT2"
-        }
-      ],
-      "category": Blockly.Categories.sensing,
-      "extensions": ["colours_sensing", "output_number"]
-    });
-  }
-};
-
 Blockly.Blocks["sensing_thing_is_number"] = {
   init: function() {
     this.jsonInit({

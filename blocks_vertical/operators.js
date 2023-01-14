@@ -766,3 +766,24 @@ Blockly.Blocks["operator_randomBoolean"] = {
     });
   }
 };
+
+Blockly.Blocks["operator_indexOfTextInText"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "index of %3 in %4",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        },
+        {
+          "type": "input_value",
+          "name": "TEXT2"
+        }
+      ],
+      "category": Blockly.Categories.operator,
+      "extensions": ["colours_operator", "output_number"]
+    });
+  }
+};
