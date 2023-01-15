@@ -496,7 +496,7 @@ Blockly.Blocks["operator_regexmatch"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "match %1 with regex %2",
+      "message0": "match %1 with regex %2 %3",
       "args0": [
         {
           "type": "input_value",
@@ -505,6 +505,10 @@ Blockly.Blocks["operator_regexmatch"] = {
         {
           "type": "input_value",
           "name": "reg"
+        },
+        {
+          "type": "input_value",
+          "name": "regrule"
         }
       ],
       "category": Blockly.Categories.operators,
