@@ -690,7 +690,7 @@ Blockly.Blocks["looks_setlooks"] = {
   }
 };
 
-Blockly.Blocks["looks_getX"] = {
+Blockly.Blocks["looks_stretchGetX"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
@@ -704,7 +704,7 @@ Blockly.Blocks["looks_getX"] = {
   }
 };
 
-Blockly.Blocks["looks_getY"] = {
+Blockly.Blocks["looks_stretchGetY"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
