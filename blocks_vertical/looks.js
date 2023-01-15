@@ -683,7 +683,7 @@ Blockly.Blocks["looks_setlooks"] = {
       ],
       "message0": "set stretch to x: %1 y: %2",
       "extensions": [
-        "shape_hat",
+        "shape_statement",
         "colours_looks"
       ]
     });
