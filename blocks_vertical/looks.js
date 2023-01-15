@@ -665,3 +665,55 @@ Blockly.Blocks['looks_nextbackdrop'] = {
     });
   }
 };
+
+Blockly.Blocks["looks_setlooks"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "X"
+        },
+        {
+          "type": "input_value",
+          "name": "Y"
+        }
+      ],
+      "message0": "set stretch to x: %1 y: %2",
+      "extensions": [
+        "shape_hat",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getX"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "x stretch",
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getY"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "y stretch",
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
