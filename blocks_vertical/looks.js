@@ -666,7 +666,7 @@ Blockly.Blocks['looks_nextbackdrop'] = {
   }
 };
 
-Blockly.Blocks["looks_setlooks"] = {
+Blockly.Blocks["looks_setStretch"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
