@@ -123,6 +123,22 @@ Blockly.hueToRgb = function(hue) {
 };
 
 /**
+ * converts hsva to rgba
+ * @param {Number} hue the color
+ * @param {Number} saturation the saturation
+ * @param {Number} value the brightness
+ * @param {Number} alpha the transparency
+ */
+Blockly.hsvaToHex = function(hue, saturation, value, alpha) {
+  let hex = goog.color.hsvToHex(hue, saturation, value)
+  const r = ((decimal >> 16) & 0xFF).toString(16);
+  const g = ((decimal >> 8) & 0xFF).toString(16);
+  const b = (decimal & 0xFF).toString(16);
+  const a = ((alpha / 100) * 255).toString(16)
+  return parseInt(r+g+b+a, 16);
+}
+
+/**
  * Returns the dimensions of the specified SVG image.
  * @param {!Element} svg SVG image.
  * @return {!Object} Contains width and height properties.

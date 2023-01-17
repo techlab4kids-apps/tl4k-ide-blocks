@@ -131,13 +131,16 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
   for(var n = 0; n <= 360; n += 20) {
     switch (channel) {
       case 'hue':
-        stops.push(goog.color.hsvToHex(n, this.saturation_, this.brightness_));
+        stops.push(goog.color.hsvaToHex(n, this.saturation_, this.brightness_, this.transparency_));
         break;
       case 'saturation':
-        stops.push(goog.color.hsvToHex(this.hue_, n / 360, this.brightness_));
+        stops.push(goog.color.hsvaToHex(this.hue_, n / 360, this.brightness_, this.transparency_));
         break;
       case 'brightness':
-        stops.push(goog.color.hsvToHex(this.hue_, this.saturation_, 255 * n / 360));
+        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, 255 * n / 360, this.transparency_));
+        break;
+      case 'transparency':
+        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, this.transparency_));
         break;
       default:
         throw new Error("Unknown channel for colour sliders: " + channel);
@@ -176,11 +179,13 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.setGradient_(this.hueSlider_.getElement(), 'hue');
     this.setGradient_(this.saturationSlider_.getElement(), 'saturation');
     this.setGradient_(this.brightnessSlider_.getElement(), 'brightness');
+    this.setGradient_(this.transparencySlider_.getElement(), 'transparency');
 
     // Update the readouts
     this.hueReadout_.textContent = Math.floor(100 * this.hue_ / 360).toFixed(0);
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
+    this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
   }
 };
 
@@ -197,6 +202,7 @@ Blockly.FieldColourSlider.prototype.updateSliderHandles_ = function() {
     this.hueSlider_.setValue(this.hue_);
     this.saturationSlider_.setValue(this.saturation_);
     this.brightnessSlider_.setValue(this.brightness_);
+    this.transparencySlider_.setValue(this.transparency_);
     this.sliderCallbacksEnabled_ = true;
   }
 };
@@ -255,6 +261,9 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
       case 'brightness':
         thisField.brightness_ = channelValue;
         break;
+      case 'transparency':
+        thisField.transparency_ = channelValue;
+        break;
     }
     var colour = goog.color.hsvToHex(thisField.hue_, thisField.saturation_, thisField.brightness_);
     if (thisField.sourceBlock_) {
@@ -279,6 +288,7 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
     thisField.hue_ = hsv[0];
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
+    thisField.transparency_ = hsv[3];
     thisField.setValue(value);
   });
 };
@@ -298,6 +308,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.hue_ = hsv[0];
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];
+  this.transparency_ = hsv[3];
 
   var hueElements = this.createLabelDom_(Blockly.Msg.COLOUR_HUE_LABEL);
   div.appendChild(hueElements[0]);
@@ -332,6 +343,17 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.brightnessSlider_.setMoveToPointEnabled(true);
   this.brightnessSlider_.render(div);
 
+  var transparencyElements =
+      this.createLabelDom_('transparency:');
+  div.appendChild(transparencyElements[0]);
+  this.transparencyReadout_ = transparencyElements[1];
+  this.transparencySlider_ = new goog.ui.Slider();
+  this.transparencySlider_.setUnitIncrement(2);
+  this.transparencySlider_.setMinimum(0);
+  this.transparencySlider_.setMaximum(255);
+  this.transparencySlider_.setMoveToPointEnabled(true);
+  this.transparencySlider_.render(div);
+
   if (Blockly.FieldColourSlider.activateEyedropper_) {
     var button = document.createElement('button');
     button.setAttribute('class', 'scratchEyedropper');
@@ -364,6 +386,9 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   Blockly.FieldColourSlider.brightnessChangeEventKey_ = goog.events.listen(this.brightnessSlider_,
       goog.ui.Component.EventType.CHANGE,
       this.sliderCallbackFactory_('brightness'));
+  Blockly.FieldColourSlider.transparencyChangeEventKey_ = goog.events.listen(this.transparencySlider_,
+      goog.ui.Component.EventType.CHANGE,
+      this.sliderCallbackFactory_('transparency'));
 };
 
 Blockly.FieldColourSlider.prototype.dispose = function() {
@@ -375,6 +400,9 @@ Blockly.FieldColourSlider.prototype.dispose = function() {
   }
   if (Blockly.FieldColourSlider.brightnessChangeEventKey_) {
     goog.events.unlistenByKey(Blockly.FieldColourSlider.brightnessChangeEventKey_);
+  }
+  if (Blockly.FieldColourSlider.transparencyChangeEventKey_) {
+    goog.events.unlistenByKey(Blockly.FieldColourSlider.transparencyChangeEventKey_);
   }
   if (Blockly.FieldColourSlider.eyedropperEventData_) {
     Blockly.unbindEvent_(Blockly.FieldColourSlider.eyedropperEventData_);
