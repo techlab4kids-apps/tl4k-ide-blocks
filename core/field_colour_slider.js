@@ -330,7 +330,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.brightnessSlider_.render(div);
 
   var transparencyElements =
-      this.createLabelDom_('transparency:');
+      this.createLabelDom_('Transparency');
   div.appendChild(transparencyElements[0]);
   this.transparencyReadout_ = transparencyElements[1];
   this.transparencySlider_ = new goog.ui.Slider();
