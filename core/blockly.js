@@ -133,6 +133,8 @@ const constrain = (number, min, max) => {
   return Math.min(Math.max(number, min), max)
 }
 
+const zero = '00000000'
+
 /**
  * converts hsva to rgba
  * @param {Number} hue the color
@@ -144,7 +146,8 @@ const constrain = (number, min, max) => {
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
   console.log(hex, (hex << 24), ((hex << 24) | constrain(alpha, 0, 255)).toString(16))
-  return '#' + ((hex << 24) | constrain(alpha, 0, 255)).toString(16)
+  var hexStr = ((hex << 24) | constrain(alpha, 0, 255)).toString(16)
+  return '#' + zero.slice(0, 8 - hexStr.length) + hexStr
 }
 
 /**
