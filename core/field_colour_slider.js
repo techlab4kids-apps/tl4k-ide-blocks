@@ -140,7 +140,7 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
         stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, 255 * n / 360, this.transparency_));
         break;
       case 'transparency':
-        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, this.transparency_));
+        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, n / 360));
         break;
       default:
         throw new Error("Unknown channel for colour sliders: " + channel);
@@ -334,9 +334,10 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   div.appendChild(transparencyElements[0]);
   this.transparencyReadout_ = transparencyElements[1];
   this.transparencySlider_ = new goog.ui.Slider();
-  this.transparencySlider_.setUnitIncrement(2);
+  this.transparencySlider_.setUnitIncrement(0.01);
+  this.transparencySlider_.setStep(0.001);
   this.transparencySlider_.setMinimum(0);
-  this.transparencySlider_.setMaximum(100);
+  this.transparencySlider_.setMaximum(255);
   this.transparencySlider_.setMoveToPointEnabled(true);
   this.transparencySlider_.render(div);
 
