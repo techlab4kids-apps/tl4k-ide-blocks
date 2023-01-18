@@ -304,7 +304,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
 
   // Init color component values that are used while the editor is open
   // in order to keep the slider values stable.
-  var hsv = goog.color.hexToHsv(this.getValue());
+  var hsv = goog.color.hexToHsva(this.getValue());
   this.hue_ = hsv[0];
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];

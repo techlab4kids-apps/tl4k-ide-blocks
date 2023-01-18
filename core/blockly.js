@@ -128,14 +128,34 @@ Blockly.hueToRgb = function(hue) {
  * @param {Number} saturation the saturation
  * @param {Number} value the brightness
  * @param {Number} alpha the transparency
+ * @returns {Number} the hex color
  */
-Blockly.hsvaToHex = function(hue, saturation, value, alpha) {
-  let hex = goog.color.hsvToHex(hue, saturation, value)
+Blockly.color.hsvaToHex = function(hue, saturation, value, alpha) {
+  let hex = goog.color.hsvToHex(hue, saturation, value).slice(1, 7)
+  const decimal = parseInt(hex, 16)
   const r = ((decimal >> 16) & 0xFF).toString(16);
   const g = ((decimal >> 8) & 0xFF).toString(16);
   const b = (decimal & 0xFF).toString(16);
   const a = ((alpha / 100) * 255).toString(16)
   return parseInt(r+g+b+a, 16);
+}
+
+/**
+ * convert hex to hsva
+ * @param {String|Number} hex the hex 
+ * @returns {Array} the hsva
+ */
+Blockly.color.hexToHsva = function(hex) {
+  let decimal = hex
+  if (typeof hex === 'string') {
+    if (hex.split('')[0] === '#') hex = hex.slice(1, 7)
+    decimal = parseInt(hex, 16)
+  }
+  const a = ((decimal >> 24) & 0xFF).toString(16);
+  const r = ((decimal >> 16) & 0xFF).toString(16);
+  const g = ((decimal >> 8) & 0xFF).toString(16);
+  const b = (decimal & 0xFF).toString(16);
+  return [r,g,b,a];
 }
 
 /**
