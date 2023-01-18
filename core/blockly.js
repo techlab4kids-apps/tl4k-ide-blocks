@@ -144,7 +144,7 @@ const constrain = (number, min, max) => {
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
   console.log(hex, (hex << 24), ((hex << 24) | constrain(alpha, 0, 255)).toString(16))
-  return (hex << 24) | constrain(alpha, 0, 255)
+  return '#' + ((hex << 24) | constrain(alpha, 0, 255)).toString(16)
 }
 
 /**
