@@ -131,13 +131,8 @@ Blockly.hueToRgb = function(hue) {
  * @returns {Number} the hex color
  */
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
-  var hex = goog.color.hsvToHex(hue, saturation, value).slice(1, 7),
-    decimal = parseInt(hex, 16),
-    r = ((decimal >> 16) & 0xFF).toString(16),
-    g = ((decimal >> 8) & 0xFF).toString(16),
-    b = (decimal & 0xFF).toString(16),
-    a = ((alpha / 100) * 255).toString(16)
-  return parseInt(r+g+b+a, 16);
+  var hex = goog.color.hsvToHex(hue, saturation, value)
+  return (hex << 24) | alpha
 }
 
 /**
@@ -145,17 +140,12 @@ goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
  * @param {String|Number} hex the hex 
  * @returns {Array} the hsva
  */
-goog.color.hexToHsva = function(hex) {
-  var decimal = hex
-  if (typeof hex === 'string') {
-    if (hex.split('')[0] === '#') hex = hex.slice(1, 7)
-    decimal = parseInt(hex, 16)
-  }
-  var a = ((decimal >> 24) & 0xFF).toString(16),
-    r = ((decimal >> 16) & 0xFF).toString(16),
-    g = ((decimal >> 8) & 0xFF).toString(16),
-    b = (decimal & 0xFF).toString(16)
-  return [r,g,b,a];
+goog.color.hexToRgba = function(decimal) {
+  var alpha = (decimal >> 24) & 0xFF,
+    red = (decimal >> 16) & 0xFF,
+    green = (decimal >> 8) & 0xFF,
+    blue = decimal & 0xFF
+  return [red,green,blue,alpha];
 }
 
 /**
