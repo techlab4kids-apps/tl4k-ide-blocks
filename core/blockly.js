@@ -130,7 +130,7 @@ Blockly.hueToRgb = function(hue) {
  * @returns {Number} the constrained number
  */
 const constrain = (number, min, max) => {
-  return min(max(number, man), max)
+  return Math.min(Math.max(number, man), max)
 }
 
 /**
