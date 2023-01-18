@@ -132,7 +132,7 @@ Blockly.hueToRgb = function(hue) {
  */
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
-  console.log(hex, parseInt((hex << 24) | alpha, 16))
+  console.log(hex, parseInt(String((hex << 24) | alpha), 16))
   return (hex << 24) | alpha
 }
 
