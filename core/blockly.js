@@ -140,12 +140,14 @@ goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
  * @param {String|Number} hex the hex 
  * @returns {Array} the hsva
  */
-goog.color.hexToRgba = function(decimal) {
-  var alpha = (decimal >> 24) & 0xFF,
-    red = (decimal >> 16) & 0xFF,
-    green = (decimal >> 8) & 0xFF,
-    blue = decimal & 0xFF
-  return [red,green,blue,alpha];
+goog.color.hexToHsva = function(decimal) {
+  var [
+      hue, 
+      saturation, 
+      value
+    ] = goog.color.hexToHsv(decimal),
+    alpha = (decimal >> 24) & 0xFF
+  return [hue,saturation,value,alpha];
 }
 
 /**
