@@ -130,7 +130,7 @@ Blockly.hueToRgb = function(hue) {
  * @param {Number} alpha the transparency
  * @returns {Number} the hex color
  */
-Blockly.color.hsvaToHex = function(hue, saturation, value, alpha) {
+goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   let hex = goog.color.hsvToHex(hue, saturation, value).slice(1, 7)
   const decimal = parseInt(hex, 16)
   const r = ((decimal >> 16) & 0xFF).toString(16);
@@ -145,7 +145,7 @@ Blockly.color.hsvaToHex = function(hue, saturation, value, alpha) {
  * @param {String|Number} hex the hex 
  * @returns {Array} the hsva
  */
-Blockly.color.hexToHsva = function(hex) {
+goog.color.hexToHsva = function(hex) {
   let decimal = hex
   if (typeof hex === 'string') {
     if (hex.split('')[0] === '#') hex = hex.slice(1, 7)
