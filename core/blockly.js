@@ -123,6 +123,17 @@ Blockly.hueToRgb = function(hue) {
 };
 
 /**
+ * constrains a number to a specified range
+ * @param {Number} number the number to constrain
+ * @param {Number} min the lower wall
+ * @param {Number} max the uper wall
+ * @returns {Number} the constrained number
+ */
+const constrain = (number, min, max) => {
+  return min(max(number, man), max)
+}
+
+/**
  * converts hsva to rgba
  * @param {Number} hue the color
  * @param {Number} saturation the saturation
@@ -132,7 +143,7 @@ Blockly.hueToRgb = function(hue) {
  */
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
-  console.log(hex, parseInt(String((hex << 24) | alpha), 16))
+  console.log(hex, ((hex << 24) | alpha).toString(16))
   return (hex << 24) | alpha
 }
 
@@ -142,12 +153,16 @@ goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
  * @returns {Array} the hsva
  */
 goog.color.hexToHsva = function(decimal) {
+  var alpha = constrain((() => {
+    if (typeof decimal === 'string') return parseInt(decimal.slice(6, 8), 16)
+    return decimal
+  })(), 0, 255) / 100
+  
   var [
       hue, 
       saturation, 
       value
-    ] = goog.color.hexToHsv(decimal),
-    alpha = (decimal >> 24) & 0xFF
+    ] = goog.color.hexToHsv(decimal)
   console.log([hue,saturation,value,alpha])
   return [hue,saturation,value,alpha];
 }
