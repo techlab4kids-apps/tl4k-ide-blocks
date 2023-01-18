@@ -208,20 +208,6 @@ Blockly.FieldColourSlider.prototype.updateSliderHandles_ = function() {
 };
 
 /**
- * Get the text from this field.  Used when the block is collapsed.
- * @return {string} Current text.
- */
-Blockly.FieldColourSlider.prototype.getText = function() {
-  var colour = this.colour_;
-  // Try to use #rgb format if possible, rather than #rrggbb.
-  var m = colour.match(/^#(.)\1(.)\2(.)\3$/);
-  if (m) {
-    colour = '#' + m[1] + m[2] + m[3];
-  }
-  return colour;
-};
-
-/**
  * Create label and readout DOM elements, returning the readout
  * @param {string} labelText - Text for the label
  * @return {Array} The container node and the readout node.
@@ -265,7 +251,7 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
         thisField.transparency_ = channelValue;
         break;
     }
-    var colour = goog.color.hsvToHex(thisField.hue_, thisField.saturation_, thisField.brightness_);
+    var colour = goog.color.hsvaToHex(thisField.hue_, thisField.saturation_, thisField.brightness_, thisField.transparency_);
     if (thisField.sourceBlock_) {
       // Call any validation function, and allow it to override.
       colour = thisField.callValidator(colour);
@@ -284,7 +270,7 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
   var thisField = this;
   Blockly.FieldColourSlider.activateEyedropper_(function(value) {
     // Update the internal hue/saturation/brightness values so sliders update.
-    var hsv = goog.color.hexToHsv(value);
+    var hsv = goog.color.hexToHsva(value);
     thisField.hue_ = hsv[0];
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
@@ -350,7 +336,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.transparencySlider_ = new goog.ui.Slider();
   this.transparencySlider_.setUnitIncrement(2);
   this.transparencySlider_.setMinimum(0);
-  this.transparencySlider_.setMaximum(255);
+  this.transparencySlider_.setMaximum(100);
   this.transparencySlider_.setMoveToPointEnabled(true);
   this.transparencySlider_.render(div);
 
