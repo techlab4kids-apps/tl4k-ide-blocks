@@ -162,16 +162,16 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
   console.log(gradient)
-  goog.style.setStyle(node, 'background',
-      '-moz-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-webkit-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-o-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-ms-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      'linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background-image',
+      '-moz-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  goog.style.setStyle(node, 'background-image',
+      '-webkit-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  goog.style.setStyle(node, 'background-image',
+      '-o-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  goog.style.setStyle(node, 'background-image',
+      '-ms-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  goog.style.setStyle(node, 'background-image',
+      'linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
   console.log(node)
 };
 
