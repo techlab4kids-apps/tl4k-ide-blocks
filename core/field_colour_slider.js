@@ -133,13 +133,13 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
   for(var n = 0; n <= 360; n += 20) {
     switch (channel) {
       case 'hue':
-        stops.push(goog.color.hsvaToHex(n, this.saturation_, this.brightness_, this.transparency_));
+        stops.push(goog.color.hsvToHex(n, this.saturation_, this.brightness_));
         break;
       case 'saturation':
-        stops.push(goog.color.hsvaToHex(this.hue_, n / 360, this.brightness_, this.transparency_));
+        stops.push(goog.color.hsvToHex(this.hue_, n / 360, this.brightness_));
         break;
       case 'brightness':
-        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, 255 * n / 360, this.transparency_));
+        stops.push(goog.color.hsvToHex(this.hue_, this.saturation_, 255 * n / 360));
         break;
       case 'transparency':
         stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, 255 * n / 360));
