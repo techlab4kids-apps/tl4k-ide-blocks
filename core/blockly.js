@@ -144,8 +144,7 @@ const zero = '00000000'
  * @returns {Number} the hex color
  */
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
-  var hex = goog.color.hsvToHex(hue, saturation, value)
-  console.log(hex, (hex << 24), ((hex << 24) | constrain(alpha, 0, 255)).toString(16))
+  var hex = parseInt(goog.color.hsvToHex(hue, saturation, value).slice(1, 6), 16)
   var hexStr = ((hex << 24) | constrain(alpha, 0, 255)).toString(16)
   return '#' + zero.slice(0, 8 - hexStr.length) + hexStr
 }
