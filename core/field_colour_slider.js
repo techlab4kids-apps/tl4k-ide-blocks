@@ -137,7 +137,7 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
       // why and how does this out put anything more then 255
       r01 = constrain((a01 * r1 + a01 * r0) / a01, 0, 255)
       g01 = constrain((a01 * g1 + a01 * g0) / a01, 0, 255)
-      b01 = constrain((a01 * b1 + a01 * b0) / a01. 0, 255)
+      b01 = constrain((a01 * b1 + a01 * b0) / a01, 0, 255)
       main = goog.color.rgbToHex(r01, g01, b01)
     }
 
