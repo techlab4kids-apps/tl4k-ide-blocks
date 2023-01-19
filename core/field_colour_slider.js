@@ -123,9 +123,9 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
       r01 = (a01 * r1 + a01 * r0) / a01
       g01 = (a01 * g1 + a01 * g0) / a01
       b01 = (a01 * b1 + a01 * b0) / a01
-      blockc = goog.color.rgbToHex([r01, g01, b01])
+      blockc = goog.color.rgbToHex(r01, g01, b01)
     } else {
-      blockc = goog.color.rgbToHex([r0, g0, b0])
+      blockc = goog.color.rgbToHex(r0, g0, b0)
     }
     this.sourceBlock_.setColour(blockc, blockc, this.sourceBlock_.getColourTertiary());
   }
