@@ -149,6 +149,7 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
         throw new Error("Unknown channel for colour sliders: " + channel);
     }
   }
+  console.log(stops)
   return stops;
 };
 
@@ -160,6 +161,7 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
+  console.log(gradient)
   goog.style.setStyle(node, 'background',
       '-moz-linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background',
@@ -170,6 +172,7 @@ Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
       '-ms-linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background',
       'linear-gradient(left, ' + gradient + ')');
+  console.log(node)
 };
 
 /**
