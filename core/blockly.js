@@ -129,7 +129,7 @@ Blockly.hueToRgb = function(hue) {
  * @param {Number} max the uper wall
  * @returns {Number} the constrained number
  */
-const constrain = (number, min, max) => {
+goog.constrain = function(number, min, max) {
   return Math.min(Math.max(number, min), max)
 }
 
@@ -143,7 +143,7 @@ const constrain = (number, min, max) => {
  */
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
-  var alpha = constrain(Math.floor(alpha), 0, 255).toString(16)
+  var alpha = goog.constrain(Math.floor(alpha), 0, 255).toString(16)
   if (alpha.length < 2) alpha = '0' + alpha
   return hex + alpha
 }

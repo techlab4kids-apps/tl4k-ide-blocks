@@ -101,17 +101,6 @@ Blockly.FieldColourSlider.prototype.getValue = function() {
 };
 
 /**
- * constrains a number to a specified range
- * @param {Number} number the number to constrain
- * @param {Number} min the lower wall
- * @param {Number} max the uper wall
- * @returns {Number} the constrained number
- */
-const constrain = function(number, min, max) {
-  return Math.min(Math.max(number, min), max)
-}
-
-/**
  * Set the colour.
  * @param {string} colour The new colour in '#rrggbb' format.
  */
@@ -135,9 +124,9 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
       var r01, g01, b01
 
       // why and how does this out put anything more then 255
-      r01 = constrain((a01 * r1 + a01 * r0) / a01, 0, 255)
-      g01 = constrain((a01 * g1 + a01 * g0) / a01, 0, 255)
-      b01 = constrain((a01 * b1 + a01 * b0) / a01, 0, 255)
+      r01 = goog.constrain((a01 * r1 + a01 * r0) / a01, 0, 255)
+      g01 = goog.constrain((a01 * g1 + a01 * g0) / a01, 0, 255)
+      b01 = goog.constrain((a01 * b1 + a01 * b0) / a01, 0, 255)
       main = goog.color.rgbToHex(r01, g01, b01)
     }
 
