@@ -114,20 +114,22 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
   if (this.sourceBlock_) {
     // Set the primary, secondary and tertiary colour to this value.
     // The renderer expects to be able to use the secondary colour as the fill for a shadow.
-    var [r0, g0, b0] = goog.color.hexToRgb(colour.slice(0, 7))
+    var main = colour.slice(0, 7)
     var back = this.sourceBlock_.getParent().getColourTertiary()
-    var a01 = parseInt(colour.slice(6, 8), 16)
-    var r01, g01, b01, blockc
+
     if (back) {
+      var a01 = parseInt(colour.slice(6, 8), 16)
+      var [r0, g0, b0] = goog.color.hexToRgb(main)
       var [r1, g1, b1] = goog.color.hexToRgb(back)
+      var r01, g01, b01
+
       r01 = (a01 * r1 + a01 * r0) / a01
       g01 = (a01 * g1 + a01 * g0) / a01
       b01 = (a01 * b1 + a01 * b0) / a01
-      blockc = goog.color.rgbToHex(r01, g01, b01)
-    } else {
-      blockc = goog.color.rgbToHex(r0, g0, b0)
+      main = goog.color.rgbToHex(r01, g01, b01)
     }
-    this.sourceBlock_.setColour(blockc, blockc, this.sourceBlock_.getColourTertiary());
+
+    this.sourceBlock_.setColour(main, main, this.sourceBlock_.getColourTertiary());
   }
   this.updateSliderHandles_();
   this.updateDom_();
