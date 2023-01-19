@@ -133,16 +133,16 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
   for(var n = 0; n <= 360; n += 20) {
     switch (channel) {
       case 'hue':
-        stops.push(goog.color.hsvToHex(n, this.saturation_, this.brightness_));
+        stops.push(`hsva(${n}, ${this.saturation_}, ${this.brightness_}, ${this.transparency_})`);
         break;
       case 'saturation':
-        stops.push(goog.color.hsvToHex(this.hue_, n / 360, this.brightness_));
+        stops.push(`hsva(${this.hue_}, ${n / 360}, ${this.brightness_}, ${this.transparency_})`);
         break;
       case 'brightness':
-        stops.push(goog.color.hsvToHex(this.hue_, this.saturation_, 255 * n / 360));
+        stops.push(`hsva(${this.hue_}, ${this.saturation_}, ${255 * n / 360}, ${this.transparency_})`);
         break;
       case 'transparency':
-        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, 255 * n / 360));
+        stops.push(`hsva(${this.hue_}, ${this.saturation_}, ${this.brightness_}, ${255 * n / 360})`);
         break;
       default:
         throw new Error("Unknown channel for colour sliders: " + channel);

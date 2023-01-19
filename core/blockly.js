@@ -133,8 +133,6 @@ const constrain = (number, min, max) => {
   return Math.min(Math.max(number, min), max)
 }
 
-const zero = '00000000'
-
 /**
  * converts hsva to rgba
  * @param {Number} hue the color
