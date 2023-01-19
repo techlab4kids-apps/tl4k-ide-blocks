@@ -160,18 +160,7 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
-  goog.style.setStyle(node, 'background',
-      '-moz-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-webkit-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-o-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      '-ms-linear-gradient(left, ' + gradient + ')');
-  goog.style.setStyle(node, 'background',
-      'linear-gradient(left, ' + gradient + ')');
-  console.log(node.style)
-  node.style += ';background-image: url("static/assets/482dc5011057fe26e9542e9476601bf2.png")';
+  node.style += 'linear-gradient(left, ' + gradient + ');background-image: url("static/assets/482dc5011057fe26e9542e9476601bf2.png")';
   console.log(node)
 };
 
