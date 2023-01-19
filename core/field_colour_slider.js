@@ -107,7 +107,7 @@ Blockly.FieldColourSlider.prototype.getValue = function() {
  * @param {Number} max the uper wall
  * @returns {Number} the constrained number
  */
-const constrain = (number, min, max) => {
+const constrain = function(number, min, max) {
   return Math.min(Math.max(number, min), max)
 }
 
