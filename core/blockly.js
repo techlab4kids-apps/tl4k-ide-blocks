@@ -147,7 +147,7 @@ goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
   var alpha =constrain(alpha, 0, 255).toString(16)
   if (alpha.length < 2) alpha = '0' + alpha
-  return '#' + hex + alpha
+  return hex + alpha
 }
 
 /**
