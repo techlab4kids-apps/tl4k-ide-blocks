@@ -159,8 +159,6 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
-  goog.style.setStyle(node, 'background-image',
-      'linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
   goog.style.setStyle(node, 'background',
       '-moz-linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background',
@@ -171,6 +169,8 @@ Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
       '-ms-linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background',
       'linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background-image',
+      'url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
 };
 
 /**
