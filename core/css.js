@@ -991,6 +991,7 @@ Blockly.Css.CONTENT = [
     'font-size: 0.65rem;',
     'color: $colour_toolboxText;',
     'margin: 8px;',
+    'background-image: url("static/assets/482dc5011057fe26e9542e9476601bf2.png");',
   '}',
 
   '.scratchColourPickerLabelText {',
