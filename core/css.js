@@ -960,7 +960,7 @@ Blockly.Css.CONTENT = [
     'position: relative;',
     'outline: none;',
     'border-radius: 11px;',
-    'margin-bottom: 20px;'
+    'margin-bottom: 20px;',
   '}',
 
   '.blocklyDropDownDiv .goog-slider-horizontal .goog-slider-thumb {',
