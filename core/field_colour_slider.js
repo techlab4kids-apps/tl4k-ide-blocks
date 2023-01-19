@@ -169,6 +169,8 @@ Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
       '-ms-linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background',
       'linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background-image',
+      'linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
 };
 
 /**
