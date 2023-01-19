@@ -256,6 +256,8 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
       case 'transparency':
         thisField.transparency_ = channelValue;
         break;
+      default:
+        throw new Error('invalid channel type: ' + channel)
     }
     var colour = goog.color.hsvaToHex(thisField.hue_, thisField.saturation_, thisField.brightness_, thisField.transparency_);
     if (thisField.sourceBlock_) {
@@ -263,6 +265,7 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
       colour = thisField.callValidator(colour);
     }
     if (colour !== null) {
+      console.log(colour)
       thisField.setValue(colour, true);
     }
   };
