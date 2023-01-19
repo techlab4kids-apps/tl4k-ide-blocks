@@ -159,8 +159,8 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  * @private
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
-  var gradient = this.createColourStops_(channel).join(',');
-  node.style += 'linear-gradient(left, ' + gradient + ');background-image: url("static/assets/482dc5011057fe26e9542e9476601bf2.png")';
+  var gradient = this.createColourStops_(channel).join(', ');
+  node.style = 'linear-gradient(left, ' + gradient + '); background-image: url("static/assets/482dc5011057fe26e9542e9476601bf2.png");';
   console.log(node)
 };
 
