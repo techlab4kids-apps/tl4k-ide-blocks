@@ -89,6 +89,7 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
     return;
   }
   Blockly.FieldColourSlider.superClass_.init.call(this, block);
+  this.transparency_ = 1
   this.setValue(this.getValue());
 };
 
@@ -171,6 +172,7 @@ Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
       'linear-gradient(left, ' + gradient + ')');
   goog.style.setStyle(node, 'background-image',
       'url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  console.log(goog.style.getStyle(node))
 };
 
 /**
