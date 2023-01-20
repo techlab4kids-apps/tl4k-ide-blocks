@@ -261,7 +261,7 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
       colour = thisField.callValidator(colour);
     }
     if (colour !== null) {
-      console.log(colour)
+      thisField.setValue(colour, true);
     }
   };
 };
