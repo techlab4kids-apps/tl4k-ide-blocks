@@ -239,6 +239,7 @@ Blockly.FieldColourSlider.prototype.createLabelDom_ = function(labelText) {
 Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
   var thisField = this;
   return function(event) {
+    console.log(channelValue, event, channel, thisField.sliderCallbacksEnabled_)
     if (!thisField.sliderCallbacksEnabled_) return;
     var channelValue = event.target.getValue();
     switch (channel) {
@@ -260,6 +261,7 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
         throw new Error('invalid channel type: ' + channel)
     }
     var colour = goog.color.hsvaToHex(thisField.hue_, thisField.saturation_, thisField.brightness_, thisField.transparency_);
+    console.log(colour)
     if (thisField.sourceBlock_) {
       // Call any validation function, and allow it to override.
       colour = thisField.callValidator(colour);
