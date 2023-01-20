@@ -206,7 +206,6 @@ Blockly.FieldColourSlider.prototype.updateSliderHandles_ = function() {
     this.saturationSlider_.setValue(this.saturation_);
     this.brightnessSlider_.setValue(this.brightness_);
     this.transparencySlider_.setValue(this.transparency_);
-    console.log(this.transparency_)
     this.sliderCallbacksEnabled_ = true;
   }
 };
@@ -239,7 +238,6 @@ Blockly.FieldColourSlider.prototype.createLabelDom_ = function(labelText) {
 Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
   var thisField = this;
   return function(event) {
-    console.log(channelValue, event, channel, thisField.sliderCallbacksEnabled_)
     if (!thisField.sliderCallbacksEnabled_) return;
     var channelValue = event.target.getValue();
     switch (channel) {
@@ -250,20 +248,15 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
         thisField.saturation_ = channelValue;
         break;
       case 'brightness':
-        console.log(thisField.brightness_)
         thisField.brightness_ = channelValue;
-        console.log(thisField.brightness_)
         break;
       case 'transparency':
-        console.log(thisField.transparency_)
         thisField.transparency_ = channelValue;
-        console.log(thisField.transparency_)
         break;
       default:
         throw new Error('invalid channel type: ' + channel)
     }
     var colour = goog.color.hsvaToHex(thisField.hue_, thisField.saturation_, thisField.brightness_, thisField.transparency_);
-    console.log(colour)
     if (thisField.sourceBlock_) {
       // Call any validation function, and allow it to override.
       colour = thisField.callValidator(colour);
@@ -287,7 +280,6 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
     thisField.transparency_ = hsv[3];
-    console.log(this.transparency_)
     thisField.setValue(value);
   });
 };
@@ -308,7 +300,6 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];
   this.transparency_ = hsv[3];
-  console.log(this.transparency_)
 
   var hueElements = this.createLabelDom_(Blockly.Msg.COLOUR_HUE_LABEL);
   div.appendChild(hueElements[0]);
