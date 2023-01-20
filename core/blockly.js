@@ -158,8 +158,8 @@ goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
  */
 goog.color.hexToHsva = function(decimal) {
   var alpha = (() => {
-    console.log(decimal, decimal.slice(8, 7), parseInt(decimal.slice(8, 7), 16))
-    if (typeof decimal === 'string') return parseInt(decimal.slice(8, 7), 16)
+    console.log(decimal, decimal.slice(7, 9), parseInt(decimal.slice(7, 9), 16))
+    if (typeof decimal === 'string') return parseInt(decimal.slice(7, 9), 16)
     return decimal & 0xFF
   })() / 255
   console.log('get', alpha)
