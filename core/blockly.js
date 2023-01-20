@@ -146,8 +146,8 @@ goog.constrain = function(number, min, max) {
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
   var alpha = goog.constrain(Math.floor(alpha * 255), 0, 255).toString(16)
-  console.log(alpha)
   if (alpha.length < 2) alpha = '0' + alpha
+  console.log('set', alpha)
   return hex + alpha
 }
 
@@ -161,7 +161,7 @@ goog.color.hexToHsva = function(decimal) {
     if (typeof decimal === 'string') return parseInt(decimal.slice(6, 8), 16)
     return decimal & 0xFF
   })() / 255
-  console.log(alpha)
+  console.log('get', alpha)
   
   var [hue, saturation, value] = goog.color.hexToHsv(decimal.slice(0, 7))
   return [hue,saturation,value,alpha];
