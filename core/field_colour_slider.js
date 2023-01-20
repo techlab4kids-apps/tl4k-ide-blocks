@@ -250,12 +250,14 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
         thisField.saturation_ = channelValue;
         break;
       case 'brightness':
+        console.log(thisField.brightness_)
         thisField.brightness_ = channelValue;
+        console.log(thisField.brightness_)
         break;
       case 'transparency':
-        console.log(this.transparency_)
+        console.log(thisField.transparency_)
         thisField.transparency_ = channelValue;
-        console.log(this.transparency_)
+        console.log(thisField.transparency_)
         break;
       default:
         throw new Error('invalid channel type: ' + channel)
