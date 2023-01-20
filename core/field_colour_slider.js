@@ -89,13 +89,12 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
     return;
   }
   Blockly.FieldColourSlider.superClass_.init.call(this, block);
-  this.transparency_ = 1
   this.setValue(this.getValue());
 };
 
 /**
  * Return the current colour.
- * @return {string} Current colour in '#rrggbb' format.
+ * @return {string} Current colour in '#rrggbbaa' format.
  */
 Blockly.FieldColourSlider.prototype.getValue = function() {
   return this.colour_;
@@ -149,7 +148,6 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
         throw new Error("Unknown channel for colour sliders: " + channel);
     }
   }
-  console.log(stops)
   return stops;
 };
 
@@ -161,7 +159,6 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
-  console.log(gradient)
   goog.style.setStyle(node, 'background-image',
       '-moz-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
   goog.style.setStyle(node, 'background-image',
@@ -172,7 +169,6 @@ Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
       '-ms-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
   goog.style.setStyle(node, 'background-image',
       'linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
-  console.log(node)
 };
 
 /**
@@ -191,7 +187,7 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.hueReadout_.textContent = Math.floor(100 * this.hue_ / 360).toFixed(0);
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
-    this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
+    this.transparencyReadout_.textContent = Math.floor(this.transparency_).toFixed(0);
   }
 };
 
