@@ -187,7 +187,7 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.hueReadout_.textContent = Math.floor(100 * this.hue_ / 360).toFixed(0);
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
-    this.transparencyReadout_.textContent = Math.floor(this.transparency_).toFixed(0);
+    this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
   }
 };
 
