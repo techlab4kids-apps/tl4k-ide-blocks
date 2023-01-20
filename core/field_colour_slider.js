@@ -188,6 +188,7 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
     this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
+    console.log(this.transparency_)
   }
 };
 
@@ -205,6 +206,7 @@ Blockly.FieldColourSlider.prototype.updateSliderHandles_ = function() {
     this.saturationSlider_.setValue(this.saturation_);
     this.brightnessSlider_.setValue(this.brightness_);
     this.transparencySlider_.setValue(this.transparency_);
+    console.log(this.transparency_)
     this.sliderCallbacksEnabled_ = true;
   }
 };
@@ -250,7 +252,9 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
         thisField.brightness_ = channelValue;
         break;
       case 'transparency':
+        console.log(this.transparency_)
         thisField.transparency_ = channelValue;
+        console.log(this.transparency_)
         break;
       default:
         throw new Error('invalid channel type: ' + channel)
@@ -279,6 +283,7 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
     thisField.transparency_ = hsv[3];
+    console.log(this.transparency_)
     thisField.setValue(value);
   });
 };
@@ -299,6 +304,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];
   this.transparency_ = hsv[3];
+  console.log(this.transparency_)
 
   var hueElements = this.createLabelDom_(Blockly.Msg.COLOUR_HUE_LABEL);
   div.appendChild(hueElements[0]);
