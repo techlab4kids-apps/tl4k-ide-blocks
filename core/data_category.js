@@ -96,7 +96,7 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_reverselist', 'LIST');
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_arraylist',
-    'LIST', ['ITEM', 'text', Blockly.Msg.DEFAULT_LIST_ITEM]);
+    'LIST', ['ARRAY', 'text', '["a", "b", "c"]']);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listarray', 'LIST');
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addShowList(xmlList, firstVariable);
