@@ -84,19 +84,19 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachitem',
         'LIST', ['VALUE', 'variable', oldFirstVar]);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachnum',
-        'LIST', ['VALUE', 'variable', oldFirstVar]);
+        'LIST', ['INDEX', 'variable', oldFirstVar]);
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addItemNumberOfList(xmlList, firstVariable);
     Blockly.DataCategory.addLengthOfList(xmlList, firstVariable);
     Blockly.DataCategory.addListContainsItem(xmlList, firstVariable);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_itemexistslist', 'LIST', 
-    ['INDEX', 'math_integer', 1]);
+        ['INDEX', 'math_integer', 1]);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listisempty', 'LIST');
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_reverselist', 'LIST');
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_arraylist',
-    'LIST', ['ARRAY', 'text', '["a", "b", "c"]']);
+        'LIST', ['ARRAY', 'text', '["a", "b", "c"]']);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listarray', 'LIST');
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addShowList(xmlList, firstVariable);
