@@ -631,7 +631,7 @@ Blockly.Blocks['data_listforeachnum'] = {
         }
       ],
       "category": Blockly.Categories.dataLists,
-      "extensions": ["colours_data_list", "shape_statement"]
+      "extensions": ["colours_data_lists", "shape_statement"]
     });
   }
 };
@@ -671,7 +671,7 @@ Blockly.Blocks['data_listforeachitem'] = {
         }
       ],
       "category": Blockly.Categories.dataLists,
-      "extensions": ["colours_data_list", "shape_statement"]
+      "extensions": ["colours_data_lists", "shape_statement"]
     });
   }
 };
