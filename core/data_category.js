@@ -60,6 +60,8 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addShowVariable(xmlList, firstVariable);
     Blockly.DataCategory.addHideVariable(xmlList, firstVariable);
   }
+  var oldFirstVar = firstVariable
+  var secondVariable = variableModelList[1]
 
   // Now add list variables to the flyout
   Blockly.DataCategory.addCreateButton(xmlList, workspace, 'LIST');
@@ -79,11 +81,23 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addDeleteAllOfList(xmlList, firstVariable);
     Blockly.DataCategory.addInsertAtList(xmlList, firstVariable);
     Blockly.DataCategory.addReplaceItemOfList(xmlList, firstVariable);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachitem',
+        'LIST', ['VALUE', 'variable', oldFirstVar]);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachnum',
+        'LIST', ['VALUE', 'variable', oldFirstVar]);
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addItemNumberOfList(xmlList, firstVariable);
     Blockly.DataCategory.addLengthOfList(xmlList, firstVariable);
     Blockly.DataCategory.addListContainsItem(xmlList, firstVariable);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_itemexistslist', 'LIST', 
+    ['INDEX', 'math_integer', 1]);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listisempty', 'LIST');
+    Blockly.DataCategory.addSep(xmlList);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_reverselist', 'LIST');
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_arraylist',
+    'LIST', ['ITEM', 'text', Blockly.Msg.DEFAULT_LIST_ITEM]);
+    Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listarray', 'LIST');
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addShowList(xmlList, firstVariable);
     Blockly.DataCategory.addHideList(xmlList, firstVariable);
@@ -462,6 +476,8 @@ Blockly.DataCategory.createValue = function(valueName, type, value) {
     case 'VALUE':
       if (type === 'math_number') {
         fieldName = 'NUM';
+      } else if (type === 'variable') {
+        return Blockly.Variables.generateVariableFieldXml_(value, valueName)
       } else {
         fieldName = 'TEXT';
       }

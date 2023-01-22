@@ -500,10 +500,6 @@ Blockly.Blocks['data_hidelist'] = {
 };
 
 Blockly.Blocks['data_reverselist'] = {
-  /**
-   * Block to hide a list.
-   * @this Blockly.Block
-   */
   init: function() {
     this.jsonInit({
       "message0": 'reverse %1',
@@ -521,10 +517,6 @@ Blockly.Blocks['data_reverselist'] = {
 };
 
 Blockly.Blocks['data_itemexistslist'] = {
-  /**
-   * Block to hide a list.
-   * @this Blockly.Block
-   */
   init: function() {
     this.jsonInit({
       "message0": 'item %1 exists in %2 ?',
@@ -638,7 +630,7 @@ Blockly.Blocks['data_listforeachnum'] = {
           "flip_rtl": true
         }
       ],
-      "category": Blockly.Categories.control,
+      "category": Blockly.Categories.dataLists,
       "extensions": ["colours_data_list", "shape_statement"]
     });
   }
@@ -678,7 +670,7 @@ Blockly.Blocks['data_listforeachitem'] = {
           "flip_rtl": true
         }
       ],
-      "category": Blockly.Categories.control,
+      "category": Blockly.Categories.dataLists,
       "extensions": ["colours_data_list", "shape_statement"]
     });
   }
