@@ -60,7 +60,7 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addShowVariable(xmlList, firstVariable);
     Blockly.DataCategory.addHideVariable(xmlList, firstVariable);
   }
-  var oldFirstVar = !!firstVariable.type 
+  var forEachVariable = Boolean(firstVariable) 
     ? ['VARIABLE', 'variable', firstVariable]
     : undefined
 
@@ -83,9 +83,9 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addInsertAtList(xmlList, firstVariable);
     Blockly.DataCategory.addReplaceItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachitem',
-        'LIST', oldFirstVar);
+        'LIST', forEachVariable);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachnum',
-        'LIST', oldFirstVar);
+        'LIST', forEachVariable);
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addItemNumberOfList(xmlList, firstVariable);
