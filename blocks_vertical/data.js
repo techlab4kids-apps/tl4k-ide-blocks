@@ -582,7 +582,7 @@ Blockly.Blocks['data_arraylist'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "ARRAY"
+          "name": "VALUE"
         },
         {
           "type": "field_variable",
@@ -611,7 +611,7 @@ Blockly.Blocks['data_listforeachnum'] = {
         },
         {
           "type": "field_variable",
-          "name": "INDEX"
+          "name": "VARIABLE"
         }
       ],
       "args1": [
@@ -651,7 +651,7 @@ Blockly.Blocks['data_listforeachitem'] = {
         },
         {
           "type": "field_variable",
-          "name": "VALUE"
+          "name": "VARIABLE"
         }
       ],
       "args1": [
