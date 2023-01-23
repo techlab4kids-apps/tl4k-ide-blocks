@@ -61,7 +61,6 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addHideVariable(xmlList, firstVariable);
   }
   var oldFirstVar = firstVariable
-  var secondVariable = variableModelList[1]
 
   // Now add list variables to the flyout
   Blockly.DataCategory.addCreateButton(xmlList, workspace, 'LIST');
@@ -82,9 +81,9 @@ Blockly.DataCategory = function(workspace) {
     Blockly.DataCategory.addInsertAtList(xmlList, firstVariable);
     Blockly.DataCategory.addReplaceItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachitem',
-        'LIST', ['VALUE', 'variable', oldFirstVar]);
+        'LIST', oldFirstVar ? ['VALUE', 'variable', oldFirstVar] : undefined);
     Blockly.DataCategory.addBlock(xmlList, firstVariable, 'data_listforeachnum',
-        'LIST', ['INDEX', 'variable', oldFirstVar]);
+        'LIST', oldFirstVar ? ['INDEX', 'variable', oldFirstVar] : undefined);
     Blockly.DataCategory.addSep(xmlList);
     Blockly.DataCategory.addItemOfList(xmlList, firstVariable);
     Blockly.DataCategory.addItemNumberOfList(xmlList, firstVariable);
