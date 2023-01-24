@@ -134,6 +134,8 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
+  var opConectionType = this.isDisplayOnly ? 'Procedure' : 'String'
+  var smConectionType = this.isDisplayOnly ? 'Procedure' : null
   this.rendered = false;
 
   var connectionMap = this.disconnectOldBlocks_();
@@ -141,14 +143,14 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
-  this.setOutput(this.output_, 'String')
+  this.setOutput(this.output_, opConectionType)
   if (this.output_) {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
   } else {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   }
-  this.setPreviousStatement(!this.output_, null)
-  this.setNextStatement(!this.output_, null)	
+  this.setPreviousStatement(!this.output_, smConectionType)
+  this.setNextStatement(!this.output_, smConectionType)	
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
@@ -799,7 +801,8 @@ Blockly.Blocks['procedures_definition'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "custom_block"
+          "name": "custom_block",
+          "check": 'Procedure'
         }
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
@@ -818,7 +821,8 @@ Blockly.Blocks['procedures_definition_return'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "custom_block"
+          "name": "custom_block",
+          "check": 'Procedure'
         }
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
@@ -839,6 +843,7 @@ Blockly.Blocks['procedures_call'] = {
     this.argumentIds_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.isDisplayOnly = false
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -877,6 +882,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.isDisplayOnly = true
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -913,6 +919,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.argumentDefaults_ = [];
     this.warp_ = false;
     this.output_ = false;
+    this.isDisplayOnly = true
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
