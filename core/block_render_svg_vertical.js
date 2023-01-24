@@ -1374,12 +1374,12 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       }
       if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' &&
       (y == inputRows.length - 1 ||
-        inputRows[y + 1].type == Blockly.OUTPUT_VALUE) &&
-        input.connection.isConnected()) {
-          const height = input.connection.targetBlock().getHeightWidth().height
-          steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
-          steps.push('v', height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
-          cursorY += height;
+        inputRows[y + 1].type == Blockly.OUTPUT_VALUE)) {
+        // If the final input is a statement stack, add a small row underneath.
+        // Consecutive statement stacks are also separated by a small divider.
+        steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
+        steps.push('v', Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y - 2 * Blockly.BlockSvg.CORNER_RADIUS);
+        cursorY += Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y;
       }
     }
     cursorY += row.height;
