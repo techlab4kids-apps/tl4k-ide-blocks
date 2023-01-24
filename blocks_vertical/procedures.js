@@ -969,3 +969,18 @@ Blockly.Blocks['argument_editor_string_number'] = {
   // Exist on declaration and arguments editors, with different implementations.
   removeFieldCallback: Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_
 };
+
+Blockly.Blocks['procedures_return'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'return %1',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "return"
+        }
+      ],
+      "extensions": ["colours_more", "shape_end"]
+    });
+  }
+};

@@ -237,6 +237,14 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     block.appendChild(mutation);
     xmlList.push(block);
   }
+
+  var field = goog.dom.createDom('field');
+  field.setAttribute('name', 'return')
+  field.setTextContent('1')
+  var block = goog.dom.createDom('block');
+  block.setAttribute('type', 'procedures_return');
+  block.appendChild(field);
+  xmlList.push(block);
   return xmlList;
 };
 
