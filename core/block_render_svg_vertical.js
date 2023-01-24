@@ -1363,7 +1363,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         this.width = Math.max(this.width, inputRows.statementEdge +
           input.connection.targetBlock().getHeightWidth().width);
       }
-      if ((this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) &&
+      if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
         (y == inputRows.length - 1 ||
           inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
         // If the final input is a statement stack, add a small row underneath.
@@ -1371,6 +1371,14 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
         steps.push('v', Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y - 2 * Blockly.BlockSvg.CORNER_RADIUS);
         cursorY += Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y;
+      }
+      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' &&
+      (y == inputRows.length - 1 ||
+        inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
+          const height = input.connection.targetBlock().getHeightWidth().height
+          steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
+          steps.push('v', height - 2 * Blockly.BlockSvg.CORNER_RADIUS);
+          cursorY += height;
       }
     }
     cursorY += row.height;
