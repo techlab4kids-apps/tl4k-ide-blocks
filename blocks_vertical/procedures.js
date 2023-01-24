@@ -141,9 +141,9 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
-  this.setOutput(this.output_)
-  this.setPreviousStatement(!this.output_)
-  this.setNextStatement(!this.output_)	
+  this.setOutput(this.output_, null)
+  this.setPreviousStatement(!this.output_, null)
+  this.setNextStatement(!this.output_, null)	
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
