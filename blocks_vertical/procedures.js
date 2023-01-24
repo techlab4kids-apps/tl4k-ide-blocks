@@ -142,6 +142,11 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
   this.setOutput(this.output_, 'String')
+  if (this.output_) {
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+  } else {
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+  }
   this.setPreviousStatement(!this.output_, null)
   this.setNextStatement(!this.output_, null)	
 
