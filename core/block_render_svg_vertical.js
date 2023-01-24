@@ -1348,8 +1348,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       // Move to the start of the notch.
       cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
 
-      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
-        this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
+        this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
+      } else if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        row.height += 20
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
       } else {
         Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
