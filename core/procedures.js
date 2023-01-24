@@ -238,6 +238,9 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     xmlList.push(block);
   }
 
+  var gapText = '<xml>' + 
+    '<sep gap="16">' +
+  '</xml>'
   var blockText = 
   '<xml>' + 
     '<block type="procedures_return">' + 
@@ -249,6 +252,8 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     '</block>' + 
   '</xml>';
   var block = Blockly.Xml.textToDom(blockText).firstChild;
+  var gap = Blockly.Xml.textToDom(gapText).firstChild
+  xmlList.push(gap);
   xmlList.push(block);
   return xmlList;
 };
