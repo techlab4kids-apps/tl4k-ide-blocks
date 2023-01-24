@@ -134,8 +134,8 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
  */
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
+  // @todo add statement check?
   var opConectionType = this.isDisplayOnly ? 'Procedure' : 'String'
-  var smConectionType = this.isDisplayOnly ? 'Procedure' : null
   this.rendered = false;
 
   var connectionMap = this.disconnectOldBlocks_();
@@ -149,8 +149,8 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   } else {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   }
-  this.setPreviousStatement(!this.output_, smConectionType)
-  this.setNextStatement(!this.output_, smConectionType)	
+  this.setPreviousStatement(!this.output_, null)
+  this.setNextStatement(!this.output_, null)	
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
@@ -801,8 +801,7 @@ Blockly.Blocks['procedures_definition'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "custom_block",
-          "check": 'Procedure'
+          "name": "custom_block"
         }
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
