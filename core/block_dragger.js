@@ -238,7 +238,8 @@ Blockly.BlockDragger.prototype.endBlockDrag = function(e, currentDragDeltaXY) {
 
   // Scratch-specific: note possible illegal definition deletion for rollback below.
   var isDeletingProcDef = this.wouldDeleteBlock_ &&
-      (this.draggingBlock_.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE);
+      (this.draggingBlock_.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
+      this.draggingBlock_.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return');
   if (isDeletingProcDef) {
     var procCodeBeingDeleted = this.draggingBlock_.getInput('custom_block').connection.targetBlock().getProcCode();
   }

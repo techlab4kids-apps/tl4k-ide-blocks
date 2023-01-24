@@ -354,7 +354,8 @@ Blockly.Procedures.getDefineBlock = function(procCode, workspace) {
   // Assume that a procedure definition is a top block.
   var blocks = workspace.getTopBlocks(false);
   for (var i = 0; i < blocks.length; i++) {
-    if (blocks[i].type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
+    if (blocks[i].type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
+      blocks[i].type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
       var prototypeBlock = blocks[i].getInput('custom_block').connection.targetBlock();
       if (prototypeBlock.getProcCode && prototypeBlock.getProcCode() == procCode) {
         return blocks[i];
@@ -454,7 +455,8 @@ Blockly.Procedures.createProcedureCallbackFactory_ = function(workspace) {
 Blockly.Procedures.editProcedureCallback_ = function(block) {
   // Edit can come from one of three block types (call, define, prototype)
   // Normalize by setting the block to the prototype block for the procedure.
-  if (block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
+  if (block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
+    block.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
     var input = block.getInput('custom_block');
     if (!input) {
       alert('Bad input'); // TODO: Decide what to do about this.
