@@ -1372,7 +1372,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         steps.push('v', Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y - 2 * Blockly.BlockSvg.CORNER_RADIUS);
         cursorY += Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y;
       }
-      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' &&
+      if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' &&
       (y == inputRows.length - 1 ||
         inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
           const height = input.connection.targetBlock().getHeightWidth().height
