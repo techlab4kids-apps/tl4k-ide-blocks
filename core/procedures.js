@@ -238,9 +238,14 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
     xmlList.push(block);
   }
 
-  var blockText = '<xml>' + 
+  var blockText = 
+  '<xml>' + 
     '<block type="procedures_return">' + 
-      '<field name="return">1</field>' + 
+      '<value name="MESSAGE">' +
+        '<shadow type="text">' +
+          '<field name="TEXT">1</field>' +
+        '</shadow>' +
+      '</value>' +
     '</block>' + 
   '</xml>';
   var block = Blockly.Xml.textToDom(blockText).firstChild;
