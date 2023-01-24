@@ -419,7 +419,7 @@ Blockly.Procedures.createProcedureCallbackFactory_ = function(workspace) {
   return function(mutation) {
     if (mutation) {
       var blockText = '<xml>' +
-          `<block type="procedures_definition${mutation.includes('returns="true"') ? '_return' : ''}">` +
+          `<block type="procedures_definition${mutation.getAttribute('returns') === 'true' ? '_return' : ''}">` +
           '<statement name="custom_block">' +
           '<shadow type="procedures_prototype">' +
           Blockly.Xml.domToText(mutation) +
