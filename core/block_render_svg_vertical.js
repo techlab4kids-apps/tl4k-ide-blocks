@@ -1363,8 +1363,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         this.width = Math.max(this.width, inputRows.statementEdge +
           input.connection.targetBlock().getHeightWidth().width);
       }
-      if ((this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
-        this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') &&
+      if ((this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) &&
         (y == inputRows.length - 1 ||
           inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
         // If the final input is a statement stack, add a small row underneath.
