@@ -664,6 +664,14 @@ Blockly.ScratchBlocks.ProcedureUtils.getWarp = function() {
   return this.warp_;
 };
 
+Blockly.ScratchBlocks.ProcedureUtils.getReturns = function() {
+  return this.output_;
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
+  this.output_ = returns;
+};
+
 /**
  * Externally-visible function to set the warp on procedure declaration.
  * @param {boolean} warp The value of the warp_ property.
@@ -904,6 +912,8 @@ Blockly.Blocks['procedures_declaration'] = {
   focusLastEditor_: Blockly.ScratchBlocks.ProcedureUtils.focusLastEditor_,
   getWarp: Blockly.ScratchBlocks.ProcedureUtils.getWarp,
   setWarp: Blockly.ScratchBlocks.ProcedureUtils.setWarp,
+  getReturns: Blockly.ScratchBlocks.ProcedureUtils.getReturns,
+  setReturns: Blockly.ScratchBlocks.ProcedureUtils.setReturns,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
