@@ -1363,18 +1363,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         this.width = Math.max(this.width, inputRows.statementEdge +
           input.connection.targetBlock().getHeightWidth().width);
       }
-      if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
+      if ((this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
+        this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') &&
         (y == inputRows.length - 1 ||
           inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
-        // If the final input is a statement stack, add a small row underneath.
-        // Consecutive statement stacks are also separated by a small divider.
-        steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
-        steps.push('v', Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y - 2 * Blockly.BlockSvg.CORNER_RADIUS);
-        cursorY += Blockly.BlockSvg.EXTRA_STATEMENT_ROW_Y;
-      }
-      if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return' &&
-      (y == inputRows.length - 1 ||
-        inputRows[y + 1].type == Blockly.OUTPUT_VALUE)) {
         // If the final input is a statement stack, add a small row underneath.
         // Consecutive statement stacks are also separated by a small divider.
         steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
