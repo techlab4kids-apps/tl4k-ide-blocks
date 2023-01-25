@@ -1324,7 +1324,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       cursorX = Math.max(cursorX, inputRows.rightEdge);
       this.width = Math.max(this.width, cursorX);
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-        this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
+        this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY, cursorX);
         console.log(row.height, 'row height')
       }
       if (!this.edgeShape_ && this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
@@ -1603,38 +1603,43 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
  * @private
  */
 Blockly.BlockSvg.prototype.renderDefineBlock_ = function(steps, inputRows,
-    input, row, cursorY) {
+    input, row, cursorY, cursorX) {
   // Following text shows up as a dummy input after the statement input, which
   // we are forcing to stay inline with the statement input instead of letting
   // it drop to a new line.
   var hasFollowingText = row.length == 2;
 
   // Figure out where the right side of the block is.
-  var rightSide = inputRows.rightEdge;
-  if (input.connection && input.connection.targetBlock()) {
-    rightSide = inputRows.statementEdge +
-        input.connection.targetBlock().getHeightWidth().width +
-        Blockly.BlockSvg.DEFINE_BLOCK_PADDING_RIGHT;
+  var rightSide
+  if (!cursorX) {
+    rightSide = inputRows.rightEdge;
+    if (input.connection && input.connection.targetBlock()) {
+      rightSide = inputRows.statementEdge +
+          input.connection.targetBlock().getHeightWidth().width +
+          Blockly.BlockSvg.DEFINE_BLOCK_PADDING_RIGHT;
+    } else {
+      // Handles the case where block is being rendered as an insertion marker
+      rightSide = Math.max(Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT, rightSide)
+      + Blockly.BlockSvg.DEFINE_BLOCK_PADDING_RIGHT;
+    }
+    rightSide -= Blockly.BlockSvg.DEFINE_HAT_CORNER_RADIUS;
+
+    if (hasFollowingText) {
+      var followingTextInput = row[1];
+      var fieldStart = rightSide + 3 * Blockly.BlockSvg.SEP_SPACE_X;
+      rightSide += followingTextInput.fieldRow[0].getSize().width;
+      rightSide += 2 * Blockly.BlockSvg.SEP_SPACE_X;
+
+      // Align fields vertically within the row.
+      // In renderFields_, the field is further centered by its own height.
+      // The dummy input's fields did not get laid out normally because we're
+      // forcing them to stay inline with a statement input.
+      var fieldY = cursorY;
+      fieldY += Blockly.BlockSvg.MIN_STATEMENT_INPUT_HEIGHT;
+      this.renderFields_(followingTextInput.fieldRow, fieldStart, fieldY);
+    }
   } else {
-    // Handles the case where block is being rendered as an insertion marker
-    rightSide = Math.max(Blockly.BlockSvg.MIN_BLOCK_X_WITH_STATEMENT, rightSide)
-    + Blockly.BlockSvg.DEFINE_BLOCK_PADDING_RIGHT;
-  }
-  rightSide -= Blockly.BlockSvg.DEFINE_HAT_CORNER_RADIUS;
-
-  if (hasFollowingText) {
-    var followingTextInput = row[1];
-    var fieldStart = rightSide + 3 * Blockly.BlockSvg.SEP_SPACE_X;
-    rightSide += followingTextInput.fieldRow[0].getSize().width;
-    rightSide += 2 * Blockly.BlockSvg.SEP_SPACE_X;
-
-    // Align fields vertically within the row.
-    // In renderFields_, the field is further centered by its own height.
-    // The dummy input's fields did not get laid out normally because we're
-    // forcing them to stay inline with a statement input.
-    var fieldY = cursorY;
-    fieldY += Blockly.BlockSvg.MIN_STATEMENT_INPUT_HEIGHT;
-    this.renderFields_(followingTextInput.fieldRow, fieldStart, fieldY);
+    rightSide = cursorX
   }
   // Draw the top and the right corner of the hat.
   steps.push('H', rightSide);
