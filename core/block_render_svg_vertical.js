@@ -1299,6 +1299,11 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
 
         cursorX = this.renderFields_(input.fieldRow, fieldX, fieldY);
         if (input.type == Blockly.INPUT_VALUE) {
+          if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+            console.log('procedure return')
+            this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
+            console.log(row.height, 'row height')
+          }
           // Create inline input connection.
           // In blocks with a notch, inputs should be bumped to a min X,
           // to avoid overlapping with the notch.
@@ -1312,11 +1317,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           input.connection.setOffsetInBlock(connectionX, connectionY);
           this.renderInputShape_(input, cursorX, cursorY + connectionYOffset);
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
-          if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-            console.log('procedure return')
-            this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
-            console.log(row.height, 'row height')
-          }
         }
       }
       // Remove final separator and replace it with right-padding.
