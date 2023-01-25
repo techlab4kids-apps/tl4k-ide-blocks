@@ -1314,10 +1314,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
         }
       }
-      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-        this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
-        console.log(row.height, 'row height')
-      }
       // Remove final separator and replace it with right-padding.
       cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
       cursorX += row.paddingEnd;
@@ -1327,6 +1323,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       // Move to the right edge
       cursorX = Math.max(cursorX, inputRows.rightEdge);
       this.width = Math.max(this.width, cursorX);
+      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
+        console.log(row.height, 'row height')
+      }
       if (!this.edgeShape_ && this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
         // Include corner radius in drawing the horizontal line.
         steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - this.edgeShapeWidth_);
