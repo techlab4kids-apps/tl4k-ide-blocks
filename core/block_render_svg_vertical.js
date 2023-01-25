@@ -1325,7 +1325,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       this.width = Math.max(this.width, cursorX);
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
         this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY, cursorX);
-        console.log(row.height, 'row height')
       }
       if (this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
         if (!this.edgeShape_) {
@@ -1354,7 +1353,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       // Move to the start of the notch.
       cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
 
-      console.log(this.type, 'actual type')
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
         console.log('procedure')
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
