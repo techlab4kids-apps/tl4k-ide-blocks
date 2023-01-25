@@ -1355,7 +1355,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
 
       console.log(this.type, 'actual type')
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
-        console.log('procedure')
+        console.log(steps, inputRows, row[0], row, cursorY, row)
         this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
       } else {
         Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
