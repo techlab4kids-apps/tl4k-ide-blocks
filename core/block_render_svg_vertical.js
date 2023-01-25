@@ -1332,7 +1332,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         steps.push('H', cursorX - this.edgeShapeWidth_);
       }
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-        console.log(steps, inputRows, row[0], row, cursorY, row)
+        console.log(steps, inputRows, row[0], row, cursorY)
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
         console.log(row.height, 'row height')
       }
