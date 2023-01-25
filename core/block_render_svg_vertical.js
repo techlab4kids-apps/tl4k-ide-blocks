@@ -1317,29 +1317,28 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
         this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
         console.log(row.height, 'row height')
+      }
+      // Remove final separator and replace it with right-padding.
+      cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
+      cursorX += row.paddingEnd;
+      // Update right edge for all inputs, such that all rows
+      // stretch to be at least the size of all previous rows.
+      inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge);
+      // Move to the right edge
+      cursorX = Math.max(cursorX, inputRows.rightEdge);
+      this.width = Math.max(this.width, cursorX);
+      if (!this.edgeShape_ && this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        // Include corner radius in drawing the horizontal line.
+        steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - this.edgeShapeWidth_);
+        steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
       } else {
-        // Remove final separator and replace it with right-padding.
-        cursorX -= Blockly.BlockSvg.SEP_SPACE_X;
-        cursorX += row.paddingEnd;
-        // Update right edge for all inputs, such that all rows
-        // stretch to be at least the size of all previous rows.
-        inputRows.rightEdge = Math.max(cursorX, inputRows.rightEdge);
-        // Move to the right edge
-        cursorX = Math.max(cursorX, inputRows.rightEdge);
-        this.width = Math.max(this.width, cursorX);
-        if (!this.edgeShape_) {
-          // Include corner radius in drawing the horizontal line.
-          steps.push('H', cursorX - Blockly.BlockSvg.CORNER_RADIUS - this.edgeShapeWidth_);
-          steps.push(Blockly.BlockSvg.TOP_RIGHT_CORNER);
-        } else {
-          // Don't include corner radius - no corner (edge shape drawn).
-          steps.push('H', cursorX - this.edgeShapeWidth_);
-        }
-        // Subtract CORNER_RADIUS * 2 to account for the top right corner
-        // and also the bottom right corner. Only move vertically the non-corner length.
-        if (!this.edgeShape_) {
-          steps.push('v', row.height - Blockly.BlockSvg.CORNER_RADIUS * 2);
-        }
+        // Don't include corner radius - no corner (edge shape drawn).
+        steps.push('H', cursorX - this.edgeShapeWidth_);
+      }
+      // Subtract CORNER_RADIUS * 2 to account for the top right corner
+      // and also the bottom right corner. Only move vertically the non-corner length.
+      if (!this.edgeShape_ && this.type != Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        steps.push('v', row.height - Blockly.BlockSvg.CORNER_RADIUS * 2);
       }
     } else if (row.type == Blockly.NEXT_STATEMENT) {
       // Nested statement.
