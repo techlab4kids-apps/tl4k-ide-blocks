@@ -1314,7 +1314,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
           if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
             console.log('procedure return')
-            row.height += 20
             this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
             console.log(row.height, 'row height')
           }
