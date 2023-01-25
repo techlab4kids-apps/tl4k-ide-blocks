@@ -1332,7 +1332,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         steps.push('H', cursorX - this.edgeShapeWidth_);
       }
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-        console.log('procedure return')
+        console.log(steps, inputRows, row[0], row, cursorY, row)
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
         console.log(row.height, 'row height')
       }
@@ -1355,8 +1355,8 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
 
       console.log(this.type, 'actual type')
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
-        console.log(steps, inputRows, row[0], row, cursorY, row)
-        this.renderDefineBlock_(steps, inputRows, row[0], row, cursorY);
+        console.log('procedure')
+        this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
       } else {
         Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
             inputRows.rightEdge, row);
