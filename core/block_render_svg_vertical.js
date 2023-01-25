@@ -1299,11 +1299,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
 
         cursorX = this.renderFields_(input.fieldRow, fieldX, fieldY);
         if (input.type == Blockly.INPUT_VALUE) {
-          if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-            console.log('procedure return')
-            this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
-            console.log(row.height, 'row height')
-          }
           // Create inline input connection.
           // In blocks with a notch, inputs should be bumped to a min X,
           // to avoid overlapping with the notch.
@@ -1335,6 +1330,11 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       } else {
         // Don't include corner radius - no corner (edge shape drawn).
         steps.push('H', cursorX - this.edgeShapeWidth_);
+      }
+      if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+        console.log('procedure return')
+        this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
+        console.log(row.height, 'row height')
       }
       // Subtract CORNER_RADIUS * 2 to account for the top right corner
       // and also the bottom right corner. Only move vertically the non-corner length.
