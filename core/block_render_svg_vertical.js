@@ -1312,6 +1312,12 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
           input.connection.setOffsetInBlock(connectionX, connectionY);
           this.renderInputShape_(input, cursorX, cursorY + connectionYOffset);
           cursorX += input.renderWidth + Blockly.BlockSvg.SEP_SPACE_X;
+          if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
+            console.log('procedure return')
+            row.height += 20
+            this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
+            console.log(row.height, 'row height')
+          }
         }
       }
       // Remove final separator and replace it with right-padding.
@@ -1348,15 +1354,10 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       // Move to the start of the notch.
       cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
 
-      console.log(this.type)
+      console.log(this.type, 'actual type')
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
         console.log('procedure')
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
-      } else if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') {
-        console.log('procedure return')
-        row.height += 20
-        this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
-        console.log(row.height)
       } else {
         Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,
             inputRows.rightEdge, row);
