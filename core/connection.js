@@ -67,7 +67,6 @@ Blockly.Connection.REASON_DIFFERENT_WORKSPACES = 5;
 Blockly.Connection.REASON_SHADOW_PARENT = 6;
 // Fixes #1127, but may be the wrong solution.
 Blockly.Connection.REASON_CUSTOM_PROCEDURE = 7;
-Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE = 7;
 
 /**
  * Connection this connection connects to.  Null if not connected.
@@ -326,10 +325,6 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     // And hack to fix #1534: Fail attempts to connect anything but a
     // defnoreturn block to a prototype block.
     return Blockly.Connection.REASON_CUSTOM_PROCEDURE;
-  } else if ((blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
-    blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') &&
-    target.type != Blockly.OPPOSITE_TYPE[this.type]) {
-    return Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE
   }
   return Blockly.Connection.CAN_CONNECT;
 };
@@ -351,6 +346,35 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       // Usually this means one block has been deleted.
       throw 'Blocks not on same workspace.';
     case Blockly.Connection.REASON_WRONG_TYPE:
+      if (this.sourceBlock_.type.startsWith(Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE)) {
+        console.warn('tried changing the type of a procedure, attempting to change define block type')
+        var x = this.x_, 
+            y = this.y_, 
+            id = this.sourceBlock_.id,
+            proto = this.sourceBlock_.getInput('custom_block'),
+            children = this.sourceBlock_.nextConnection
+        
+        if (target.type == Blockly.OUTPUT_VALUE &&
+          this.type == Blockly.NEXT_STATEMENT) {
+          var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
+              Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return', id)
+          this.sourceBlock_.dispose()
+          newBlock.moveTo(x, y)
+          newBlock.nextConnection.connect(children)
+          newBlock.inputList[0].connect(proto)
+        } else if (target.type == Blockly.NEXT_STATEMENT &&
+          this.type == Blockly.OUTPUT_VALUE) {
+          var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
+              Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE, id)
+          this.sourceBlock_.dispose()
+          newBlock.moveTo(x, y)
+          newBlock.nextConnection.connect(children)
+          newBlock.inputList[0].connect(proto)
+        } else {
+          throw new Error('couldnt generate new procedure defintion block')
+        }
+        break;
+      }
       throw 'Attempt to connect incompatible types.';
     case Blockly.Connection.REASON_TARGET_NULL:
       throw 'Target connection is null.';
@@ -362,34 +386,6 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       throw 'Connecting non-shadow to shadow block.';
     case Blockly.Connection.REASON_CUSTOM_PROCEDURE:
       throw 'Trying to replace a shadow on a custom procedure definition.';
-    case Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE:
-      console.warn('tried changing the type of a procedure, attempting to change define block type')
-      var x = this.x_, 
-          y = this.y_, 
-          id = this.sourceBlock_.id,
-          proto = this.sourceBlock_.getInput('custom_block'),
-          children = this.sourceBlock_.nextConnection
-      
-      if (target.type == Blockly.OUTPUT_VALUE &&
-        this.type == Blockly.NEXT_STATEMENT) {
-        var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
-            Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return', id)
-        this.sourceBlock_.dispose()
-        newBlock.moveTo(x, y)
-        newBlock.nextConnection.connect(children)
-        newBlock.inputList[0].connect(proto)
-      } else if (target.type == Blockly.NEXT_STATEMENT &&
-        this.type == Blockly.OUTPUT_VALUE) {
-        var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
-            Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE, id)
-        this.sourceBlock_.dispose()
-        newBlock.moveTo(x, y)
-        newBlock.nextConnection.connect(children)
-        newBlock.inputList[0].connect(proto)
-      } else {
-        throw new Error('couldnt generate new procedure defintion block')
-      }
-      break;
 
     default:
       throw 'Unknown connection failure: this should never happen!';
