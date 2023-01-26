@@ -240,7 +240,7 @@ Blockly.Connection.prototype.connect_ = function(childConnection) {
  */
 Blockly.Connection.prototype.dispose = function() {
   if (this.isConnected()) {
-    throw 'Disconnect connection before disposing of it.';
+    this.disconnect()
   }
   if (this.inDB_) {
     this.db_.removeConnection_(this);
