@@ -291,7 +291,7 @@ Blockly.Connection.prototype.isConnected = function() {
  * @private
  */
 Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
-  console.log(target.getSourceBlock().id)
+  console.log(target.getSourceBlock().type, target)
   if (!target) {
     return Blockly.Connection.REASON_TARGET_NULL;
   }
