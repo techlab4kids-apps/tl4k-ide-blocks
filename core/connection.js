@@ -30,6 +30,7 @@ goog.require('Blockly.Events.BlockMove');
 
 goog.require('goog.asserts');
 goog.require('goog.dom');
+goog.require('Blockly.BlockSvg');
 
 
 /**
@@ -363,11 +364,34 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
     case Blockly.Connection.REASON_CUSTOM_PROCEDURE:
       throw 'Trying to replace a shadow on a custom procedure definition.';
     case Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE:
-      console.warn('tried changing the type of a procedure, attempting to change block type')
+      console.warn('tried changing the type of a procedure, attempting to change define block type')
+      var x = this.x_, 
+          y = this.y_, 
+          id = this.sourceBlock_.id,
+          proto = this.sourceBlock_.getInput('custom_block'),
+          children = this.sourceBlock_.nextConnection
+      
       if (target.type == Blockly.OUTPUT_VALUE &&
         this.type == Blockly.NEXT_STATEMENT) {
-          this.sourceBlock_
+        var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
+            Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return', id)
+        this.sourceBlock_.dispose()
+        newBlock.moveTo(x, y)
+        newBlock.nextConnection.connect(children)
+        newBlock.inputList[0].connect(proto)
+      } else if (target.type == Blockly.NEXT_STATEMENT &&
+        this.type == Blockly.OUTPUT_VALUE) {
+        var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
+            Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE, id)
+        this.sourceBlock_.dispose()
+        newBlock.moveTo(x, y)
+        newBlock.nextConnection.connect(children)
+        newBlock.inputList[0].connect(proto)
+      } else {
+        throw new Error('couldnt generate new procedure defintion block')
       }
+      break;
+
     default:
       throw 'Unknown connection failure: this should never happen!';
   }
