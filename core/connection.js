@@ -38,7 +38,7 @@ goog.require('Blockly.BlockSvg');
  * @param {!Blockly.Block} source The block establishing this connection.
  * @param {number} type The type of the connection.
  * @constructor
- */
+ */ 
 Blockly.Connection = function(source, type) {
   /**
    * @type {!Blockly.Block}
