@@ -1354,7 +1354,6 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
       cursorX = inputRows.statementEdge + Blockly.BlockSvg.NOTCH_WIDTH;
 
       if (this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) {
-        console.log('procedure')
         this.renderDefineBlock_(steps, inputRows, input, row, cursorY);
       } else {
         Blockly.BlockSvg.drawStatementInputFromTopRight_(steps, cursorX,

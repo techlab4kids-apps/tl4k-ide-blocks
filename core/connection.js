@@ -67,6 +67,7 @@ Blockly.Connection.REASON_DIFFERENT_WORKSPACES = 5;
 Blockly.Connection.REASON_SHADOW_PARENT = 6;
 // Fixes #1127, but may be the wrong solution.
 Blockly.Connection.REASON_CUSTOM_PROCEDURE = 7;
+Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE = 7;
 
 /**
  * Connection this connection connects to.  Null if not connected.
@@ -290,6 +291,7 @@ Blockly.Connection.prototype.isConnected = function() {
  * @private
  */
 Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
+  console.log(target.getSourceBlock().id)
   if (!target) {
     return Blockly.Connection.REASON_TARGET_NULL;
   }
@@ -324,6 +326,10 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     // And hack to fix #1534: Fail attempts to connect anything but a
     // defnoreturn block to a prototype block.
     return Blockly.Connection.REASON_CUSTOM_PROCEDURE;
+  } else if ((blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
+    blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return') &&
+    target.type != Blockly.OPPOSITE_TYPE[this.type]) {
+    return Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE
   }
   return Blockly.Connection.CAN_CONNECT;
 };
@@ -356,6 +362,12 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       throw 'Connecting non-shadow to shadow block.';
     case Blockly.Connection.REASON_CUSTOM_PROCEDURE:
       throw 'Trying to replace a shadow on a custom procedure definition.';
+    case Blockly.Connection.REASON_EDIT_CUSTOM_PROCEDURE:
+      console.warn('tried changing the type of a procedure, attempting to change block type')
+      if (target.type == Blockly.OUTPUT_VALUE &&
+        this.type == Blockly.NEXT_STATEMENT) {
+          this.sourceBlock_
+      }
     default:
       throw 'Unknown connection failure: this should never happen!';
   }
