@@ -81,10 +81,10 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('proccode', this.procCode_);
   container.setAttribute('argumentids', JSON.stringify(this.argumentIds_));
   container.setAttribute('argumentnames', JSON.stringify(this.displayNames_));
-  container.setAttribute('argumentdefaults',
-      JSON.stringify(this.argumentDefaults_));
+  container.setAttribute('argumentdefaults', JSON.stringify(this.argumentDefaults_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
+  container.setAttribute('returns', JSON.stringify(this.edited));
   return container;
 };
 
@@ -107,6 +107,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
       xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.updateDisplay_();
+  this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   if (this.updateArgumentReporterNames_) {
     this.updateArgumentReporterNames_(prevArgIds, prevDisplayNames);
   }
@@ -675,6 +676,12 @@ Blockly.ScratchBlocks.ProcedureUtils.getReturns = function() {
   return this.output_;
 };
 
+Blockly.ScratchBlocks.ProcedureUtils.getEdited = function() {
+  var old = this.edited
+  this.edited = true
+  return old
+}
+
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
   this.output_ = returns;
 };
@@ -727,8 +734,7 @@ Blockly.ScratchBlocks.ProcedureUtils.removeFieldCallback = function(field) {
  * @param {Blockly.Field} field The field being removed.
  * @public
  */
-Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_ = function(
-    field) {
+Blockly.ScratchBlocks.ProcedureUtils.removeArgumentCallback_ = function(field) {
   if (this.parentBlock_ && this.parentBlock_.removeFieldCallback) {
     this.parentBlock_.removeFieldCallback(field);
   }
@@ -843,6 +849,7 @@ Blockly.Blocks['procedures_call'] = {
     this.warp_ = false;
     this.output_ = false;
     this.isDisplayOnly = false
+    this.edited = false
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -882,6 +889,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.warp_ = false;
     this.output_ = false;
     this.isDisplayOnly = true
+    this.edited = false
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -919,6 +927,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.warp_ = false;
     this.output_ = false;
     this.isDisplayOnly = true
+    this.edited = false
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -944,6 +953,7 @@ Blockly.Blocks['procedures_declaration'] = {
   setWarp: Blockly.ScratchBlocks.ProcedureUtils.setWarp,
   getReturns: Blockly.ScratchBlocks.ProcedureUtils.getReturns,
   setReturns: Blockly.ScratchBlocks.ProcedureUtils.setReturns,
+  getEdited: Blockly.ScratchBlocks.ProcedureUtils.getEdited,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
