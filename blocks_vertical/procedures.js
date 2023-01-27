@@ -84,7 +84,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('argumentdefaults', JSON.stringify(this.argumentDefaults_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
-  container.setAttribute('returns', JSON.stringify(this.edited));
+  container.setAttribute('edited', JSON.stringify(this.edited));
   return container;
 };
 
