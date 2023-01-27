@@ -349,27 +349,31 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       if (this.sourceBlock_.type.startsWith(Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE)) {
         console.warn('tried changing the type of a procedure, attempting to change define block type')
         var x = this.x_, 
-            y = this.y_, 
-            id = this.sourceBlock_.id,
-            proto = this.sourceBlock_.getInput('custom_block'),
+            y = this.y_,
             children = this.sourceBlock_.nextConnection
-        
-        if (target.type == Blockly.OUTPUT_VALUE &&
-          this.type == Blockly.NEXT_STATEMENT) {
-          var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
-              Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return', id)
+        children.disconnect()
+        if (target.type == Blockly.OUTPUT_VALUE && this.type == Blockly.NEXT_STATEMENT) {
+          var proto = this.sourceBlock_.getInput('custom_block').conection.sourceBlock_.ouputConnection
+          proto.disconnect()
           this.sourceBlock_.dispose()
+
+          var newBlock = Blockly.Block.obtain(Blockly.getMainWorkspace(), Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return');
+          newBlock.initSvg();
+          newBlock.render();
           newBlock.moveTo(x, y)
           newBlock.nextConnection.connect(children)
-          newBlock.inputList[0].connect(proto)
-        } else if (target.type == Blockly.NEXT_STATEMENT &&
-          this.type == Blockly.OUTPUT_VALUE) {
-          var newBlock = new Blockly.BlockSvg(this.sourceBlock_.workspace, 
-              Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE, id)
+          newBlock.getInput('custom_block').conection.connect(proto)
+        } else if (target.type == Blockly.NEXT_STATEMENT && this.type == Blockly.OUTPUT_VALUE) {
+          var proto = this.sourceBlock_.getInput('custom_block').sourceBlock_.ouputConnection
+          proto.disconnect()
           this.sourceBlock_.dispose()
+
+          var newBlock = Blockly.Block.obtain(Blockly.getMainWorkspace(), Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE);
+          newBlock.initSvg();
+          newBlock.render();
           newBlock.moveTo(x, y)
           newBlock.nextConnection.connect(children)
-          newBlock.inputList[0].connect(proto)
+          newBlock.getInput('custom_block').conection.connect(proto)
         } else {
           throw new Error('couldnt generate new procedure defintion block')
         }
