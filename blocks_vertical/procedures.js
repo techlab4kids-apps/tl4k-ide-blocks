@@ -44,6 +44,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('argumentids', JSON.stringify(this.argumentIds_));
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
+  container.setAttribute('edited', JSON.stringify(this.edited));
   return container;
 };
 
@@ -60,6 +61,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.argumentIds_ = JSON.parse(xmlElement.getAttribute('argumentids'));
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
+  this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.updateDisplay_();
 };
 
@@ -677,11 +679,11 @@ Blockly.ScratchBlocks.ProcedureUtils.getReturns = function() {
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.getEdited = function() {
-  return this.edited
+  return this.edited;
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
-  this.edited = edited
+  this.edited = edited;
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
