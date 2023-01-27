@@ -329,6 +329,8 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   return Blockly.Connection.CAN_CONNECT;
 };
 
+
+
 /**
  * Checks whether the current connection and target connection are compatible
  * and throws an exception if they are not.
@@ -348,36 +350,7 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
     case Blockly.Connection.REASON_WRONG_TYPE:
       if (this.sourceBlock_.type.startsWith(Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE)) {
         console.warn('tried changing the type of a procedure, attempting to change define block type')
-        var x = this.x_, 
-            y = this.y_,
-            children = this.sourceBlock_.nextConnection
-        children.disconnect()
-        if (target.type == Blockly.OUTPUT_VALUE && this.type == Blockly.NEXT_STATEMENT) {
-          var proto = this.sourceBlock_.getInput('custom_block').conection.sourceBlock_.ouputConnection
-          proto.disconnect()
-          this.sourceBlock_.dispose()
-
-          var newBlock = Blockly.Block.obtain(Blockly.getMainWorkspace(), Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return');
-          newBlock.initSvg();
-          newBlock.render();
-          newBlock.moveTo(x, y)
-          newBlock.nextConnection.connect(children)
-          newBlock.getInput('custom_block').conection.connect(proto)
-        } else if (target.type == Blockly.NEXT_STATEMENT && this.type == Blockly.OUTPUT_VALUE) {
-          var proto = this.sourceBlock_.getInput('custom_block').sourceBlock_.ouputConnection
-          proto.disconnect()
-          this.sourceBlock_.dispose()
-
-          var newBlock = Blockly.Block.obtain(Blockly.getMainWorkspace(), Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE);
-          newBlock.initSvg();
-          newBlock.render();
-          newBlock.moveTo(x, y)
-          newBlock.nextConnection.connect(children)
-          newBlock.getInput('custom_block').conection.connect(proto)
-        } else {
-          throw new Error('couldnt generate new procedure defintion block')
-        }
-        break;
+        throw new Error('couldnt generate new procedure defintion block')
       }
       throw 'Attempt to connect incompatible types.';
     case Blockly.Connection.REASON_TARGET_NULL:

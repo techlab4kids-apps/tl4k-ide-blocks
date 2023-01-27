@@ -425,15 +425,16 @@ Blockly.Procedures.createProcedureDefCallback_ = function(workspace) {
 Blockly.Procedures.createProcedureCallbackFactory_ = function(workspace) {
   return function(mutation) {
     if (mutation) {
-      var blockText = '<xml>' +
-          `<block type="procedures_definition${mutation.getAttribute('returns') === 'true' ? '_return' : ''}">` +
+      var blockText = 
+      '<xml>' +
+        `<block type="procedures_definition${JSON.parse(mutation.getAttribute('returns')) ? '_return' : ''}">` +
           '<statement name="custom_block">' +
-          '<shadow type="procedures_prototype">' +
-          Blockly.Xml.domToText(mutation) +
-          '</shadow>' +
+            '<shadow type="procedures_prototype">' +
+              Blockly.Xml.domToText(mutation) +
+            '</shadow>' +
           '</statement>' +
-          '</block>' +
-          '</xml>';
+        '</block>' +
+      '</xml>';
       var blockDom = Blockly.Xml.textToDom(blockText).firstChild;
       Blockly.Events.setGroup(true);
       var block = Blockly.Xml.domToBlock(blockDom, workspace);
