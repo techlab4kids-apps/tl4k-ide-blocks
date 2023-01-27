@@ -677,9 +677,11 @@ Blockly.ScratchBlocks.ProcedureUtils.getReturns = function() {
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.getEdited = function() {
-  var old = this.edited
-  this.edited = true
-  return old
+  return this.edited
+}
+
+Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
+  this.edited = edited
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
@@ -954,6 +956,7 @@ Blockly.Blocks['procedures_declaration'] = {
   getReturns: Blockly.ScratchBlocks.ProcedureUtils.getReturns,
   setReturns: Blockly.ScratchBlocks.ProcedureUtils.setReturns,
   getEdited: Blockly.ScratchBlocks.ProcedureUtils.getEdited,
+  setEdited: Blockly.ScratchBlocks.ProcedureUtils.setEdited,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
