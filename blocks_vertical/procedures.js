@@ -29,6 +29,9 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
+goog.require('Blockly.Extensions');
+const outputTypes = Object.keys(Blockly.Extensions.ALL_)
+  .filter(name => name.startsWith('output_'))
 
 // Serialization and deserialization.
 
@@ -45,6 +48,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
+  container.setAttribute('opType', JSON.stringify(this.outputType));
   return container;
 };
 
@@ -62,6 +66,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
+  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
   this.updateDisplay_();
 };
 
@@ -87,6 +92,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
+  container.setAttribute('opType', JSON.stringify(this.outputType));
   return container;
 };
 
@@ -105,9 +111,9 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
 
   this.argumentIds_ = JSON.parse(xmlElement.getAttribute('argumentids'));
   this.displayNames_ = JSON.parse(xmlElement.getAttribute('argumentnames'));
-  this.argumentDefaults_ = JSON.parse(
-      xmlElement.getAttribute('argumentdefaults'));
+  this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
+  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   if (this.updateArgumentReporterNames_) {
@@ -138,7 +144,7 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
   // @todo add statement check?
-  var opConectionType = this.isDisplayOnly ? 'Procedure' : 'String'
+  var ConectionType = (this.outputType || 'String').toLowerCase()
   this.rendered = false;
 
   var connectionMap = this.disconnectOldBlocks_();
@@ -146,14 +152,18 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
-  this.setOutput(this.output_, opConectionType)
-  if (this.output_) {
-    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+  if (this.output_ && outputTypes.includes(ConectionType)) {
+    Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
   } else {
-    this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+    this.setOutput(false, 'String')
+    try {
+      Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
+    } catch {
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+      this.setPreviousStatement(true, null)
+      this.setNextStatement(true, null)	
+    }
   }
-  this.setPreviousStatement(!this.output_, null)
-  this.setNextStatement(!this.output_, null)	
 
   this.rendered = wasRendered;
   if (wasRendered && !this.isInsertionMarker()) {
@@ -830,8 +840,7 @@ Blockly.Blocks['procedures_definition_return'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "custom_block",
-          "check": 'Procedure'
+          "name": "custom_block"
         }
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
@@ -854,6 +863,7 @@ Blockly.Blocks['procedures_call'] = {
     this.output_ = false;
     this.isDisplayOnly = false
     this.edited = false
+    this.outputType = 'statement'
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -894,6 +904,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.output_ = false;
     this.isDisplayOnly = true
     this.edited = false
+    this.outputType = 'statement'
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -932,6 +943,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.output_ = false;
     this.isDisplayOnly = true
     this.edited = false
+    this.outputType = 'statement'
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
