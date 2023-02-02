@@ -158,7 +158,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
       Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
     } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-      this.setOutput(true, 'String')
+      this.setOutput(this.output_, 'String')
       console.warn(err)
     }
   } else {
@@ -166,8 +166,8 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
     } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
-      this.setPreviousStatement(true, null)
-      this.setNextStatement(true, null)	
+      this.setPreviousStatement(!this.output_, null)
+      this.setNextStatement(!this.output_, null)	
       console.warn(err)
     }
   }
