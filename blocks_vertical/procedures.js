@@ -31,6 +31,7 @@ goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 const outputTypes = Object.keys(Blockly.Extensions.ALL_)
   .filter(name => name.startsWith('output_'))
+  .map(extension => extensions.replace('output_', ''))
 
 // Serialization and deserialization.
 
@@ -977,6 +978,7 @@ Blockly.Blocks['procedures_declaration'] = {
   setReturns: Blockly.ScratchBlocks.ProcedureUtils.setReturns,
   getEdited: Blockly.ScratchBlocks.ProcedureUtils.getEdited,
   setEdited: Blockly.ScratchBlocks.ProcedureUtils.setEdited,
+  setType: Blockly.ScratchBlocks.ProcedureUtils.setType,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
