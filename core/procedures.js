@@ -240,7 +240,7 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
 
   var gapText = 
   '<xml>' + 
-    '<sep gap="16">' +
+    '<sep gap="16"/>' +
   '</xml>'
   var blockText = 
   '<xml>' + 
