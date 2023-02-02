@@ -29,7 +29,6 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
-goog.require('Blockly.Extensions');
 const outputTypes = Object.keys(Blockly.Extensions.ALL_)
   .filter(name => name.startsWith('output_'))
 
