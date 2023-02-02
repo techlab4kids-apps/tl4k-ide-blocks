@@ -29,9 +29,6 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
-const outputTypes = Object.keys(Blockly.Extensions.ALL_)
-  .filter(name => name.startsWith('output_'))
-  .map(extension => extension.replace('output_', ''))
 
 // Serialization and deserialization.
 
@@ -156,8 +153,14 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.setPreviousStatement(false, null)
   this.setNextStatement(false, null)	
   this.setOutput(false, 'String')
-  if (this.output_ && outputTypes.includes(ConectionType)) {
-    Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
+  if (this.output_) {
+    try {
+      Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
+    } catch (err) {
+      this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+      this.setOutput(true, 'String')
+      console.warn(err)
+    }
   } else {
     try {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
@@ -702,13 +705,11 @@ Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
   this.output_ = returns;
-  this.rendered = false
   this.updateDisplay_();
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.setType = function(type) {
   this.outputType = type.toLowerCase()
-  this.rendered = false
   this.updateDisplay_();
 }
 
