@@ -112,7 +112,7 @@ Blockly.ScratchBlocks.VerticalExtensions.SHAPE_END = function() {
 Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_NUMBER = function() {
   this.setInputsInline(true);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-  this.setOutput(true, 'Number');
+  this.setOutput(true, ['Number', (this.type == Blockly.PROCEDURES_CALL_BLOCK_TYPE ? 'procedure' : '')]);
 };
 
 /**
@@ -125,7 +125,7 @@ Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_NUMBER = function() {
 Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_STRING = function() {
   this.setInputsInline(true);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-  this.setOutput(true, 'String');
+  this.setOutput(true, ['String', (this.type == Blockly.PROCEDURES_CALL_BLOCK_TYPE ? 'procedure' : '')]);
 };
 
 /**
@@ -138,7 +138,7 @@ Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_STRING = function() {
 Blockly.ScratchBlocks.VerticalExtensions.OUTPUT_BOOLEAN = function() {
   this.setInputsInline(true);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL);
-  this.setOutput(true, 'Boolean');
+  this.setOutput(true, ['Boolean', (this.type == Blockly.PROCEDURES_CALL_BLOCK_TYPE ? 'procedure' : '')]);
 };
 
 /**

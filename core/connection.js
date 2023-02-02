@@ -314,10 +314,7 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_SHADOW_PARENT;
   } else if ((
       (
-        (
-          (blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE) || 
-          (blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')
-        ) &&
+        blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
         blockB.type != Blockly.PROCEDURES_PROTOTYPE_BLOCK_TYPE &&
         superiorConn == blockA.getInput('custom_block').connection
       ) ||
