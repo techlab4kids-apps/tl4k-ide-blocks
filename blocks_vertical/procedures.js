@@ -31,7 +31,7 @@ goog.require('Blockly.constants');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 const outputTypes = Object.keys(Blockly.Extensions.ALL_)
   .filter(name => name.startsWith('output_'))
-  .map(extension => extensions.replace('output_', ''))
+  .map(extension => extension.replace('output_', ''))
 
 // Serialization and deserialization.
 
