@@ -240,7 +240,7 @@ Blockly.Procedures.flyoutCategory = function(workspace) {
 
   var gapText = 
   '<xml>' + 
-    '<sep gap="16"/>' +
+    '<sep gap="24"/>' +
   '</xml>'
   var blockText = 
   '<xml>' + 
@@ -425,14 +425,28 @@ Blockly.Procedures.createProcedureDefCallback_ = function(workspace) {
 Blockly.Procedures.createProcedureCallbackFactory_ = function(workspace) {
   return function(mutation) {
     if (mutation) {
+      var returns = JSON.parse(mutation.getAttribute('returns'))
+      var returnBlockText = 
+      '<xml>' + 
+        '<next>' +
+          '<block type="procedures_return">' + 
+            '<value name="return">' +
+              '<shadow type="text">' +
+                '<field name="TEXT">1</field>' +
+              '</shadow>' +
+            '</value>' +
+          '</block>' + 
+        '</next>' +
+      '</xml>';
       var blockText = 
       '<xml>' +
-        `<block type="procedures_definition${JSON.parse(mutation.getAttribute('returns')) ? '_return' : ''}">` +
+        `<block type="procedures_definition${returns ? '_return' : ''}">` +
           '<statement name="custom_block">' +
             '<shadow type="procedures_prototype">' +
               Blockly.Xml.domToText(mutation) +
             '</shadow>' +
           '</statement>' +
+          (returns ? returnBlockText : '') +
         '</block>' +
       '</xml>';
       var blockDom = Blockly.Xml.textToDom(blockText).firstChild;
