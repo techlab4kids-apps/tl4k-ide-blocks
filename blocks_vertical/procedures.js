@@ -153,12 +153,14 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.setPreviousStatement(false, null)
   this.setNextStatement(false, null)	
   this.setOutput(false, 'procedure')
+  this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   if (this.output_) {
     try {
-      if (this.isDisplayOnly) throw 'your mom :trel:'
       Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
+      if (this.isDisplayOnly) throw 'your mom :trel:'
     } catch (err) {
-      this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+      // only if this isnt a display block do we try to replicate the old behavior
+      if (!this.isDisplayOnly) this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
       this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
       console.warn(err)
     }
