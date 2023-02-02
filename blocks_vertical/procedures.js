@@ -698,7 +698,13 @@ Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
   this.output_ = returns;
+  this.updateDisplay_();
 };
+
+Blockly.ScratchBlocks.ProcedureUtils.setType = function(type) {
+  this.outputType = type.toLowerCase()
+  this.updateDisplay_();
+}
 
 /**
  * Externally-visible function to set the warp on procedure declaration.
