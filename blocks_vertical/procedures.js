@@ -155,10 +155,11 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.setOutput(false, 'procedure')
   if (this.output_) {
     try {
+      if (this.isDisplayOnly) throw 'your mom :trel:'
       Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
     } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-      this.setOutput(this.output_, ['String', 'procedure'])
+      this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
       console.warn(err)
     }
   } else {
