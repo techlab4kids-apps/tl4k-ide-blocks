@@ -152,10 +152,13 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
+  // clear the blocks shape so that it doesnt get mangeld by any extensions run
+  this.setPreviousStatement(false, null)
+  this.setNextStatement(false, null)	
+  this.setOutput(false, 'String')
   if (this.output_ && outputTypes.includes(ConectionType)) {
     Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
   } else {
-    this.setOutput(false, 'String')
     try {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
     } catch (err) {
@@ -699,11 +702,13 @@ Blockly.ScratchBlocks.ProcedureUtils.setEdited = function(edited) {
 
 Blockly.ScratchBlocks.ProcedureUtils.setReturns = function(returns) {
   this.output_ = returns;
+  this.rendered = false
   this.updateDisplay_();
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.setType = function(type) {
   this.outputType = type.toLowerCase()
+  this.rendered = false
   this.updateDisplay_();
 }
 
