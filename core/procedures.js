@@ -427,17 +427,15 @@ Blockly.Procedures.createProcedureCallbackFactory_ = function(workspace) {
     if (mutation) {
       var returns = JSON.parse(mutation.getAttribute('returns'))
       var returnBlockText = 
-      '<xml>' + 
-        '<next>' +
-          '<block type="procedures_return">' + 
-            '<value name="return">' +
-              '<shadow type="text">' +
-                '<field name="TEXT">1</field>' +
-              '</shadow>' +
-            '</value>' +
-          '</block>' + 
-        '</next>' +
-      '</xml>';
+      '<next>' +
+        '<block type="procedures_return">' + 
+          '<value name="return">' +
+            '<shadow type="text">' +
+              '<field name="TEXT">1</field>' +
+            '</shadow>' +
+          '</value>' +
+        '</block>' + 
+      '</next>';
       var blockText = 
       '<xml>' +
         `<block type="procedures_definition${returns ? '_return' : ''}">` +
