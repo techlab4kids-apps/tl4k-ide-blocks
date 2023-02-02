@@ -157,10 +157,11 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
     this.setOutput(false, 'String')
     try {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
-    } catch {
+    } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
       this.setPreviousStatement(true, null)
       this.setNextStatement(true, null)	
+      console.warn(err)
     }
   }
 
