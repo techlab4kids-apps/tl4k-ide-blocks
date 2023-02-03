@@ -139,20 +139,10 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
  * @this Blockly.Block
  */
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
-  const outputTypes = [
-    'string',
-    'number',
-    'boolean'
-  ]
-  const statementTypes = [
-    'statement',
-    'end'
-  ]
   var wasRendered = this.rendered;
   // @todo add statement check?
-  var ConectionType = this.outputType
+  var ConectionType = (this.outputType || 'String').toLowerCase()
   this.rendered = false;
-  if (!ConectionType) console.error('posibly corrupt block: ' + this.id, this)
 
   var connectionMap = this.disconnectOldBlocks_();
   this.removeAllInputs_();
@@ -161,7 +151,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.deleteShadows_(connectionMap);
   // clear the blocks shape so that it doesnt get mangeld by any extensions run
   this.setPreviousStatement(false, null)
-  this.setNextStatement(false, null)
+  this.setNextStatement(false, null)	
   this.setOutput(false, 'procedure')
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   if (this.output_) {
@@ -169,14 +159,6 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
       Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
       if (this.isDisplayOnly) throw 'your mom :trel:'
     } catch (err) {
-      // if the connection type is for a none-returning block then set this block so 
-      // that it isnt returning
-      if (!outputTypes.includes(ConectionType) && 
-        statementTypes.includes(ConectionType)) {
-        this.output_ = false
-        this.updateDisplay_()
-        return
-      }
       // only if this isnt a display block do we try to replicate the old behavior
       if (!this.isDisplayOnly) this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
       this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
@@ -185,15 +167,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   } else {
     try {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
-    } catch (err) {      
-      // if the connection type is for a returning block then set this block so 
-      // that it is returning
-      if (outputTypes.includes(ConectionType) && 
-        !statementTypes.includes(ConectionType)) {
-        this.output_ = true
-        this.updateDisplay_()
-        return
-      }
+    } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
       this.setPreviousStatement(!this.output_, null)
       this.setNextStatement(!this.output_, null)	
