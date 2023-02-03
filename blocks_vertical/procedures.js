@@ -110,7 +110,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.displayNames_ = JSON.parse(xmlElement.getAttribute('argumentnames'));
   this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
-  this.outputType = JSON.parse(xmlElement.getAttribute('opType')) || (this.output_ ? 'string' : 'statement');
+  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   if (this.updateArgumentReporterNames_) {
