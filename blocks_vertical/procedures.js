@@ -110,7 +110,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.displayNames_ = JSON.parse(xmlElement.getAttribute('argumentnames'));
   this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
-  this.outputType = JSON.parse(xmlElement.getAttribute('opType')) || (this.output_ ? 'string' : 'statement');
+  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   if (this.updateArgumentReporterNames_) {
@@ -153,6 +153,11 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var ConectionType = this.outputType
   this.rendered = false;
   if (!ConectionType) console.error('posibly corrupt block: ' + this.id, this)
+  // this is to prevent this script from infinitly looping when the type is none-existant
+  if (!outputTypes.includes(ConectionType) && 
+    !statementTypes.includes(ConectionType)) {
+    ConectionType = this.output_ ? 'string' : 'statement'
+  }
 
   var connectionMap = this.disconnectOldBlocks_();
   this.removeAllInputs_();
