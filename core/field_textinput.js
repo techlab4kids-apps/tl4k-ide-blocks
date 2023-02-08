@@ -437,6 +437,7 @@ Blockly.FieldTextInput.prototype.onHtmlInputChange_ = function(e) {
   var htmlInput = Blockly.FieldTextInput.htmlInput_;
   // Update source block.
   var text = htmlInput.value;
+  console.log(text)
   if (text !== htmlInput.oldValue_) {
     htmlInput.oldValue_ = text;
     this.setText(text);
@@ -621,6 +622,7 @@ Blockly.FieldTextInput.prototype.maybeSaveEdit_ = function() {
   var htmlInput = Blockly.FieldTextInput.htmlInput_;
   // Save the edit (if it validates).
   var text = htmlInput.value;
+  console.log(value)
   if (this.sourceBlock_) {
     var text1 = this.callValidator(text);
     if (text1 === null) {
