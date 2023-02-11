@@ -631,3 +631,59 @@ Blockly.Blocks["sensing_getspritewithattrib"] = {
     });
   }
 };
+
+Blockly.Blocks['sensing_distanceTo'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'distance from %1 %2 to %3 %4',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "x1"
+        },
+        {
+          "type": "input_value",
+          "name": "y1"
+        },
+        {
+          "type": "input_value",
+          "name": "x2"
+        },
+        {
+          "type": "input_value",
+          "name": "y2"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_directionTo'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'direction to %1 %2 from %3 %4',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "x2"
+        },
+        {
+          "type": "input_value",
+          "name": "y2"
+        },
+        {
+          "type": "input_value",
+          "name": "x1"
+        },
+        {
+          "type": "input_value",
+          "name": "y1"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
