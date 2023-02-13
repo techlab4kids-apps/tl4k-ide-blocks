@@ -69,8 +69,17 @@ Blockly.Blocks['polygon'] = {
    */
   init: function() {
     this.setColour(Blockly.Colours.textField, Blockly.Colours.textField, Blockly.Colours.textField)
-    this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND)
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
+    this.setOutput(true, 'math_polygon')
+    this.setShadow(true);
     this.points = 0
+    this.oldConnections = {}
+  },
+  mutationToDom: function() {
+    const container = document.createElement('mutation');
+
+    container.setAttribute('points', this.points);
+    return container;
   },
   domToMutation: function(xmlElement) {
     const newPoints = JSON.parse(xmlElement.getAttribute('points'))
@@ -107,8 +116,22 @@ Blockly.Blocks['polygon'] = {
       const yi = this.appendValueInput(yn)
       const xc = xi.connection
       const yc = yi.connection
-      xc.connect(connections[xn])
-      yc.connect(connections[yn])
+      if (!(connections[xn] || connections[yn])) {
+        const nxb = this.workspace.newBlock('math_number');
+        const nyb = this.workspace.newBlock('math_number');
+        nxb.setFieldValue('1', 'NUM');
+        nyb.setFieldValue('1', 'NUM');
+        nxb.setShadow(true);
+        nyb.setShadow(true);
+        nxb.initSvg();
+        nyb.initSvg();
+        nxb.render(false);
+        nyb.render(false);
+        connections[xn] = nxb.outputConnection
+        connections[yn] = nyb.outputConnection
+      }
+      connections[yn].connect(xc)
+      connections[yn].connect(yc)
       xi.appendField('x:')
       yi.appendField('y:')
     }
