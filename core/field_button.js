@@ -86,5 +86,6 @@ class FieldButton extends Blockly.Field {
         }
     }
 }
+Blockly.FieldButton = FieldButton
 
 Blockly.Field.register('field_Button', FieldButton);
