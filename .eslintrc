@@ -47,7 +47,8 @@
         "no-redeclare": ["off"], # Closure style allows redeclarations
         "valid-jsdoc": ["error", {"requireReturn": false}],
         "no-console": ["off"],
-        "no-constant-condition": ["off"]
+        "no-constant-condition": ["off"],
+        "linebreak-style": ["off"]
     },
     "env": {
         "browser": true
