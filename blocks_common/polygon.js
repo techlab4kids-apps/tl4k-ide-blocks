@@ -92,14 +92,14 @@ Blockly.Blocks['polygon'] = {
   clear: function() {
     const connections = {}
     for (let point = 1; point <= this.points; point++) {
-      const xn = `x${point}`
-      const yn = `y${point}`
-      const xi = this.getInput(xn)
-      const yi = this.getInput(yn)
-      connections[xn] = xi.connection.targetConnection
-      connections[yn] = yi.connection.targetConnection
-      xi.dispose()
-      yi.dispose()
+      const xName = `x${point}`
+      const yName = `y${point}`
+      const xInput = this.getInput(xName)
+      const yInput = this.getInput(yName)
+      connections[xName] = xInput.connection.targetConnection
+      connections[yName] = yInput.connection.targetConnection
+      xInput.dispose()
+      yInput.dispose()
     }
 
     const button = this.getInput('button')
@@ -110,30 +110,30 @@ Blockly.Blocks['polygon'] = {
     const connections = this.oldConnections
     // create all the node inputs
     for (let point = 1; point <= this.points; point++) {
-      const xn = `x${point}`
-      const yn = `y${point}`
-      const xi = this.appendValueInput(xn)
-      const yi = this.appendValueInput(yn)
-      const xc = xi.connection
-      const yc = yi.connection
-      if (!(connections[xn] || connections[yn])) {
-        const nxb = this.workspace.newBlock('math_number');
-        const nyb = this.workspace.newBlock('math_number');
-        nxb.setFieldValue('1', 'NUM');
-        nyb.setFieldValue('1', 'NUM');
-        nxb.setShadow(true);
-        nyb.setShadow(true);
-        nxb.initSvg();
-        nyb.initSvg();
-        nxb.render(false);
-        nyb.render(false);
-        connections[xn] = nxb.outputConnection
-        connections[yn] = nyb.outputConnection
+      const xName = `x${point}`
+      const yName = `y${point}`
+      const xInput = this.appendValueInput(xName)
+      const yInput = this.appendValueInput(yName)
+      const xConnection = xInput.connection
+      const yConnection = yInput.connection
+      if (!(connections[xName] || connections[yName])) {
+        const newxBlock = this.workspace.newBlock('math_number');
+        const newyBlock = this.workspace.newBlock('math_number');
+        newxBlock.setFieldValue('1', 'NUM');
+        newyBlock.setFieldValue('1', 'NUM');
+        newxBlock.setShadow(true);
+        newyBlock.setShadow(true);
+        newxBlock.initSvg();
+        newyBlock.initSvg();
+        newxBlock.render(false);
+        newyBlock.render(false);
+        connections[xName] = newxBlock.outputConnection
+        connections[yName] = newyBlock.outputConnection
       }
-      connections[yn].connect(xc)
-      connections[yn].connect(yc)
-      xi.appendField('x:')
-      yi.appendField('y:')
+      connections[yName].connect(xConnection)
+      connections[yName].connect(yConnection)
+      xInput.appendField('x:')
+      yInput.appendField('y:')
     }
 
     const thisBlock = this
