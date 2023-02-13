@@ -61,6 +61,12 @@ const arrowRight = group => {
   );
   return imageContainer
 }
+const buttonClick = (field) => {
+  const thisBlock = field.sourceBlock_
+  const newState = !thisBlock.isCollapsed()
+  thisBlock.setCollapsed(newState)
+  return newState ? arrowLeft : arrowRight
+}
 
 Blockly.Blocks['polygon'] = {
   /**
@@ -139,11 +145,7 @@ Blockly.Blocks['polygon'] = {
     const thisBlock = this
     const button = new Blockly.FieldButton(
       this.isCollapsed() ? arrowLeft : arrowRight,
-      () => {
-        const newState = !thisBlock.isCollapsed()
-        thisBlock.setCollapsed(newState)
-        return newState ? arrowLeft : arrowRight
-      })
+)
     const buttoni = this.appendDummyInput('button')
     buttoni.appendField(button)
   }
