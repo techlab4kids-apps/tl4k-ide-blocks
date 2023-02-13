@@ -78,6 +78,9 @@ Blockly.Blocks['polygon'] = {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
     this.setOutput(true, 'math_polygon')
     this.setShadow(true);
+    const button = new Blockly.FieldButton(this.isCollapsed() ? arrowLeft : arrowRight, buttonClick)
+    this.appendDummyInput('button')
+      .appendField(button)
     this.points = 0
     this.oldConnections = {}
   },
@@ -142,11 +145,8 @@ Blockly.Blocks['polygon'] = {
       yInput.appendField('y:')
     }
 
-    const thisBlock = this
-    const button = new Blockly.FieldButton(
-      this.isCollapsed() ? arrowLeft : arrowRight,
-)
-    const buttoni = this.appendDummyInput('button')
-    buttoni.appendField(button)
+    const button = new Blockly.FieldButton(this.isCollapsed() ? arrowLeft : arrowRight, buttonClick)
+    this.appendDummyInput('button')
+      .appendField(button)
   }
 };
