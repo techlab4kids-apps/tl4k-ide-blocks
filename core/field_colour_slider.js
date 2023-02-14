@@ -97,7 +97,10 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
  * @return {string} Current colour in '#rrggbbaa' format.
  */
 Blockly.FieldColourSlider.prototype.getValue = function() {
-  return this.colour_;
+  const hsva = goog.color.hexToHsva(this.colour_)
+  // alpha cant be 0
+  hsva[3] = goog.constrain(hsva[3] * 100, 1, 100) / 100
+  return goog.color.hsvaToHex(hsva);
 };
 
 /**
@@ -188,7 +191,6 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
     this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
-    console.log(this.transparency_)
   }
 };
 
