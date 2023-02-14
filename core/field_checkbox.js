@@ -74,7 +74,6 @@ Blockly.FieldCheckbox.ARROW_RIGHT = function() {
   return Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg';
 };
 
-
 /**
  * Mouse cursor style when over the hotspot that initiates editability.
  */
@@ -92,14 +91,10 @@ Blockly.FieldCheckbox.prototype.init = function() {
   // The checkbox doesn't use the inherited text element.
   // Instead it uses a custom checkmark element that is either visible or not.
   this.checkElement_ = Blockly.utils.createSvgElement(
-      'image',
-      {
-        'height': '20px',
-        'width': '20px',
-        'x': -3,
-        'y': 14
-      },
-      this.fieldGroup_);
+    'image',
+    {'height': '20px', 'width': '20px', 'x': -3, 'y': 14}, 
+    this.fieldGroup_
+  );
   this.setValue(this.state_);
 };
 
@@ -117,19 +112,29 @@ Blockly.FieldCheckbox.prototype.getValue = function() {
  * @param {string|boolean} newBool New state.
  */
 Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
-  var newState = (typeof newBool == 'string') ?
-      (newBool.toUpperCase() == 'TRUE') : !!newBool;
+  const newState = (typeof newBool == 'string')
+    ? (newBool.toUpperCase() === 'TRUE')
+    : !!newBool;
+
   if (this.state_ !== newState) {
+    const newSvg = newState
+      ? Blockly.FieldCheckbox.ARROW_LEFT()
+      : Blockly.FieldCheckbox.ARROW_RIGHT();
+
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
-      Blockly.Events.fire(new Blockly.Events.BlockChange(
-          this.sourceBlock_, 'field', this.name, this.state_, newState));
+      const event = new Blockly.Events.BlockChange(
+        this.sourceBlock_, 
+        'field', 
+        this.name, 
+        this.state_, 
+        newState
+      );
+      Blockly.Events.fire(event);
     }
+
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink',
-          'xlink:href', newState
-            ? Blockly.FieldCheckbox.ARROW_LEFT()
-            : Blockly.FieldCheckbox.ARROW_RIGHT());
+      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
     }
   }
 };
@@ -139,14 +144,12 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
  * @private
  */
 Blockly.FieldCheckbox.prototype.showEditor_ = function() {
-  var newState = !this.state_;
+  let newState = !this.state_;
   if (this.sourceBlock_) {
     // Call any validation function, and allow it to override.
     newState = this.callValidator(newState);
   }
-  if (newState !== null) {
-    this.setValue(String(newState).toUpperCase());
-  }
+  this.setValue(newState);
 };
 
 Blockly.Field.register('field_checkbox', Blockly.FieldCheckbox);
