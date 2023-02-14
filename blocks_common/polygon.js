@@ -78,7 +78,7 @@ Blockly.Blocks['polygon'] = {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
     this.setOutput(true, 'math_polygon')
     this.setShadow(true);
-    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, buttonClick)
+    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, false, buttonClick)
     this.appendDummyInput('button')
       .appendField(button)
     this.points = 0
@@ -145,7 +145,7 @@ Blockly.Blocks['polygon'] = {
       yInput.appendField('y:')
     }
 
-    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, buttonClick)
+    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, false, buttonClick)
     this.appendDummyInput('button')
       .appendField(button)
   }
