@@ -29,38 +29,8 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 
-const arrowLeft = group => {
-  const imageContainer = Blockly.utils.createSvgElement(
-    'image',
-    {
-      'height': this.height_ + 'px',
-      'width': this.width_ + 'px'
-    },
-    group
-  );
-  imageContainer.setAttributeNS(
-    'http://www.w3.org/1999/xlink',
-    'xlink:href', 
-    Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'
-  );
-  return imageContainer
-}
-const arrowRight = group => {
-  const imageContainer = Blockly.utils.createSvgElement(
-    'image',
-    {
-      'height': this.height_ + 'px',
-      'width': this.width_ + 'px'
-    },
-    group
-  );
-  imageContainer.setAttributeNS(
-    'http://www.w3.org/1999/xlink',
-    'xlink:href', 
-    Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
-  );
-  return imageContainer
-}
+const arrowLeft = Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'
+const arrowRight = Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
 const buttonClick = (field) => {
   const thisBlock = field.sourceBlock_
   const newState = !thisBlock.isCollapsed()
