@@ -53,9 +53,8 @@ Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl, opt_onclick
   this.text_ = opt_alt || '';
   this.flipRTL_ = flip_rtl;
   this.onClicked_ = opt_onclick || function() {};
+  Blockly.FieldImage.superClass_.constructor.call(this, src, opt_onclick);
   this.setValue(src);  
-  Blockly.FieldImage.superClass_.constructor.call(this, this.text_,
-    opt_onclick);
   this.addArgType('image');
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
