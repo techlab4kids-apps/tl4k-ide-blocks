@@ -30,7 +30,7 @@ Blockly.Blocks['polygon'] = {
    */
   init: function() {
     this.color = Blockly.Colours.pen.primary
-    this.colapsed = false
+    this.expanded = true
     this.points = 0
     this.offset = [0,0]
     this.scale = 50
@@ -143,17 +143,17 @@ Blockly.Blocks['polygon'] = {
     console.log('creating colapse/expand button...')
     const thisBlock = this;
     const button = new Blockly.FieldCheckbox(
-      this.colapsed, 
+      this.expanded, 
       newState => {
-        thisBlock.setColapsed(newState)
+        thisBlock.setExpanded(newState)
         return newState
       }
     )
     this.appendDummyInput('button')
       .appendField(button)
   },
-  setColapsed: function(bool) {
-    this.colapsed = bool
+  setExpanded: function(bool) {
+    this.expanded = bool
     let nextRender = 1
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`

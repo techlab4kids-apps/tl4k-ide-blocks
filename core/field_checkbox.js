@@ -85,6 +85,16 @@ Blockly.FieldCheckbox.prototype.init = function() {
 };
 
 /**
+ * overide the width update so that this field never has any width
+ **/
+Blockly.FieldCheckbox.prototype.updateWidth = function() {
+  // call the orignal updateWidth
+  Blockly.FieldCheckbox.superClass_.updateWidth.call(this);
+  // if collapsed, make this field have negative width
+  if (this.state_) this.size_.width = -10
+}
+
+/**
  * Return 'TRUE' if the checkbox is checked, 'FALSE' otherwise.
  * @return {string} Current state.
  */
@@ -118,7 +128,6 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
       Blockly.Events.fire(event);
     }
 
-    this.size_.width = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
