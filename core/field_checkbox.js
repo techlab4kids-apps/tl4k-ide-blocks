@@ -125,7 +125,9 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink',
-          'xlink:href', newState ? this.ARROW_LEFT() : this.ARROW_RIGHT());
+          'xlink:href', newState
+            ? Blockly.FieldCheckbox.ARROW_LEFT()
+            : Blockly.FieldCheckbox.ARROW_RIGHT());
     }
   }
 };
