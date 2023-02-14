@@ -126,8 +126,8 @@ Blockly.Blocks['polygon'] = {
       this.isCollapsed() 
         ? arrowLeft() 
         : arrowRight(), 
-      10, 
-      10, 
+      100, 
+      100, 
       null, 
       false, 
       buttonClick
