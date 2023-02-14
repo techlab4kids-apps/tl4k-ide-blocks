@@ -59,9 +59,21 @@ Blockly.FieldCheckbox.fromJson = function(options) {
 };
 
 /**
- * Character for the checkmark.
+ * Src for arrow image
+ * @returns {String} the image src for the left pointing arrow
  */
-Blockly.FieldCheckbox.CHECK_CHAR = '\u2713';
+Blockly.FieldCheckbox.ARROW_LEFT = function() {
+  return Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
+};
+
+/**
+ * Src for arrow image
+ * @returns {String} the image src for the right pointing arrow
+ */
+Blockly.FieldCheckbox.ARROW_RIGHT = function() {
+  return Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg';
+};
+
 
 /**
  * Mouse cursor style when over the hotspot that initiates editability.
@@ -79,12 +91,14 @@ Blockly.FieldCheckbox.prototype.init = function() {
   Blockly.FieldCheckbox.superClass_.init.call(this);
   // The checkbox doesn't use the inherited text element.
   // Instead it uses a custom checkmark element that is either visible or not.
-  this.checkElement_ = Blockly.utils.createSvgElement('text',
-      {'class': 'blocklyText blocklyCheckbox', 'x': -3, 'y': 14},
+  this.checkElement_ = Blockly.utils.createSvgElement(
+      'image',
+      {
+        'height': this.height_ + 'px',
+        'width': this.width_ + 'px'
+      },
       this.fieldGroup_);
-  var textNode = document.createTextNode(Blockly.FieldCheckbox.CHECK_CHAR);
-  this.checkElement_.appendChild(textNode);
-  this.checkElement_.style.display = this.state_ ? 'block' : 'none';
+  this.setValue(this.state_);
 };
 
 /**
@@ -110,7 +124,8 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     }
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.style.display = newState ? 'block' : 'none';
+      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink',
+          'xlink:href', newState ? this.ARROW_LEFT() : this.ARROW_RIGHT());
     }
   }
 };
