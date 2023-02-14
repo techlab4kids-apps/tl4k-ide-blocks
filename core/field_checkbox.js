@@ -95,7 +95,9 @@ Blockly.FieldCheckbox.prototype.init = function() {
       'image',
       {
         'height': '20px',
-        'width': '20px'
+        'width': '20px',
+        'x': -3,
+        'y': 14
       },
       this.fieldGroup_);
   this.setValue(this.state_);
