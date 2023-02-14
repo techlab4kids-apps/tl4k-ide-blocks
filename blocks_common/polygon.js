@@ -99,7 +99,7 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.appendValueInput(yName)
       const xConnection = xInput.connection
       const yConnection = yInput.connection
-      if (!(connections[xName] || connections[yName])) {
+      if (!connections[xName] || !connections[yName]) {
         const newxBlock = this.workspace.newBlock('math_number');
         const newyBlock = this.workspace.newBlock('math_number');
         const initialValue = getXYForPoint(point, this.points, this.offset, this.scale)
@@ -116,8 +116,8 @@ Blockly.Blocks['polygon'] = {
       }
       connections[yName].connect(xConnection)
       connections[yName].connect(yConnection)
-      xInput.appendField('x:')
-      yInput.appendField('y:')
+      xInput.appendField('x: ')
+      yInput.appendField('y: ')
     }
 
     console.log('initializing block...')
