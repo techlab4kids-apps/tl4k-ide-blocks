@@ -154,6 +154,7 @@ Blockly.Blocks['polygon'] = {
   },
   setColapsed: function(bool) {
     this.colapsed = bool
+    let nextRender = 1
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
       const yName = `y${point}`
@@ -161,6 +162,11 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.getInput(yName)
       xInput.setVisible(bool)
       yInput.setVisible(bool)
+      if (point === nextRender) {
+        nextRender *= 2
+        this.initSvg();
+        this.render();
+      }
     }
     this.initSvg();
     this.render();

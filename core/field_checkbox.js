@@ -45,7 +45,6 @@ Blockly.FieldCheckbox = function(state, opt_validator) {
   this.state_ = (typeof state == 'string')
     ? (state.toUpperCase() === 'TRUE')
     : !!state;
-  this.width_ = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
   this.addArgType('checkbox');
 };
 goog.inherits(Blockly.FieldCheckbox, Blockly.Field);
@@ -103,8 +102,6 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     ? (newBool.toUpperCase() === 'TRUE')
     : !!newBool;
 
-  // make this field have 0 width
-  this.width_ = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
   if (this.state_ !== newState) {
     const newSvg = newState
       ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
@@ -121,8 +118,7 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
       Blockly.Events.fire(event);
     }
 
-    console.log(newSvg)
-
+    this.size_.width = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
