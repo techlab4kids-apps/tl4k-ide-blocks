@@ -35,7 +35,6 @@ Blockly.Blocks['polygon'] = {
     this.offset = [0,0]
     this.scale = 50
     this.oldConnections = {}
-    this.generate()
   },
   mutationToDom: function() {
     const container = document.createElement('mutation');
@@ -79,12 +78,11 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.getInput(yName)
       connections[xName] = xInput.connection.targetConnection
       connections[yName] = yInput.connection.targetConnection
-      xInput.dispose()
-      yInput.dispose()
+      this.removeInput(xName)
+      this.removeInput(yName)
     }
 
-    const button = this.getInput('button')
-    button.dispose()
+    this.removeInput('button')
     this.oldConnections = connections
   },
   generate: function() {
