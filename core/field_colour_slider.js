@@ -89,14 +89,15 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
     return;
   }
   Blockly.FieldColourSlider.superClass_.init.call(this, block);
-  this.setValue(this.getValue());
+  this.setValue(this.getValue(true));
 };
 
 /**
  * Return the current colour.
  * @return {string} Current colour in '#rrggbbaa' format.
  */
-Blockly.FieldColourSlider.prototype.getValue = function() {
+Blockly.FieldColourSlider.prototype.getValue = function(internal) {
+  if (internal) return this.colour_
   const hsva = goog.color.hexToHsva(this.colour_)
   // alpha cant be 0
   hsva[3] = goog.constrain(hsva[3], 0.01, 1) / 100
@@ -297,7 +298,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
 
   // Init color component values that are used while the editor is open
   // in order to keep the slider values stable.
-  var hsv = goog.color.hexToHsva(this.getValue());
+  var hsv = goog.color.hexToHsva(this.getValue(true));
   this.hue_ = hsv[0];
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];
@@ -366,7 +367,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
 
   // Set value updates the slider positions
   // Do this before attaching callbacks to avoid extra events from initial set
-  this.setValue(this.getValue());
+  this.setValue(this.getValue(true));
 
   // Enable callbacks for the sliders
   this.sliderCallbacksEnabled_ = true;
