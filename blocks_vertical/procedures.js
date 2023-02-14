@@ -141,7 +141,7 @@ Blockly.ScratchBlocks.ProcedureUtils.getProcCode = function() {
 Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   var wasRendered = this.rendered;
   // @todo add statement check?
-  var ConectionType = (this.outputType || 'String').toLowerCase()
+  var ConectionType = (this.outputType || (this.output_ ? 'string' : 'statement')).toLowerCase()
   this.rendered = false;
 
   var connectionMap = this.disconnectOldBlocks_();
