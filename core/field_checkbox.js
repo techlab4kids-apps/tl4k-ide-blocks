@@ -81,6 +81,8 @@ Blockly.FieldCheckbox.prototype.init = function() {
     {'height': '20px', 'width': '15px', 'x': 0, 'y': 7}, 
     this.fieldGroup_
   );
+  
+  this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg');
   this.setValue(this.getValue());
 };
 
