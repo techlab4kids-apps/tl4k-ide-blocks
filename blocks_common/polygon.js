@@ -9,6 +9,20 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 
+const getXYForPoint = (point, points, opt_offset, opt_scale) => {
+  const offset = Array.isArray(opt_offset) 
+    ? opt_offset 
+    : [0,0]
+  const scale = typeof opt_scale === 'number' 
+    ? opt_scale 
+    : 10
+  
+  const dir = (360 / points) * point
+  const x = Math.cos(dir) * scale
+  const y = Math.sin(dir) * scale
+  return [x + offset[0],y + offset[1]]
+}
+
 Blockly.Blocks['polygon'] = {
   /**
    * Block for complex shapes.
@@ -18,6 +32,8 @@ Blockly.Blocks['polygon'] = {
     this.color = Blockly.Colours.textField
     this.colapsed = false
     this.points = 0
+    this.offset = [0,0]
+    this.scale = 50
     this.oldConnections = {}
     this.generate()
   },
@@ -25,18 +41,32 @@ Blockly.Blocks['polygon'] = {
     const container = document.createElement('mutation');
 
     container.setAttribute('points', this.points);
+    container.setAttribute('color', this.color);
     return container;
   },
   domToMutation: function(xmlElement) {
+    console.log('loading block settings...')
     const newPoints = JSON.parse(xmlElement.getAttribute('points'))
     const newColor = JSON.parse(xmlElement.getAttribute('color') || '""')
-    if (newPoints === this.points) {
+    const newOffset = JSON.parse(xmlElement.getAttribute('midle') || '""')
+    const newScale = JSON.parse(xmlElement.getAttribute('scale') || '""')
+    if (newPoints !== this.points) {
+      console.log('new points')
       this.clear()
       this.points = newPoints
       this.generate()
     }
-    if (newColor) {
+    if (typeof newColor === 'string') {
+      console.log('setting color')
       this.color = newColor
+    }
+    if (newOffset && Array.isArray(newOffset)) {
+      console.log('setting center position')
+      this.offset = newOffset
+    }
+    if (typeof newScale === 'number') {
+      console.log('setting scale')
+      this.length = newScale
     }
   },
   clear: function() {
@@ -72,8 +102,9 @@ Blockly.Blocks['polygon'] = {
       if (!(connections[xName] || connections[yName])) {
         const newxBlock = this.workspace.newBlock('math_number');
         const newyBlock = this.workspace.newBlock('math_number');
-        newxBlock.setFieldValue('1', 'NUM');
-        newyBlock.setFieldValue('1', 'NUM');
+        const initialValue = getXYForPoint(point, this.points, this.offset, this.scale)
+        newxBlock.setFieldValue(String(initialValue[0]), 'NUM');
+        newyBlock.setFieldValue(String(initialValue[1]), 'NUM');
         newxBlock.setShadow(true);
         newyBlock.setShadow(true);
         newxBlock.initSvg();
