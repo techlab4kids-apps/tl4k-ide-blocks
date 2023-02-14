@@ -78,7 +78,7 @@ Blockly.FieldCheckbox.prototype.init = function() {
   // Instead it uses a custom checkmark element that is either visible or not.
   this.checkElement_ = Blockly.utils.createSvgElement(
     'image',
-    {'height': '20px', 'width': '20px', 'x': 0, 'y': 7}, 
+    {'height': '15px', 'width': '20px', 'x': 0, 'y': 7}, 
     this.fieldGroup_
   );
   this.setValue(this.getValue());
