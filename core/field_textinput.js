@@ -177,7 +177,6 @@ Blockly.FieldTextInput.prototype.setText = function(newText) {
     return;
   }
   newText = String(newText);
-  console.log(newText)
   if (newText === this.text_) {
     // No change.
     return;

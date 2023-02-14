@@ -41,6 +41,7 @@ Blockly.Blocks['polygon'] = {
   },
   clear: function() {
     const connections = {}
+    console.log('clearing block...')
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
       const yName = `y${point}`
