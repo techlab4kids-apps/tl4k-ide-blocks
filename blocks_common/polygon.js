@@ -44,15 +44,10 @@ Blockly.Blocks['polygon'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.setColour(Blockly.Colours.textField, Blockly.Colours.textField, Blockly.Colours.textField)
-    this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
-    this.setOutput(true, 'math_polygon')
-    this.setShadow(true);
-    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, false, buttonClick)
-    this.appendDummyInput('button')
-      .appendField(button)
+    this.color = Blockly.Colours.textField
     this.points = 0
     this.oldConnections = {}
+    this.generate()
   },
   mutationToDom: function() {
     const container = document.createElement('mutation');
@@ -62,10 +57,14 @@ Blockly.Blocks['polygon'] = {
   },
   domToMutation: function(xmlElement) {
     const newPoints = JSON.parse(xmlElement.getAttribute('points'))
+    const newColor = JSON.parse(xmlElement.getAttribute('color') || '""')
     if (newPoints === this.points) {
       this.clear()
       this.points = newPoints
       this.generate()
+    }
+    if (newColor) {
+      this.color = newColor
     }
   },
   clear: function() {
@@ -115,6 +114,10 @@ Blockly.Blocks['polygon'] = {
       yInput.appendField('y:')
     }
 
+    this.setColour(this.color, this.color, this.color)
+    this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
+    this.setOutput(true, 'math_polygon')
+    this.setShadow(true);
     const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, false, buttonClick)
     this.appendDummyInput('button')
       .appendField(button)
