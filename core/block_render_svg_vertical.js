@@ -1182,11 +1182,7 @@ Blockly.BlockSvg.prototype.renderClassify_ = function() {
   var shapes = [];
 
   if (this.outputConnection) {
-    if (this.isShadow_) {
-      shapes.push('argument');
-    } else {
-      shapes.push('reporter');
-    }
+    shapes.push('reporter');
     if (this.edgeShape_ === Blockly.OUTPUT_SHAPE_HEXAGONAL) {
       shapes.push('boolean');
     } else if (this.edgeShape_ === Blockly.OUTPUT_SHAPE_ROUND) {
