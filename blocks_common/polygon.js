@@ -92,8 +92,7 @@ Blockly.Blocks['polygon'] = {
     const thisBlock = this;
     const button = new Blockly.FieldCheckbox(
       this.isCollapsed(), 
-      () => {
-        const newState = !thisBlock.isCollapsed()
+      newState => {
         thisBlock.setCollapsed(newState)
         return newState
       }
