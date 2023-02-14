@@ -799,7 +799,8 @@ Blockly.BlockSvg.prototype.renderCompute_ = function(iconWidth) {
     if (!input.isVisible()) {
       continue;
     }
-    var isSecondInputOnProcedure = (this.type == 'procedures_definition' || this.type == 'procedures_definition_return') &&
+    var isSecondInputOnProcedure = (this.type == 'procedures_definition' ||
+        this.type == 'procedures_definition_return') &&
         lastType && lastType == Blockly.NEXT_STATEMENT;
     var row;
     // Don't create a new row for the second dummy input on a procedure block.
@@ -1367,7 +1368,7 @@ Blockly.BlockSvg.prototype.renderDrawRight_ = function(steps,
         this.width = Math.max(this.width, inputRows.statementEdge +
           input.connection.targetBlock().getHeightWidth().width);
       }
-      if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE || 
+      if ((!(this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE ||
         this.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE + '_return')) &&
         (y == inputRows.length - 1 ||
           inputRows[y + 1].type == Blockly.NEXT_STATEMENT)) {
@@ -1599,6 +1600,8 @@ Blockly.BlockSvg.drawStatementInputBottom_ = function(steps, rightEdge, row) {
  *     the bottom.
  * @param {number} cursorY The y position of the start of this row.  Used to
  *     position the following dummy input's fields.
+ * @param {number} cursorX The x position of the start of this row.  Used to
+ *     position the following dummy input's fields.
  * @private
  */
 Blockly.BlockSvg.prototype.renderDefineBlock_ = function(steps, inputRows,
@@ -1609,7 +1612,7 @@ Blockly.BlockSvg.prototype.renderDefineBlock_ = function(steps, inputRows,
   var hasFollowingText = row.length == 2;
 
   // Figure out where the right side of the block is.
-  var rightSide
+  var rightSide;
   if (!cursorX) {
     rightSide = inputRows.rightEdge;
     if (input.connection && input.connection.targetBlock()) {
@@ -1638,7 +1641,7 @@ Blockly.BlockSvg.prototype.renderDefineBlock_ = function(steps, inputRows,
       this.renderFields_(followingTextInput.fieldRow, fieldStart, fieldY);
     }
   } else {
-    rightSide = cursorX
+    rightSide = cursorX;
   }
   // Draw the top and the right corner of the hat.
   steps.push('H', rightSide);

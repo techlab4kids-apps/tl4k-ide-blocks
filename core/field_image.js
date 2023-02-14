@@ -53,7 +53,10 @@ Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl, opt_onclick
   this.text_ = opt_alt || '';
   this.flipRTL_ = flip_rtl;
   this.onClicked_ = opt_onclick || function() {};
-  this.setValue(src);
+  this.setValue(src);  
+  Blockly.FieldImage.superClass_.constructor.call(this, this.text_,
+    opt_onclick);
+  this.addArgType('image');
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
 
@@ -182,7 +185,7 @@ Blockly.FieldImage.prototype.setText = function(alt) {
  */
 Blockly.FieldImage.prototype.showEditor_ = function() {
   if (this.sourceBlock_) {
-    const newImage = this.onClicked_(this)
+    const newImage = this.callValidator(this)
     // if no image provided, dont change the image
     if (newImage) this.setValue(newImage);
   }
