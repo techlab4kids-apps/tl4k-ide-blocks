@@ -102,6 +102,8 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     ? (newBool.toUpperCase() === 'TRUE')
     : !!newBool;
 
+  // make this field have 0 width
+  this.width_ = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
   if (this.state_ !== newState) {
     const newSvg = newState
       ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
