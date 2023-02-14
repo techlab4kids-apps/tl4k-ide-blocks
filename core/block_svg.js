@@ -716,7 +716,7 @@ Blockly.BlockSvg.prototype.showContextMenu_ = function(e) {
       menuOptions.push(Blockly.ContextMenu.blockCommentOption(block));
     }
     menuOptions.push(Blockly.ContextMenu.blockDeleteOption(block));
-  } else if (this.parentBlock_ && this.isShadow_) {
+  } else if (this.parentBlock_ && this.isShadow_ && !this.type === 'polygon') {
     this.parentBlock_.showContextMenu_(e);
     return;
   }
