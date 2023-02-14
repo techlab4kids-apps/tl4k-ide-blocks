@@ -132,6 +132,8 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
       Blockly.Events.fire(event);
     }
 
+    console.log(newSvg)
+
     this.state_ = newState;
     if (this.checkElement_) {
       this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
