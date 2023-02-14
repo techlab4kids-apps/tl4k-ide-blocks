@@ -109,7 +109,7 @@ Blockly.Blocks['polygon'] = {
       const xInput = this.getInput(xName)
       const yInput = this.getInput(yName)
       xInput.setVisible(bool)
-      yInput.setHidden(bool)
+      yInput.setVisible(bool)
     }
   }
 };
