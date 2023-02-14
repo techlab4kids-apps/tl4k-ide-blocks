@@ -59,22 +59,6 @@ Blockly.FieldCheckbox.fromJson = function(options) {
 };
 
 /**
- * Src for arrow image
- * @returns {String} the image src for the left pointing arrow
- */
-Blockly.FieldCheckbox.ARROW_LEFT = function() {
-  return Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
-};
-
-/**
- * Src for arrow image
- * @returns {String} the image src for the right pointing arrow
- */
-Blockly.FieldCheckbox.ARROW_RIGHT = function() {
-  return Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg';
-};
-
-/**
  * Mouse cursor style when over the hotspot that initiates editability.
  */
 Blockly.FieldCheckbox.prototype.CURSOR = 'default';
@@ -118,8 +102,8 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
 
   if (this.state_ !== newState) {
     const newSvg = newState
-      ? Blockly.FieldCheckbox.ARROW_LEFT()
-      : Blockly.FieldCheckbox.ARROW_RIGHT();
+      ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
+      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
 
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       const event = new Blockly.Events.BlockChange(
