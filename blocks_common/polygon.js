@@ -35,6 +35,7 @@ Blockly.Blocks['polygon'] = {
     this.offset = [0,0]
     this.scale = 50
     this.oldConnections = {}
+    this.generate()
   },
   mutationToDom: function() {
     const container = document.createElement('mutation');
