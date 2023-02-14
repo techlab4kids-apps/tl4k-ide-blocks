@@ -16,6 +16,7 @@ Blockly.Blocks['polygon'] = {
    */
   init: function() {
     this.color = Blockly.Colours.textField
+    this.colapsed = false
     this.points = 0
     this.oldConnections = {}
     this.generate()
@@ -91,13 +92,24 @@ Blockly.Blocks['polygon'] = {
     this.setShadow(true);
     const thisBlock = this;
     const button = new Blockly.FieldCheckbox(
-      this.isCollapsed(), 
+      this.colapsed, 
       newState => {
-        thisBlock.setCollapsed(newState)
+        thisBlock.setColapsed(newState)
         return newState
       }
     )
     this.appendDummyInput('button')
       .appendField(button)
+  },
+  setColapsed: function(bool) {
+    this.colapsed = bool
+    for (let point = 1; point <= this.points; point++) {
+      const xName = `x${point}`
+      const yName = `y${point}`
+      const xInput = this.getInput(xName)
+      const yInput = this.getInput(yName)
+      xInput.setVisible(bool)
+      yInput.setHidden(bool)
+    }
   }
 };
