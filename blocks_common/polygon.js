@@ -90,9 +90,8 @@ Blockly.Blocks['polygon'] = {
   generate: function() {
     const connections = this.oldConnections
     // create all the node inputs
-    console.log(this.points)
+    console.log(`creating ${this.points} points...`)
     for (let point = 1; point <= this.points; point++) {
-      console.log(point)
       const xName = `x${point}`
       const yName = `y${point}`
       const xInput = this.appendValueInput(xName)
@@ -120,10 +119,13 @@ Blockly.Blocks['polygon'] = {
       yInput.appendField('y:')
     }
 
+    console.log('initializing block...')
     this.setColour(this.color, this.color, this.color)
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
     this.setOutput(true, 'math_polygon')
     this.setShadow(true);
+
+    console.log('creating colapse/expand button...')
     const thisBlock = this;
     const button = new Blockly.FieldCheckbox(
       this.colapsed, 
