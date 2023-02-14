@@ -35,6 +35,7 @@ Blockly.Blocks['polygon'] = {
     this.offset = [0,0]
     this.scale = 50
     this.oldConnections = {}
+    this.blocks = {}
     this.generate()
   },
   mutationToDom: function() {
@@ -99,7 +100,15 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.appendValueInput(yName)
       const xConnection = xInput.connection
       const yConnection = yInput.connection
-      if (!connections[xName] || !connections[yName]) {
+      // dispose of any free-floating blocks that where created by this block
+      if (!this.blocks[xName].connection.targetConnection) {
+        this.blocks[xName].dispose()
+      }
+      if (!this.blocks[yName].connection.targetConnection) {
+        this.blocks[yName].dispose()
+      }
+      // if this point isnt filled in, fill it in
+      if (!this.getInput(xName).connection.targetConnection || !this.getInput(yName).connection.targetConnection) {
         const newxBlock = this.workspace.newBlock('math_number');
         const newyBlock = this.workspace.newBlock('math_number');
         const initialValue = getXYForPoint(point, this.points, this.offset, this.scale)
@@ -111,11 +120,16 @@ Blockly.Blocks['polygon'] = {
         newyBlock.initSvg();
         newxBlock.render(false);
         newyBlock.render(false);
-        connections[xName] = newxBlock.outputConnection
-        connections[yName] = newyBlock.outputConnection
+        newxBlock.outputConnection.connect(xConnection)
+        newyBlock.outputConnection.connect(yConnection)
+        this.blocks[xName] = newxBlock
+        this.blocks[yName] = newyBlock
       }
-      connections[yName].connect(xConnection)
-      connections[yName].connect(yConnection)
+      // if we have a cached connection for this point then connect it
+      if (connections[xName] || connections[yName]) {
+        connections[xName].connect(xConnection)
+        connections[yName].connect(yConnection)
+      }
       xInput.appendField('x: ')
       yInput.appendField('y: ')
     }

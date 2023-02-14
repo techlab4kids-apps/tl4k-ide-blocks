@@ -45,6 +45,7 @@ Blockly.FieldCheckbox = function(state, opt_validator) {
   this.state_ = (typeof state == 'string')
     ? (state.toUpperCase() === 'TRUE')
     : !!state;
+  this.width_ = -Blockly.BlockSvg.EDITABLE_FIELD_PADDING
   this.addArgType('checkbox');
 };
 goog.inherits(Blockly.FieldCheckbox, Blockly.Field);
