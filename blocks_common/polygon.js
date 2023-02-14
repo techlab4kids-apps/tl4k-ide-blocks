@@ -29,7 +29,7 @@ Blockly.Blocks['polygon'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.color = Blockly.Colours.pen
+    this.color = Blockly.Colours.pen.primary
     this.colapsed = false
     this.points = 0
     this.offset = [0,0]
