@@ -29,13 +29,17 @@ goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
 
-const arrowLeft = Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'
-const arrowRight = Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
+// the arrow svg's have to be accessed when the image is suposed to be rendered
+// becuase mainWorkspace isnt initialized when these get defined
+const arrowLeft = () => Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'
+const arrowRight = () => Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
 const buttonClick = (field) => {
   const thisBlock = field.sourceBlock_
   const newState = !thisBlock.isCollapsed()
   thisBlock.setCollapsed(newState)
-  return newState ? arrowLeft : arrowRight
+  return newState 
+    ? arrowLeft() 
+    : arrowRight()
 }
 
 Blockly.Blocks['polygon'] = {
@@ -118,7 +122,16 @@ Blockly.Blocks['polygon'] = {
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
     this.setOutput(true, 'math_polygon')
     this.setShadow(true);
-    const button = new Blockly.FieldImage(this.isCollapsed() ? arrowLeft : arrowRight, 10, 10, null, false, buttonClick)
+    const button = new Blockly.FieldImage(
+      this.isCollapsed() 
+        ? arrowLeft() 
+        : arrowRight(), 
+      10, 
+      10, 
+      null, 
+      false, 
+      buttonClick
+    )
     this.appendDummyInput('button')
       .appendField(button)
   }
