@@ -29,7 +29,7 @@ Blockly.Blocks['polygon'] = {
    * @this Blockly.Block
    */
   init: function() {
-    this.color = Blockly.Colours.textField
+    this.color = Blockly.Colours.pen
     this.colapsed = false
     this.points = 0
     this.offset = [0,0]
@@ -40,8 +40,10 @@ Blockly.Blocks['polygon'] = {
   mutationToDom: function() {
     const container = document.createElement('mutation');
 
-    container.setAttribute('points', this.points);
-    container.setAttribute('color', this.color);
+    container.setAttribute('points', JSON.stringify(this.points));
+    container.setAttribute('color', JSON.stringify(this.color));
+    container.setAttribute('midle', JSON.stringify(this.offset));
+    container.setAttribute('scale', JSON.stringify(this.scale));
     return container;
   },
   domToMutation: function(xmlElement) {
