@@ -39,10 +39,11 @@ goog.require('goog.userAgent');
  * @param {number} height Height of the image.
  * @param {string=} opt_alt Optional alt text for when block is collapsed.
  * @param {boolean} flip_rtl Whether to flip the icon in RTL
+ * @param {Function} opt_onclick optionaly what to do when this image is clicked
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl) {
+Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl, opt_onclick) {
   this.sourceBlock_ = null;
 
   // Ensure height and width are numbers.  Strings are bad at math.
@@ -51,6 +52,7 @@ Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl) {
   this.size_ = new goog.math.Size(this.width_, this.height_);
   this.text_ = opt_alt || '';
   this.flipRTL_ = flip_rtl;
+  this.onClicked_ = opt_onclick || function() {};
   this.setValue(src);
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
@@ -173,6 +175,18 @@ Blockly.FieldImage.prototype.setText = function(alt) {
   }
   this.text_ = alt;
 };
+
+/**
+ * run the "on clicked" event when the button is clicked
+ * @private
+ */
+Blockly.FieldImage.prototype.showEditor_ = function() {
+  if (this.sourceBlock_) {
+    const newImage = this.onClicked_(this)
+    // if no image provided, dont change the image
+    if (newImage) this.setValue(newImage);
+  }
+}
 
 /**
  * Images are fixed width, no need to render.
