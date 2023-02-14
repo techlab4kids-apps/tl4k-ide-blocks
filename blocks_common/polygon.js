@@ -59,7 +59,9 @@ Blockly.Blocks['polygon'] = {
   generate: function() {
     const connections = this.oldConnections
     // create all the node inputs
+    console.log(this.points)
     for (let point = 1; point <= this.points; point++) {
+      console.log(point)
       const xName = `x${point}`
       const yName = `y${point}`
       const xInput = this.appendValueInput(xName)
