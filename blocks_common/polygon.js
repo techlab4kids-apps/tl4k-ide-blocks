@@ -101,10 +101,10 @@ Blockly.Blocks['polygon'] = {
       const xConnection = xInput.connection
       const yConnection = yInput.connection
       // dispose of any free-floating blocks that where created by this block
-      if (!this.blocks[xName] && !this.blocks[xName].connection.targetConnection) {
+      if (this.blocks[xName] && !this.blocks[xName].connection.targetConnection) {
         this.blocks[xName].dispose()
       }
-      if (!this.blocks[yName] && !this.blocks[yName].connection.targetConnection) {
+      if (this.blocks[yName] && !this.blocks[yName].connection.targetConnection) {
         this.blocks[yName].dispose()
       }
       // if this point isnt filled in, fill it in
