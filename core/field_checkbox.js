@@ -81,8 +81,6 @@ Blockly.FieldCheckbox.prototype.init = function() {
     {'height': '20px', 'width': '15px', 'x': 0, 'y': 7}, 
     this.fieldGroup_
   );
-  
-  this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg');
   this.setValue(this.getValue());
 };
 
@@ -93,7 +91,7 @@ Blockly.FieldCheckbox.prototype.updateWidth = function() {
   // call the orignal updateWidth
   Blockly.FieldCheckbox.superClass_.updateWidth.call(this);
   // if collapsed, make this field have negative width
-  if (this.state_) this.size_.width = -10
+  if (!this.state_) this.size_.width = -10
 }
 
 /**
@@ -115,7 +113,7 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     : !!newBool;
 
   if (this.state_ !== newState) {
-    const newSvg = newState
+    const newSvg = !newState
       ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
       : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
 
