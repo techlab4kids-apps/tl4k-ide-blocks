@@ -42,7 +42,9 @@ goog.require('Blockly.Field');
 Blockly.FieldCheckbox = function(state, opt_validator) {
   Blockly.FieldCheckbox.superClass_.constructor.call(this, '', opt_validator);
   // Set the initial state.
-  this.setValue(state);
+  this.state_ = (typeof state == 'string')
+    ? (state.toUpperCase() === 'TRUE')
+    : !!state;
   this.addArgType('checkbox');
 };
 goog.inherits(Blockly.FieldCheckbox, Blockly.Field);
@@ -79,7 +81,7 @@ Blockly.FieldCheckbox.prototype.init = function() {
     {'height': '20px', 'width': '20px', 'x': 0, 'y': 7}, 
     this.fieldGroup_
   );
-  this.setValue(this.state_);
+  this.setValue(this.getValue());
 };
 
 /**

@@ -148,5 +148,7 @@ Blockly.Blocks['polygon'] = {
       xInput.setVisible(bool)
       yInput.setVisible(bool)
     }
+    this.initSvg();
+    this.render(false);
   }
 };
