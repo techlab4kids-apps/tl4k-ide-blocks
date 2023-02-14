@@ -94,8 +94,8 @@ Blockly.FieldCheckbox.prototype.init = function() {
   this.checkElement_ = Blockly.utils.createSvgElement(
       'image',
       {
-        'height': this.height_ + 'px',
-        'width': this.width_ + 'px'
+        'height': '20px',
+        'width': '20px'
       },
       this.fieldGroup_);
   this.setValue(this.state_);
