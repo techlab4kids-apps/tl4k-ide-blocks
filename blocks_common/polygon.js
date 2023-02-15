@@ -45,6 +45,7 @@ Blockly.Blocks['polygon'] = {
     container.setAttribute('color', this.color);
     container.setAttribute('midle', JSON.stringify(this.offset));
     container.setAttribute('scale', JSON.stringify(this.scale));
+    container.setAttribute('expanded', JSON.stringify(this.expanded));
     return container;
   },
   domToMutation: function(xmlElement) {
@@ -53,6 +54,7 @@ Blockly.Blocks['polygon'] = {
     const newColor = xmlElement.getAttribute('color') || ''
     const newOffset = JSON.parse(xmlElement.getAttribute('midle') || '""')
     const newScale = JSON.parse(xmlElement.getAttribute('scale') || '""')
+    this.expanded = JSON.parse(xmlElement.getAttribute('expanded') || 'false')
     if (newPoints !== this.points) {
       console.log('new points')
       this.clear()
@@ -71,7 +73,6 @@ Blockly.Blocks['polygon'] = {
       console.log('setting scale')
       this.length = newScale
     }
-    this.expanded = this.getFieldValue('button') === 'TRUE';
   },
   clear: function() {
     const connections = {}
