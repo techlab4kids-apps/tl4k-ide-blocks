@@ -20,11 +20,7 @@
         "operator-linebreak": "off",
         "one-var": "off",
         "brace-style": "off",
-        "camelcase": "off",
-        "indent": "off",
-        "dot-notation": "off",
-        "strict": "off",
-        "space-before-function-paren": "off"
+        "camelcase": "off"
     },
     "globals": {
         "Blockly": true, # Blockly global
