@@ -111,27 +111,24 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
   const newState = (typeof newBool == 'string')
     ? (newBool.toUpperCase() === 'TRUE')
     : !!newBool;
+  const newSvg = !newState
+    ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
+    : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
 
-  if (this.state_ !== newState) {
-    const newSvg = !newState
-      ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
-      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
+  if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
+    const event = new Blockly.Events.BlockChange(
+      this.sourceBlock_, 
+      'field', 
+      this.name, 
+      this.state_, 
+      newState
+    );
+    Blockly.Events.fire(event);
+  }
 
-    if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
-      const event = new Blockly.Events.BlockChange(
-        this.sourceBlock_, 
-        'field', 
-        this.name, 
-        this.state_, 
-        newState
-      );
-      Blockly.Events.fire(event);
-    }
-
-    this.state_ = newState;
-    if (this.checkElement_) {
-      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
-    }
+  this.state_ = newState;
+  if (this.checkElement_) {
+    this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
   }
 };
 
