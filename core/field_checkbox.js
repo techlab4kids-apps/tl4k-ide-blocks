@@ -78,7 +78,8 @@ Blockly.FieldCheckbox.prototype.init = function() {
   // Instead it uses a custom checkmark element that is either visible or not.
   this.checkElement_ = Blockly.utils.createSvgElement(
     'image',
-    {'height': '20px', 'width': '15px', 'x': 0, 'y': 7}, 
+    {'height': '20px', 'width': '15px', 'x': 0, 'y': 7, 
+      "xlink:href": Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
     this.fieldGroup_
   );
   this.setValue(this.getValue());
