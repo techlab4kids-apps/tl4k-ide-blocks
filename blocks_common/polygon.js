@@ -53,7 +53,6 @@ Blockly.Blocks["polygon"] = {
         const newColor = xmlElement.getAttribute('color') || '';
         const newOffset = JSON.parse(xmlElement.getAttribute('midle') || '""');
         const newScale = JSON.parse(xmlElement.getAttribute('scale') || '""');
-        const newExpanded = JSON.parse(xmlElement.getAttribute('scale') || 'false');
         if (newPoints !== this.points) {
             console.log('new points');
             this.clear();
@@ -71,9 +70,6 @@ Blockly.Blocks["polygon"] = {
         if (typeof newScale === 'number') {
             console.log('setting scale');
             this.length = newScale;
-        }
-        if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
-            this.setExpanded(newExpanded);
         }
     },
     clear: function() {
