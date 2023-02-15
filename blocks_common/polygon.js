@@ -126,8 +126,10 @@ Blockly.Blocks['polygon'] = {
         newyBlock.setShadow(true);
         newxBlock.initSvg();
         newyBlock.initSvg();
-        newxBlock.render(false);
-        newyBlock.render(false);
+        if (this.expanded){
+          newxBlock.render(false);
+          newyBlock.render(false);
+        }
         newxBlock.outputConnection.connect(xConnection)
         newyBlock.outputConnection.connect(yConnection)
         this.myBlocks[xName] = newxBlock
