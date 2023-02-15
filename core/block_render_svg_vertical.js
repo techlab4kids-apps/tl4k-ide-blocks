@@ -1021,7 +1021,11 @@ Blockly.BlockSvg.prototype.computeRightEdge_ = function(curEdge, hasStatement) {
     if (this.isShadow() &&
         !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this)) {
       // Single-fields
-      if (!this.type === 'polygon') edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
+      if (!this.type === 'polygon') {
+        edge = edge
+      } else {
+        edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
+      }
     } else {
       // Reporters
       edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_OUTPUT);
