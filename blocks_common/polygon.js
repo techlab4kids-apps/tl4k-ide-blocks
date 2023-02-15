@@ -75,8 +75,7 @@ Blockly.Blocks['polygon'] = {
     }
     if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
       this.setExpanded(newExpanded)
-      this.clear()
-      this.generate()
+      this.setFieldValue(newExpanded, 'button')
     }
   },
   clear: function() {
@@ -93,7 +92,7 @@ Blockly.Blocks['polygon'] = {
       this.removeInput(yName)
     }
 
-    this.removeInput('button')
+    this.removeInput('buttonContainer')
     this.oldConnections = connections
   },
   generate: function() {
@@ -163,8 +162,8 @@ Blockly.Blocks['polygon'] = {
         return newState
       }
     )
-    this.appendDummyInput('button')
-      .appendField(button)
+    this.appendDummyInput('buttonContainer')
+      .appendField(button, 'button')
   },
   setExpanded: function(bool) {
     this.expanded = bool
