@@ -42,7 +42,7 @@ Blockly.Blocks["polygon"] = {
         const container = document.createElement('mutation');
 
         container.setAttribute('points', JSON.stringify(this.points));
-        container.setAttribute('color', JSON.stringify(this.color));
+        container.setAttribute('color', this.color);
         container.setAttribute('midle', JSON.stringify(this.offset));
         container.setAttribute('scale', JSON.stringify(this.scale));
         container.setAttribute('expanded', JSON.stringify(this.expanded));
@@ -57,7 +57,6 @@ Blockly.Blocks["polygon"] = {
         const newExpanded = JSON.parse(xmlElement.getAttribute('expanded') || 'false');
         if (newPoints !== this.points) {
             console.log('new points');
-            this.clear();
             this.points = newPoints;
             this.generate();
         }
@@ -74,7 +73,8 @@ Blockly.Blocks["polygon"] = {
             this.length = newScale;
         }
         if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
-            this.setExpanded(newExpanded);
+            this.expanded = newExpanded;
+            this.generate();
         }
     },
     clear: function() {
@@ -95,6 +95,7 @@ Blockly.Blocks["polygon"] = {
         this.oldConnections = connections;
     },
     generate: function() {
+        this.clear();
         const connections = this.oldConnections;
         // create all the node inputs
         console.log(`creating ${this.points} points...`);
