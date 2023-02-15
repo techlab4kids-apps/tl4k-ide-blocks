@@ -50,7 +50,7 @@ Blockly.Blocks["polygon"] = {
     domToMutation: function(xmlElement) {
         console.log('loading block settings...');
         const newPoints = JSON.parse(xmlElement.getAttribute('points'));
-        const newColor = xmlElement.getAttribute('color') || '';
+        const newColor = JSON.parse(xmlElement.getAttribute('color') || '""');
         const newOffset = JSON.parse(xmlElement.getAttribute('midle') || '""');
         const newScale = JSON.parse(xmlElement.getAttribute('scale') || '""');
         if (newPoints !== this.points) {
