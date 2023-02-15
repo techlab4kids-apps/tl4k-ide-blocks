@@ -74,8 +74,8 @@ Blockly.Blocks['polygon'] = {
       this.length = newScale
     }
     if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
-      this.clear()
       this.setExpanded(newExpanded)
+      this.clear()
       this.generate()
     }
   },
