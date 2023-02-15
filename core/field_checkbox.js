@@ -130,7 +130,7 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
 
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttribute('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
+      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
       this.sourceBlock_.initSvg();
       this.sourceBlock_.render();
     }
