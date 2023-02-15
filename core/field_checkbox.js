@@ -79,7 +79,7 @@ Blockly.FieldCheckbox.prototype.init = function() {
   this.checkElement_ = Blockly.utils.createSvgElement(
     'image',
     {'height': '20px', 'width': '15px', 'x': 0, 'y': 7, 
-      "src": Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
+      "src": './' + Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
     this.fieldGroup_
   );
   this.setValue(this.getValue());
@@ -114,9 +114,9 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     : !!newBool;
 
   if (this.state_ !== newState) {
-    const newSvg = !newState
+    const newSvg = './' + (!newState
       ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
-      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
+      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg');
 
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       const event = new Blockly.Events.BlockChange(
