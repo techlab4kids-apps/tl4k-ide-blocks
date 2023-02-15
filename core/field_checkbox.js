@@ -79,7 +79,7 @@ Blockly.FieldCheckbox.prototype.init = function() {
   this.checkElement_ = Blockly.utils.createSvgElement(
     'image',
     {'height': '20px', 'width': '15px', 'x': 0, 'y': 7, 
-      "xlink:href": Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
+      "src": Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
     this.fieldGroup_
   );
   this.setValue(this.getValue());
@@ -131,7 +131,7 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
 
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
+      this.checkElement_.setAttribute('src', newSvg);
     }
   }
 };
