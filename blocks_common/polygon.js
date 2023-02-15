@@ -124,9 +124,9 @@ Blockly.Blocks['polygon'] = {
         newyBlock.setFieldValue(String(initialValue[1]), 'NUM');
         newxBlock.setShadow(true);
         newyBlock.setShadow(true);
-        newxBlock.initSvg();
-        newyBlock.initSvg();
         if (this.expanded){
+          newxBlock.initSvg();
+          newyBlock.initSvg();
           newxBlock.render(false);
           newyBlock.render(false);
         }
