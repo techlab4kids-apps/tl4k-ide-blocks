@@ -71,6 +71,7 @@ Blockly.Blocks['polygon'] = {
       console.log('setting scale')
       this.length = newScale
     }
+    this.expanded = this.getFieldValue('button') === 'TRUE';
   },
   clear: function() {
     const connections = {}
