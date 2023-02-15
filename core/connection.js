@@ -310,7 +310,9 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_DIFFERENT_WORKSPACES;
   } else if (!this.checkType_(target)) {
     return Blockly.Connection.REASON_CHECKS_FAILED;
-  } else if (blockA.isShadow() && !blockB.isShadow()) {
+  } 
+  // depracated: prevents things like the polygon block from being posible
+  else if (/* blockA.isShadow() && !blockB.isShadow() */false) {
     return Blockly.Connection.REASON_SHADOW_PARENT;
   } else if ((
       (
