@@ -74,7 +74,6 @@ Blockly.Blocks['polygon'] = {
       this.length = newScale
     }
     if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
-      this.expanded = newExpanded
       this.setExpanded(newExpanded)
     }
   },
@@ -166,7 +165,6 @@ Blockly.Blocks['polygon'] = {
       .appendField(button)
   },
   setExpanded: function(bool) {
-    const connections = this.oldConnections
     this.expanded = bool
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
