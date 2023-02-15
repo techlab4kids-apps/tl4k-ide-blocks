@@ -35,7 +35,7 @@ Blockly.Blocks['polygon'] = {
     this.offset = [0,0]
     this.scale = 50
     this.oldConnections = {}
-    this.blocks = {}
+    this.myBlocks = {}
     this.generate()
   },
   mutationToDom: function() {
@@ -101,11 +101,11 @@ Blockly.Blocks['polygon'] = {
       const xConnection = xInput.connection
       const yConnection = yInput.connection
       // dispose of any free-floating blocks that where created by this block
-      if (this.blocks[xName] && !this.blocks[xName].connection.targetConnection) {
-        this.blocks[xName].dispose()
+      if (this.myBlocks[xName] && !this.myBlocks[xName].connection.targetConnection) {
+        this.myBlocks[xName].dispose()
       }
-      if (this.blocks[yName] && !this.blocks[yName].connection.targetConnection) {
-        this.blocks[yName].dispose()
+      if (this.myBlocks[yName] && !this.myBlocks[yName].connection.targetConnection) {
+        this.myBlocks[yName].dispose()
       }
       // if this point isnt filled in, fill it in
       if (!this.getInput(xName).connection.targetConnection || !this.getInput(yName).connection.targetConnection) {
@@ -122,8 +122,8 @@ Blockly.Blocks['polygon'] = {
         newyBlock.render(false);
         newxBlock.outputConnection.connect(xConnection)
         newyBlock.outputConnection.connect(yConnection)
-        this.blocks[xName] = newxBlock
-        this.blocks[yName] = newyBlock
+        this.myBlocks[xName] = newxBlock
+        this.myBlocks[yName] = newyBlock
       }
       // if we have a cached connection for this point then connect it
       if (connections[xName] || connections[yName]) {
@@ -169,17 +169,21 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.getInput(yName)
       xInput.setVisible(bool)
       yInput.setVisible(bool)
-      // re-render any blocks if we are showing them
-      if (bool && (connections[xName] || connections[yName])) {
-        const xBlock = connections[xName].getSourceBlock()
-        const yBlock = connections[yName].getSourceBlock()
-        xBlock.initSvg();
-        yBlock.initSvg();
-        xBlock.render();
-        yBlock.render();
-      }
     }
     this.initSvg();
-    this.render();
+    // we dont need to re-render this block since renderChildren will render all parents aswell
+    this.rerenderChildBlocks();
+  },
+  rerenderChildBlocks: function() {
+    const renderInputs = (block) => {
+      const children = block.childBlocks_
+      // once we hit a bottom block, rerender the whole tree
+      if (children.length) block.render(true)
+      for (var i = 0, child; child = children[i]; i++) {
+        child.render(false)
+        renderInputs(child)
+      }
+    }
+    renderInputs(this)
   }
 };
