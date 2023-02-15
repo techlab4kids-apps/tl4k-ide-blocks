@@ -42,7 +42,7 @@ Blockly.Blocks['polygon'] = {
     const container = document.createElement('mutation');
 
     container.setAttribute('points', JSON.stringify(this.points));
-    container.setAttribute('color', JSON.stringify(this.color));
+    container.setAttribute('color', this.color);
     container.setAttribute('midle', JSON.stringify(this.offset));
     container.setAttribute('scale', JSON.stringify(this.scale));
     return container;
