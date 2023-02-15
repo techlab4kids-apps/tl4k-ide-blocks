@@ -165,9 +165,13 @@ Blockly.Blocks["polygon"] = {
             }
         );
         this.appendDummyInput('button')
-            .appendField(button);
+            .appendField(button, 'button');
     },
     setExpanded: function(bool) {
+        const newValue = String(bool).toUpperCase();
+        if (this.getFieldValue('button') !== newValue) {
+            this.setFieldValue(bool, 'button');
+        }
         this.expanded = bool;
         for (let point = 1; point <= this.points; point++) {
             const xName = `x${point}`;
