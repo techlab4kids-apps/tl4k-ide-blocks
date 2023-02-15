@@ -136,10 +136,6 @@ Blockly.Blocks['polygon'] = {
       if (connections[xName] || connections[yName]) {
         const xBlock = connections[xName].getSourceBlock();
         const yBlock = connections[yName].getSourceBlock();
-        // for some reason, somehow, the stored blocks do not contain the same workspace as this block
-        // to fix this we asign the blocks our workspace
-        xBlock.workspace = this.workspace;
-        yBlock.workspace = this.workspace;
         connections[xName].connect(xConnection);
         connections[yName].connect(yConnection);
         // re-render the blocks after connecting them
