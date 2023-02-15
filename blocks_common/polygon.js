@@ -127,8 +127,15 @@ Blockly.Blocks['polygon'] = {
       }
       // if we have a cached connection for this point then connect it
       if (connections[xName] || connections[yName]) {
+        const xBlock = connections[xName].getSourceBlock()
+        const yBlock = connections[yName].getSourceBlock()
         connections[xName].connect(xConnection)
         connections[yName].connect(yConnection)
+        // re-render the blocks after connecting them
+        xBlock.initSvg();
+        yBlock.initSvg();
+        xBlock.render(false);
+        yBlock.render(false);
       }
       xInput.appendField('x: ')
       yInput.appendField('y: ')
@@ -153,6 +160,7 @@ Blockly.Blocks['polygon'] = {
       .appendField(button)
   },
   setExpanded: function(bool) {
+    const connections = this.oldConnections
     this.expanded = bool
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
@@ -161,6 +169,15 @@ Blockly.Blocks['polygon'] = {
       const yInput = this.getInput(yName)
       xInput.setVisible(bool)
       yInput.setVisible(bool)
+      // re-render any blocks if we are showing them
+      if (bool && (connections[xName] || connections[yName])) {
+        const xBlock = connections[xName].getSourceBlock()
+        const yBlock = connections[yName].getSourceBlock()
+        xBlock.initSvg();
+        yBlock.initSvg();
+        xBlock.render();
+        yBlock.render();
+      }
     }
     this.initSvg();
     this.render();
