@@ -78,8 +78,7 @@ Blockly.FieldCheckbox.prototype.init = function() {
   // Instead it uses a custom checkmark element that is either visible or not.
   this.checkElement_ = Blockly.utils.createSvgElement(
     'image',
-    {'height': '20px', 'width': '15px', 'x': 0, 'y': 7, 
-      "src": './' + Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg'}, 
+    {'height': '20px', 'width': '15px', 'x': 0, 'y': 7}, 
     this.fieldGroup_
   );
   this.setValue(this.getValue());
@@ -114,9 +113,9 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
     : !!newBool;
 
   if (this.state_ !== newState) {
-    const newSvg = './' + (!newState
+    const newSvg = !newState
       ? Blockly.mainWorkspace.options.pathToMedia + 'polygon-expand.svg'
-      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg');
+      : Blockly.mainWorkspace.options.pathToMedia + 'polygon-colapse.svg';
 
     if (this.sourceBlock_ && Blockly.Events.isEnabled()) {
       const event = new Blockly.Events.BlockChange(
@@ -131,7 +130,9 @@ Blockly.FieldCheckbox.prototype.setValue = function(newBool) {
 
     this.state_ = newState;
     if (this.checkElement_) {
-      this.checkElement_.setAttribute('src', newSvg);
+      this.checkElement_.setAttribute('http://www.w3.org/1999/xlink', 'xlink:href', newSvg);
+      this.sourceBlock_.initSvg();
+      this.sourceBlock_.render();
     }
   }
 };
