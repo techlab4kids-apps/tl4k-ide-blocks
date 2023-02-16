@@ -101,7 +101,7 @@ Blockly.FieldColourSlider.prototype.getValue = function(internal) {
   const hsva = goog.color.hexToHsva(this.colour_)
   // alpha cant be 0
   hsva[3] = goog.constrain(hsva[3], 0.01, 1) / 100
-  return goog.color.hsvaToHex(hsva);
+  return goog.color.hsvaToHex(hsva[0], hsva[1], hsva[2], hsva[3]);
 };
 
 /**
