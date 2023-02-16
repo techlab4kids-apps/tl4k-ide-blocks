@@ -965,7 +965,7 @@ Blockly.BlockSvg.prototype.computeInputHeight_ = function(input, row,
     return Blockly.BlockSvg.MIN_BLOCK_Y_SINGLE_FIELD_OUTPUT;
   } else if (this.outputConnection) {
     // If this is an extension reporter block, make it taller.
-    if (this.isScratchExtension) {
+    if (this.isScratchExtension || this.type === 'polygon') {
       return Blockly.BlockSvg.MIN_BLOCK_Y_REPORTER + 2 * Blockly.BlockSvg.GRID_UNIT;
     }
     // All other reporters.
