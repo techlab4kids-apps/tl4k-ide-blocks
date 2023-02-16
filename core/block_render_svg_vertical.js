@@ -960,7 +960,7 @@ Blockly.BlockSvg.prototype.computeInputHeight_ = function(input, row,
   if (this.inputList.length === 1 && this.outputConnection &&
       (this.isShadow() &&
       !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this)) &&
-      !this.type === 'polygon') {
+      this.type !== 'polygon') {
     // "Lone" field blocks are smaller.
     return Blockly.BlockSvg.MIN_BLOCK_Y_SINGLE_FIELD_OUTPUT;
   } else if (this.outputConnection) {
