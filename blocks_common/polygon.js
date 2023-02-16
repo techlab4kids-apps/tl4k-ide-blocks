@@ -36,6 +36,8 @@ Blockly.Blocks['polygon'] = {
     this.scale = 50
     this.oldConnections = {}
     this.myBlocks = {}
+    // makes the block B I G
+    this.isScratchExtension = true
     this.generate()
   },
   mutationToDom: function() {
