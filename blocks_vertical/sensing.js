@@ -691,7 +691,7 @@ Blockly.Blocks['sensing_directionTo'] = {
 Blockly.Blocks['sensing_isUpperCase'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'is character uppercase?',
+      "message0": 'is character %1 uppercase?',
       "args0": [
         {
           "type": "input_value",
