@@ -670,18 +670,10 @@ Blockly.Blocks['control_case_next'] = {
   init: function() {
     this.jsonInit({
       "message0": 'run next case when %1',
-      "message1": "%1",
       "args0": [
         {
           "type": "input_value",
           "name": "CONDITION"
-        }
-      ],
-      "args1": [
-        {
-          "type": "input_statement",
-          "check": 'normal',
-          "name": "SUBSTACK"
         }
       ],
       "category": Blockly.Categories.control,
