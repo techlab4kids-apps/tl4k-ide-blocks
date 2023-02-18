@@ -478,7 +478,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       break;
     }
     case Blockly.NEXT_STATEMENT: {
-      // if the type fails, treat the block as a normal statement
+      // if the type for the c-block fails, treat the block as a normal statement
       if (firstStatementConnection && !this.checkType_(firstStatementConnection)) {
         break;
       }
