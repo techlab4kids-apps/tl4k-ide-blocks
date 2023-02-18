@@ -625,7 +625,7 @@ Blockly.Blocks['control_switch_default'] = {
       "args1": [
         {
           "type": "input_statement",
-          "name": "SUBSTACK",
+          "name": "SUBSTACK1",
           "check": 'switchCase'
         }
       ],
@@ -633,7 +633,7 @@ Blockly.Blocks['control_switch_default'] = {
         {
           "type": "input_statement",
           "check": 'normal',
-          "name": "SUBSTACK"
+          "name": "SUBSTACK2"
         }
       ],
       "category": Blockly.Categories.control,
