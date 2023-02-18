@@ -479,7 +479,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
     }
     case Blockly.NEXT_STATEMENT: {
       // if the type fails, treat the block as a normal statement
-      if (!this.checkType_(firstStatementConnection)) {
+      if (firstStatementConnection && !this.checkType_(firstStatementConnection)) {
         break;
       }
 
