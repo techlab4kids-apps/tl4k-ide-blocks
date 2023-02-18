@@ -665,3 +665,13 @@ Blockly.Blocks['control_case'] = {
     });
   }
 };
+
+Blockly.Blocks['control_exitCase'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'exit case',
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
