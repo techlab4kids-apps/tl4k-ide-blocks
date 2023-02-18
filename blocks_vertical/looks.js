@@ -717,3 +717,31 @@ Blockly.Blocks["looks_stretchGetY"] = {
     });
   }
 };
+
+Blockly.Blocks["looks_sayHeight"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble height",
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_sayWidth"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "bubble width",
+      "extensions": [
+        "output_string",
+        "colours_looks"
+      ]
+    });
+  }
+};
