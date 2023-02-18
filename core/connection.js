@@ -485,7 +485,8 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       if (firstStatementConnection &&
           this == this.sourceBlock_.previousConnection &&
           candidate.isConnectedToNonInsertionMarker() &&
-          !firstStatementConnection.targetConnection) {
+          !firstStatementConnection.targetConnection &&
+          this.checkType_(firstStatementConnection)) {
         return false;
       }
       // Don't let a block with no next connection bump other blocks out of the
