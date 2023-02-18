@@ -43,6 +43,7 @@ Blockly.Blocks['control_forever'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -84,6 +85,7 @@ Blockly.Blocks['control_repeat'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -123,6 +125,7 @@ Blockly.Blocks['control_if'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -154,12 +157,14 @@ Blockly.Blocks['control_if_else'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
       "args3": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK2"
         }
       ],
@@ -287,6 +292,7 @@ Blockly.Blocks['control_repeat_until'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -327,6 +333,7 @@ Blockly.Blocks['control_while'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -370,6 +377,7 @@ Blockly.Blocks['control_for_each'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -521,6 +529,7 @@ Blockly.Blocks['control_all_at_once'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -572,6 +581,87 @@ Blockly.Blocks["control_if_return_else_return"] = {
       ],
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['control_switch'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'switch %1',
+      "message1": "%1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CONDITION"
+        }
+      ],
+      "args1": [
+        {
+          "type": "input_statement",
+          "name": "SUBSTACK",
+          "check": 'switchCase'
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_switch_default'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'switch %1',
+      "message1": "%1",
+      "message2": "default",
+      "message3": "%1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CONDITION"
+        }
+      ],
+      "args1": [
+        {
+          "type": "input_statement",
+          "name": "SUBSTACK",
+          "check": 'switchCase'
+        }
+      ],
+      "args3": [
+        {
+          "type": "input_statement",
+          "check": 'normal',
+          "name": "SUBSTACK"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_case'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'case %1',
+      "message1": "%1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CONDITION"
+        }
+      ],
+      "args1": [
+        {
+          "type": "input_statement",
+          "check": 'normal',
+          "name": "SUBSTACK"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_case"]
     });
   }
 };

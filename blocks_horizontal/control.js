@@ -43,6 +43,7 @@ Blockly.Blocks['control_repeat'] = {
       "args0": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         },
         {
@@ -83,6 +84,7 @@ Blockly.Blocks['control_forever'] = {
       "args0": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         },
         {
@@ -117,6 +119,7 @@ Blockly.Blocks['control_repeat'] = {
       "args0": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         },
         {

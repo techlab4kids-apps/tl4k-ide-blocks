@@ -72,10 +72,23 @@ Blockly.ScratchBlocks.VerticalExtensions.COLOUR_TEXTFIELD = function() {
  * @this {Blockly.Block}
  * @readonly
  */
+Blockly.ScratchBlocks.VerticalExtensions.SHAPE_CASE = function() {
+  this.setInputsInline(true);
+  this.setPreviousStatement(true, 'switchCase');
+  this.setNextStatement(true, 'switchCase');
+};
+
+/**
+ * Extension to make a block fit into a stack of statements, regardless of its
+ * inputs.  That means the block should have a previous connection and a next
+ * connection and have inline inputs.
+ * @this {Blockly.Block}
+ * @readonly
+ */
 Blockly.ScratchBlocks.VerticalExtensions.SHAPE_STATEMENT = function() {
   this.setInputsInline(true);
-  this.setPreviousStatement(true, null);
-  this.setNextStatement(true, null);
+  this.setPreviousStatement(true, 'normal');
+  this.setNextStatement(true, 'normal');
 };
 
 /**
@@ -87,7 +100,7 @@ Blockly.ScratchBlocks.VerticalExtensions.SHAPE_STATEMENT = function() {
  */
 Blockly.ScratchBlocks.VerticalExtensions.SHAPE_HAT = function() {
   this.setInputsInline(true);
-  this.setNextStatement(true, null);
+  this.setNextStatement(true, 'normal');
 };
 
 /**
@@ -99,7 +112,7 @@ Blockly.ScratchBlocks.VerticalExtensions.SHAPE_HAT = function() {
  */
 Blockly.ScratchBlocks.VerticalExtensions.SHAPE_END = function() {
   this.setInputsInline(true);
-  this.setPreviousStatement(true, null);
+  this.setPreviousStatement(true, 'normal');
 };
 
 /**
@@ -235,6 +248,8 @@ Blockly.ScratchBlocks.VerticalExtensions.registerAll = function() {
       Blockly.ScratchBlocks.VerticalExtensions.COLOUR_TEXTFIELD);
 
   // Register extensions for common block shapes.
+  Blockly.Extensions.register('shape_case',
+      Blockly.ScratchBlocks.VerticalExtensions.SHAPE_CASE);
   Blockly.Extensions.register('shape_statement',
       Blockly.ScratchBlocks.VerticalExtensions.SHAPE_STATEMENT);
   Blockly.Extensions.register('shape_hat',

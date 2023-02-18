@@ -52,6 +52,7 @@ function procedureTest_setUp() {
       "args0": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ]});

@@ -617,6 +617,7 @@ Blockly.Blocks['data_listforeachnum'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],
@@ -657,6 +658,7 @@ Blockly.Blocks['data_listforeachitem'] = {
       "args1": [
         {
           "type": "input_statement",
+          "check": 'normal',
           "name": "SUBSTACK"
         }
       ],

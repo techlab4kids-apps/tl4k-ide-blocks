@@ -687,3 +687,19 @@ Blockly.Blocks['sensing_directionTo'] = {
     });
   }
 };
+
+Blockly.Blocks['sensing_isUpperCase'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'is character uppercase?',
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "text"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
