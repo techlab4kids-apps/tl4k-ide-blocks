@@ -470,11 +470,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       break;
     }
     case Blockly.NEXT_STATEMENT: {
-      // for some unkown reason, the initial type check passes nomatter what for c-blocks
-      if (!this.checkType_(candidate)) {
-        return false;
-      }
-      
+      if (!this.checkType_(candidate)) return false;
       // Scratch-specific behaviour:
       // If this is a c-block, we can't connect this block's
       // previous connection unless we're connecting to the end of the last
@@ -482,8 +478,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       if (firstStatementConnection &&
           this == this.sourceBlock_.previousConnection &&
           candidate.isConnectedToNonInsertionMarker() &&
-          !firstStatementConnection.targetConnection &&
-          this.checkType_(firstStatementConnection)) {
+          !firstStatementConnection.targetConnection) {
         return false;
       }
       // Don't let a block with no next connection bump other blocks out of the

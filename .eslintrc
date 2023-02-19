@@ -50,6 +50,7 @@
         "no-console": ["off"],
         "no-constant-condition": ["off"]
     },
+    "enviroment": "web",
     "globals": {
         "Blockly": true, # Blockly global
         "goog": true, # goog closure libraries/includes
