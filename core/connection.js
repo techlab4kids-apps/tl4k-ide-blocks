@@ -308,10 +308,10 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_WRONG_TYPE;
   } else if (blockA && blockB && blockA.workspace !== blockB.workspace) {
     return Blockly.Connection.REASON_DIFFERENT_WORKSPACES;
-  } else if (!this.checkType_(target)) {
-    return Blockly.Connection.REASON_CHECKS_FAILED;
   } else if (blockA.isShadow() && !blockB.isShadow() && !blockA.type === 'polygon') {
     return Blockly.Connection.REASON_SHADOW_PARENT;
+  } else if (!this.checkType_(target)) {
+    return Blockly.Connection.REASON_CHECKS_FAILED;
   } else if (((blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
     blockB.type != Blockly.PROCEDURES_PROTOTYPE_BLOCK_TYPE &&
     superiorConn == blockA.getInput('custom_block').connection) ||
@@ -470,6 +470,7 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       break;
     }
     case Blockly.NEXT_STATEMENT: {
+
       // Scratch-specific behaviour:
       // If this is a c-block, we can't connect this block's
       // previous connection unless we're connecting to the end of the last
