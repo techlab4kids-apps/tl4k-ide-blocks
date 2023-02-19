@@ -308,6 +308,10 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_WRONG_TYPE;
   } else if (blockA && blockB && blockA.workspace !== blockB.workspace) {
     return Blockly.Connection.REASON_DIFFERENT_WORKSPACES;
+  } else if (!this.checkType_(target)) {
+    return Blockly.Connection.REASON_CHECKS_FAILED;
+  } else if (blockA.isShadow() && !blockB.isShadow() && !blockA.type === 'polygon') {
+    return Blockly.Connection.REASON_SHADOW_PARENT;
   } else if (((blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
     blockB.type != Blockly.PROCEDURES_PROTOTYPE_BLOCK_TYPE &&
     superiorConn == blockA.getInput('custom_block').connection) ||
@@ -320,10 +324,6 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     // And hack to fix #1534: Fail attempts to connect anything but a
     // defnoreturn block to a prototype block.
     return Blockly.Connection.REASON_CUSTOM_PROCEDURE;
-  }else if (blockA.isShadow() && !blockB.isShadow() && !blockA.type === 'polygon') {
-    return Blockly.Connection.REASON_SHADOW_PARENT;
-  } else if (!this.checkType_(target)) {
-    return Blockly.Connection.REASON_CHECKS_FAILED;
   }
   return Blockly.Connection.CAN_CONNECT;
 };
@@ -470,7 +470,11 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       break;
     }
     case Blockly.NEXT_STATEMENT: {
-
+      // for some unkown reason, the initial type check passes nomatter what for c-blocks
+      if (!this.checkType_(candidate)) {
+        return false;
+      }
+      
       // Scratch-specific behaviour:
       // If this is a c-block, we can't connect this block's
       // previous connection unless we're connecting to the end of the last
