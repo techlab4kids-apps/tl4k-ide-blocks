@@ -587,7 +587,7 @@ Blockly.Blocks["sensing_mobile"] = {
       "message0": "mobile?",
       "args0": [],
       "category": Blockly.Categories.sensing,
-      "extensions": ["colours_operators", "output_boolean"]
+      "extensions": ["colours_sensing", "output_boolean"]
     });
   }
 };

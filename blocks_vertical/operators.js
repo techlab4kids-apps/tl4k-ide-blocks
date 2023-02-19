@@ -753,3 +753,28 @@ Blockly.Blocks["operator_indexOfTextInText"] = {
     });
   }
 };
+
+Blockly.Blocks["operator_toUpperLowerCase"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 to %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT"
+        },
+        {
+          "type": "field_dropdown",
+          "name": "OPTION",
+          "options": [
+            ["uppercase", "upper"],
+            ["lowercase", "lower"]
+          ]
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
