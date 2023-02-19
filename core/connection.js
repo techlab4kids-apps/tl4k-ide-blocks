@@ -406,6 +406,13 @@ Blockly.Connection.prototype.canConnectToPrevious_ = function(candidate) {
   // mid-stack.
   var sourceHasPreviousConn = this.sourceBlock_.previousConnection != null;
 
+  // cant wrap around candidate since the connection types dont match
+  if (isFirstStatementConnection && 
+      sourceHasPreviousConn && 
+      candidate.sourceBlock_.previousConnection &&
+      !this.sourceBlock_.previousConnection.checkType_(candidate.sourceBlock_.previousConnection.targetConnection)) {
+    return false
+  }
   if (isFirstStatementConnection && sourceHasPreviousConn) {
     return true;
   }
@@ -470,10 +477,6 @@ Blockly.Connection.prototype.isConnectionAllowed = function(candidate) {
       break;
     }
     case Blockly.NEXT_STATEMENT: {
-      if (!candidate.sourceBlock_.nextBlock === this && 
-          !this.checkType_(candidate.sourceBlock_.nextBlock)) {
-        return false
-      };
       // Scratch-specific behaviour:
       // If this is a c-block, we can't connect this block's
       // previous connection unless we're connecting to the end of the last
