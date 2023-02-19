@@ -409,7 +409,7 @@ Blockly.Connection.prototype.canConnectToPrevious_ = function(candidate) {
   // cant wrap around candidate since the connection types dont match
   if (isFirstStatementConnection && 
       sourceHasPreviousConn && 
-      candidate.sourceBlock_.previousConnection &&
+      candidate.sourceBlock_.previousConnection.targetConnection &&
       !this.sourceBlock_.previousConnection.checkType_(candidate.sourceBlock_.previousConnection.targetConnection)) {
     return false
   }
