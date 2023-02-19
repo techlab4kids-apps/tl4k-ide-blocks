@@ -687,7 +687,7 @@ Blockly.Blocks['control_exitCase'] = {
     this.jsonInit({
       "message0": 'exit case',
       "category": Blockly.Categories.control,
-      "extensions": ["colours_control", "shape_statement"]
+      "extensions": ["colours_control", "shape_end"]
     });
   }
 };
