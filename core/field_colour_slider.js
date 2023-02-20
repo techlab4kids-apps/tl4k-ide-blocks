@@ -96,12 +96,8 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
  * Return the current colour.
  * @return {string} Current colour in '#rrggbbaa' format.
  */
-Blockly.FieldColourSlider.prototype.getValue = function(internal) {
-  if (internal) return this.colour_
-  const hsva = goog.color.hexToHsva(this.colour_)
-  // alpha cant be 0
-  hsva[3] = goog.constrain(hsva[3], 0.01, 1) / 100
-  return goog.color.hsvaToHex(hsva[0], hsva[1], hsva[2], hsva[3]);
+Blockly.FieldColourSlider.prototype.getValue = function() {
+  return this.colour_;
 };
 
 /**
