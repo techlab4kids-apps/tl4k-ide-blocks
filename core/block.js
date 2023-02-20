@@ -303,6 +303,9 @@ Blockly.Block.prototype.dispose = function(healStack) {
       }
       connections[i].dispose();
     }
+  } catch (err) {
+    // i suspect theres an error here...
+    console.warn(err)
   } finally {
     Blockly.Events.enable();
   }
