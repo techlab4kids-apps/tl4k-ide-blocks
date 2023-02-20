@@ -837,7 +837,6 @@ Blockly.Blocks['procedures_definition'] = {
       "args0": [
         {
           "type": "input_statement",
-          "check": 'normal',
           "name": "custom_block"
         }
       ],
