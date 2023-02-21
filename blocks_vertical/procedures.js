@@ -150,8 +150,8 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
   // clear the blocks shape so that it doesnt get mangeld by any extensions run
-  this.setPreviousStatement(false, null)
-  this.setNextStatement(false, null)	
+  this.setPreviousStatement(false, 'procedure')
+  this.setNextStatement(false, 'procedure')	
   this.setOutput(false, 'procedure')
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   if (this.output_) {
@@ -169,8 +169,8 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
       Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
     } catch (err) {
       this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
-      this.setPreviousStatement(!this.output_, null)
-      this.setNextStatement(!this.output_, null)	
+      this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+      this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')	
       console.warn(err)
     }
   }
@@ -837,7 +837,8 @@ Blockly.Blocks['procedures_definition'] = {
       "args0": [
         {
           "type": "input_statement",
-          "name": "custom_block"
+          "name": "custom_block",
+          "check": 'procedure'
         }
       ],
       "extensions": ["colours_more", "shape_hat", "procedure_def_contextmenu"]
