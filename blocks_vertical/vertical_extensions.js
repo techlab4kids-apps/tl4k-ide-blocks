@@ -72,6 +72,19 @@ Blockly.ScratchBlocks.VerticalExtensions.COLOUR_TEXTFIELD = function() {
  * @this {Blockly.Block}
  * @readonly
  */
+Blockly.ScratchBlocks.VerticalExtensions.SHAPE_PROCEDURE = function() {
+  this.setInputsInline(true);
+  this.setPreviousStatement(true, 'procedure');
+  this.setNextStatement(true, 'procedure');
+};
+
+/**
+ * Extension to make a block fit into a stack of statements, regardless of its
+ * inputs.  That means the block should have a previous connection and a next
+ * connection and have inline inputs.
+ * @this {Blockly.Block}
+ * @readonly
+ */
 Blockly.ScratchBlocks.VerticalExtensions.SHAPE_CASE = function() {
   this.setInputsInline(true);
   this.setPreviousStatement(true, 'switchCase');
@@ -248,6 +261,8 @@ Blockly.ScratchBlocks.VerticalExtensions.registerAll = function() {
       Blockly.ScratchBlocks.VerticalExtensions.COLOUR_TEXTFIELD);
 
   // Register extensions for common block shapes.
+  Blockly.Extensions.register('shape_procedure',
+      Blockly.ScratchBlocks.VerticalExtensions.SHAPE_PROCEDURE);
   Blockly.Extensions.register('shape_case',
       Blockly.ScratchBlocks.VerticalExtensions.SHAPE_CASE);
   Blockly.Extensions.register('shape_statement',
