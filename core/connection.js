@@ -310,7 +310,7 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_DIFFERENT_WORKSPACES;
   } else if (!this.checkType_(target)) {
     return Blockly.Connection.REASON_CHECKS_FAILED;
-  } else if (blockA.isShadow() && !blockB.isShadow() && !blockA.type === 'polygon') {
+  } else if (blockA.isShadow() && !blockB.isShadow()) {
     return Blockly.Connection.REASON_SHADOW_PARENT;
   } else if (((blockA.type == Blockly.PROCEDURES_DEFINITION_BLOCK_TYPE &&
     blockB.type != Blockly.PROCEDURES_PROTOTYPE_BLOCK_TYPE &&
