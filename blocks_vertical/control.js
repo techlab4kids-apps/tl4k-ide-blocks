@@ -27,6 +27,26 @@ goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
 
+Blockly.Blocks['your_mom'] = {
+  "message0": "your mom %1",
+  "args0": [
+    {
+      "type": "field_image",
+      "src": "https://en.m.wikipedia.org/wiki/Trollface#/media/File%3ATrollface_non-free.png",
+      "width": 15,
+      "height": 15,
+      "alt": "*",
+      "flipRtl": false
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": "#ff0000",
+  "tooltip": "your mom :trel:",
+  "helpUrl": "https://tenor.com/view/urmom-your-mom-baldi-defaultdance-gif-19665250"
+}
+
 Blockly.Blocks['control_forever'] = {
   /**
    * Block for repeat n times (external number).
