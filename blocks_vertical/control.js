@@ -27,7 +27,7 @@ goog.require('Blockly.Colours');
 goog.require('Blockly.ScratchBlocks.VerticalExtensions');
 
 
-Blockly.Blocks['your_mom'] = {
+Blockly.Blocks['your_mom'] = {init:function(){this.jsonInit({
   "message0": "your mom %1",
   "args0": [
     {
@@ -45,7 +45,7 @@ Blockly.Blocks['your_mom'] = {
   "colour": "#ff0000",
   "tooltip": "your mom :trel:",
   "helpUrl": "https://tenor.com/view/urmom-your-mom-baldi-defaultdance-gif-19665250"
-}
+})}}
 
 Blockly.Blocks['control_forever'] = {
   /**
