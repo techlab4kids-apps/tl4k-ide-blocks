@@ -293,15 +293,8 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   if (!target) {
     return Blockly.Connection.REASON_TARGET_NULL;
   }
-  if (this.isSuperior()) {
-    var blockA = this.sourceBlock_;
-    var blockB = target.getSourceBlock();
-    var superiorConn = this;
-  } else {
-    var blockB = this.sourceBlock_;
-    var blockA = target.getSourceBlock();
-    var superiorConn = target;
-  }
+  var blockA = this.sourceBlock_;
+  var blockB = target.getSourceBlock();
   if (blockA && blockA == blockB) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {
