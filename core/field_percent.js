@@ -99,7 +99,7 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
   }
 
   this.handle_ = Blockly.utils.createSvgElement('rect', {
-    'x': center,
+    'x': center - 20,
     'y': 0,
     'width': 40,
     'height': 10,
