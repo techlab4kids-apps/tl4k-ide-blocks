@@ -41,12 +41,10 @@ goog.require('Blockly.FieldAngle');
  * @constructor
  */
 Blockly.FieldPercentage = function(opt_value, opt_validator) {
-  this.percent_ = Number(opt_value)
   Blockly.FieldPercentage.superClass_.constructor.call(
-      this, `${opt_value}%`, opt_validator);
+      this, opt_value, opt_validator);
 };
 goog.inherits(Blockly.FieldPercentage, Blockly.FieldAngle);
-
 /**
  * Round Percentages to the nearest 15 degrees when using mouse.
  * Set to 0 to disable rounding.
@@ -87,14 +85,14 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
   }, div);
   const center = Blockly.FieldAngle.HALF / 2
 
-  for (var percent = 0; percent < 100; percent += 4) {
+  for (var percent = 0; percent < 100; percent += 5) {
     const yAxis = percent * 1.5
     Blockly.utils.createSvgElement('line', {
       'x1': -10 + center,
       'y1': yAxis,
       'x2': 10 + center,
       'y2': yAxis,
-      'class': 'blocklyPercentageMarks',
+      'class': 'blocklyPercentageMarks'
     }, svg);
   }
 
@@ -117,7 +115,9 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
   this.updateGraph_();
 };
 
-Blockly.FieldPercentage.prototype.updateGraph_ = function() {}
+Blockly.FieldPercentage.prototype.updateGraph_ = function() {
+  this.handle_.setAttribute('y', this.percent_ * 1.5)
+}
 
 /**
  * Construct a FieldPercentage from a JSON arg object.
@@ -132,19 +132,13 @@ Blockly.FieldPercentage.fromJson = function(options) {
 
 Blockly.FieldPercentage.prototype.onMouseMove = function(e) {
   e.preventDefault();
-  var percent = e.clientX % 101
+  var bBox = this.handle_.ownerSVGElement.getBoundingClientRect();
+  var dy = e.clientY - bBox.top;
+  var percent = (dy / 1.5) % 101
   percent = Math.round(percent / Blockly.FieldPercentage.ROUND) * Blockly.FieldPercentage.ROUND
   percent = this.callValidator(percent);
   this.setValue(percent);
-}
-
-Blockly.FieldPercentage.prototype.setValue = function(val) {
-  this.percent_ = val
-  Blockly.FieldPercentage.superClass_.setValue.call(this, `${val}%`);
-}
-
-Blockly.FieldPercentage.prototype.getValue = function() {
-  return this.percent_
+  this.updateGraph_();
 }
 
 /**
@@ -163,7 +157,7 @@ Blockly.FieldPercentage.prototype.classValidator = function(text) {
   }
   n = n % 101;
   
-  return `${n}%`;
+  return n;
 };
 
 Blockly.Field.register('field_percentage', Blockly.FieldPercentage);
