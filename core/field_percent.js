@@ -85,24 +85,25 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
     'height': (Blockly.FieldAngle.HALF * 2) + 'px',
     'width': (Blockly.FieldAngle.HALF) + 'px'
   }, div);
+  const center = Blockly.FieldAngle.HALF / 2
 
   for (var percent = 0; percent < 100; percent += 4) {
     const yAxis = percent * 1.5
     Blockly.utils.createSvgElement('line', {
-      'x1': -10,
+      'x1': -10 + center,
       'y1': yAxis,
-      'x2': 10,
+      'x2': 10 + center,
       'y2': yAxis,
       'class': 'blocklyPercentageMarks',
     }, svg);
   }
 
   this.handle_ = Blockly.utils.createSvgElement('rect', {
-    'x': 0,
+    'x': center,
     'y': 0,
     'width': 40,
     'height': 10,
-    'class': 'blocklyAngleDragHandle'
+    'class': 'blocklyPercentageDragHandle'
   }, svg);
 
   Blockly.DropDownDiv.setColour(this.sourceBlock_.parentBlock_.getColour(),

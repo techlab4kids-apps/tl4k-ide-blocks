@@ -816,6 +816,15 @@ Blockly.Css.CONTENT = [
     'stroke-width: 1.5;',
   '}',
 
+  '.blocklyPercentageDragHandle {',
+    'stroke: #fff;',
+    'stroke-width: 5;',
+    'stroke-opacity: 0.25;',
+    'fill: #fff;',
+    'cursor: pointer;',
+    'border-radius: 25px;',
+  '}',
+
   '.blocklyAngleGauge {',
     'fill: #fff;',
     'fill-opacity: 0.20;',
