@@ -88,9 +88,9 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
   for (var percent = 0; percent < 100; percent += 4) {
     Blockly.utils.createSvgElement('line', {
       'x1': -10,
-      'y1': percent,
+      'y1': percent * 0.5,
       'x2': 10,
-      'y2': percent,
+      'y2': percent * 0.5,
       'class': 'blocklyPercentageMarks',
     }, svg);
   }

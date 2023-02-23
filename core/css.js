@@ -813,8 +813,7 @@ Blockly.Css.CONTENT = [
 
   '.blocklyPercentageMarks {',
     'stroke: #fff;',
-    'stroke-width: 3;',
-    'stroke-opacity: 0.5;',
+    'stroke-width: 2;',
   '}',
 
   '.blocklyAngleGauge {',
