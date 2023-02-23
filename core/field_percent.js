@@ -131,6 +131,7 @@ Blockly.FieldPercentage.fromJson = function(options) {
 
 Blockly.FieldPercentage.prototype.onMouseMove = function(e) {
   e.preventDefault();
+  var percent = e.clientX % 101
   percent = Math.round(percent / Blockly.FieldPercentage.ROUND) * Blockly.FieldPercentage.ROUND
   percent = this.callValidator(percent);
   this.setValue(percent);
