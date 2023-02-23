@@ -26,7 +26,7 @@
 
 goog.provide('Blockly.FieldPercentage');
 
-goog.provide('Blockly.FieldAngle');
+goog.require('Blockly.FieldAngle');
 
 
 /**
