@@ -41,8 +41,9 @@ goog.require('Blockly.FieldAngle');
  * @constructor
  */
 Blockly.FieldPercentage = function(opt_value, opt_validator) {
+  this.percent_ = Number(opt_value)
   Blockly.FieldPercentage.superClass_.constructor.call(
-      this, opt_value, opt_validator);
+      this, `${opt_value}%`, opt_validator);
 };
 goog.inherits(Blockly.FieldPercentage, Blockly.FieldAngle);
 
@@ -115,7 +116,7 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
   this.updateGraph_();
 };
 
-Blockly.FieldAngle.prototype.updateGraph_ = function() {}
+Blockly.FieldPercentage.prototype.updateGraph_ = function() {}
 
 /**
  * Construct a FieldPercentage from a JSON arg object.
@@ -127,6 +128,22 @@ Blockly.FieldAngle.prototype.updateGraph_ = function() {}
 Blockly.FieldPercentage.fromJson = function(options) {
   return new Blockly.FieldPercentage(options['percentage']);
 };
+
+Blockly.FieldPercentage.prototype.onMouseMove = function(e) {
+  e.preventDefault();
+  percent = Math.round(percent / Blockly.FieldPercentage.ROUND) * Blockly.FieldPercentage.ROUND
+  percent = this.callValidator(percent);
+  this.setValue(percent);
+}
+
+Blockly.FieldPercentage.prototype.setValue = function(val) {
+  this.percent_ = val
+  Blockly.FieldPercentage.superClass_.constructor.call(this, `${val}%`, opt_validator);
+}
+
+Blockly.FieldPercentage.prototype.getValue = function() {
+  return this.percent_
+}
 
 /**
  * Ensure that only an Percentage may be entered.
@@ -144,7 +161,7 @@ Blockly.FieldPercentage.prototype.classValidator = function(text) {
   }
   n = n % 101;
   
-  return String(n);
+  return `${n}%`;
 };
 
 Blockly.Field.register('field_percentage', Blockly.FieldPercentage);
