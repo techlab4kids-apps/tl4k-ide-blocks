@@ -139,7 +139,7 @@ Blockly.FieldPercentage.prototype.onMouseMove = function(e) {
 
 Blockly.FieldPercentage.prototype.setValue = function(val) {
   this.percent_ = val
-  Blockly.FieldPercentage.superClass_.constructor.call(this, `${val}%`, opt_validator);
+  Blockly.FieldPercentage.superClass_.constructor.call(this, `${val}%`);
 }
 
 Blockly.FieldPercentage.prototype.getValue = function() {
