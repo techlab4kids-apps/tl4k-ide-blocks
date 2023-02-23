@@ -65,6 +65,50 @@ Blockly.FieldPercentage.OFFSET = 0;
 Blockly.FieldPercentage.WRAP = 100;
 
 /**
+ * Show the inline free-text editor on top of the text.
+ * @private
+ */
+Blockly.FieldPercentage.prototype.showEditor_ = function() {
+  // Mobile browsers have issues with in-line textareas (focus & keyboards).
+  Blockly.FieldAngle.superClass_.showEditor_.call(this, this.useTouchInteraction_);
+  // If there is an existing drop-down someone else owns, hide it immediately and clear it.
+  Blockly.DropDownDiv.hideWithoutAnimation();
+  Blockly.DropDownDiv.clearContent();
+  var div = Blockly.DropDownDiv.getContentDiv();
+  // Build the SVG DOM.
+  var svg = Blockly.utils.createSvgElement('svg', {
+    'xmlns': 'http://www.w3.org/2000/svg',
+    'xmlns:html': 'http://www.w3.org/1999/xhtml',
+    'xmlns:xlink': 'http://www.w3.org/1999/xlink',
+    'version': '1.1',
+    'height': (Blockly.FieldAngle.HALF * 2) + 'px',
+    'width': (Blockly.FieldAngle.HALF) + 'px'
+  }, div);
+
+  for (var percent = 0; percent < 100; percent += 4) {
+    Blockly.utils.createSvgElement('line', {
+      'x1': -10,
+      'y1': percent,
+      'x2': 10,
+      'y2': percent,
+      'class': 'blocklyPercentageMarks',
+    }, svg);
+  }
+
+  Blockly.DropDownDiv.setColour(this.sourceBlock_.parentBlock_.getColour(),
+      this.sourceBlock_.getColourTertiary());
+  Blockly.DropDownDiv.setCategory(this.sourceBlock_.parentBlock_.getCategory());
+  Blockly.DropDownDiv.showPositionedByBlock(this, this.sourceBlock_);
+
+  this.mouseDownWrapper_ =
+      Blockly.bindEvent_(this.handle_, 'mousedown', this, this.onMouseDown);
+
+  this.updateGraph_();
+};
+
+Blockly.FieldAngle.prototype.updateGraph_ = function() {}
+
+/**
  * Construct a FieldPercentage from a JSON arg object.
  * @param {!Object} options A JSON object with options (Percentage).
  * @returns {!Blockly.FieldPercentage} The new field instance.
@@ -91,7 +135,7 @@ Blockly.FieldPercentage.prototype.classValidator = function(text) {
   }
   n = n % 101;
   
-  return `${n}%`;
+  return String(n);
 };
 
 Blockly.Field.register('field_percentage', Blockly.FieldPercentage);
