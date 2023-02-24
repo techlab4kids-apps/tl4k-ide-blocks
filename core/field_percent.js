@@ -116,7 +116,10 @@ Blockly.FieldPercentage.prototype.showEditor_ = function() {
 };
 
 Blockly.FieldPercentage.prototype.updateGraph_ = function() {
-  this.handle_.setAttribute('y', this.percent_ * 1.5)
+  if (!this.handle_) {
+    return;
+  }
+  this.handle_.setAttribute('y', this.getValue() * 1.5)
 }
 
 /**
