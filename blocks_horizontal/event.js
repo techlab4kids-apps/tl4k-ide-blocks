@@ -24,7 +24,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.event');
+goog.provide('Blockly.Blocks.horizontalEvent');
 
 goog.require('Blockly.Blocks');
 

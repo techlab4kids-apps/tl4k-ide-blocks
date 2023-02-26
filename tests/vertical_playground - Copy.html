@@ -15,7 +15,6 @@
     <script src="../blocks_common/note.js"></script>
     <script src="../blocks_common/text.js"></script>
     <script src="../blocks_common/colour.js"></script>
-    <script src="../blocks_common/polygon.js"></script>
     <script src="../blocks_vertical/control.js"></script>
     <script src="../blocks_vertical/event.js"></script>
     <script src="../blocks_vertical/motion.js"></script>
@@ -27,7 +26,9 @@
     <script src="../blocks_vertical/sensing.js"></script>
     <script src="../blocks_vertical/data.js"></script>
     <script src="../blocks_vertical/extensions.js"></script>
-    <script src="../blocks_vertical/default_toolbox.js"></script>
+    <script src="../blocks_horizontal/control.js"></script>
+    <script src="../blocks_horizontal/event.js"></script>
+    <script src="../blocks_horizontal/wedo.js"></script>
 
     <script>
       'use strict';
@@ -37,6 +38,82 @@
       var workspace = null;
 
       function start() {
+        const blocklyDiv = document.createElement('div')
+        document.head.appendChild(blocklyDiv)
+
+        const tempWorkspace = Blockly.inject(blocklyDiv, {
+            comments: true,
+            disable: false,
+            collapse: false,
+            media: '../media/',
+            readOnly: true,
+            rtl: false,
+            scrollbars: true,
+            toolbox: '<xml></xml>',
+            toolboxPosition: 'end',
+            horizontalLayout: 'bottom',
+            sounds: false,
+            zoom: {
+                controls: true,
+                wheel: true,
+                startScale: 0.675,
+                maxScale: 4,
+                minScale: 0.25,
+                scaleSpeed: 1.1
+            },
+            colours: {
+                fieldShadow: 'rgba(255, 255, 255, 0.3)',
+                dragShadowOpacity: 0.6
+            }
+        });
+        const blockNames = Object.keys(Blockly.Blocks)
+            .filter(name => Boolean(Blockly.Blocks[name].init))
+        const blockInputNames = {}
+        for (let name, index = 0; name = blockNames[index]; index++) {
+          try {
+            const block = tempWorkspace.newBlock(name)
+            block.initSvg()
+            const inputs = block.inputList.map(input => ({
+              name: input.name, 
+              type: input.type,
+              number: input.connection && input.connection.check_ 
+                ? input.connection.check_.includes('Number') 
+                : null
+            }))
+            block.dispose()
+            blockInputNames[name] = inputs || []
+          } catch (err) {
+            console.warn(`couldnt get inputs for block "${name}" because:`, err)
+            tempWorkspace.blockDB_ = {}
+            tempWorkspace.topBlocks_ = []
+            blockNames.splice(index, 1)
+            index--
+          }
+        }
+        tempWorkspace.dispose()
+
+        Blockly.Blocks.defaultToolbox = 
+        '<xml id="toolbox-categories" style="display: none">' +
+            (blockNames
+                .map(name => {
+                    const inputs = blockInputNames[name]
+                    if (!inputs) console.log('wtf, how')
+                    return (
+                    `<block type="${name}" id="${name}">` +
+                        (inputs
+                            .filter(input => input.type === Blockly.INPUT_VALUE && !input.number === null)
+                            .map(input => (
+                                `<value name="${input.name}">` +
+                                    `<shadow type="${input.number ? 'math_integer' : 'text'}">` +
+                                        `<field name="${input.number ? 'NUM' : 'TEXT'}">10</field>` +
+                                    '</shadow>' +
+                                '</value>'))
+                            .join('')) +
+                    '</block>')
+                })
+                .join('')) +
+        '</xml>';
+
         var soundsEnabled = null;
         if (sessionStorage) {
           // Restore sounds state.

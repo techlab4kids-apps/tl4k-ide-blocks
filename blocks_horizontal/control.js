@@ -24,7 +24,7 @@
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.control');
+goog.provide('Blockly.Blocks.horizontalControl');
 
 goog.require('Blockly.Blocks');
 
