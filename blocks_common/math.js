@@ -152,27 +152,3 @@ Blockly.Blocks['math_angle'] = {
     });
   }
 };
-
-Blockly.Blocks['math_percentage'] = {
-  /**
-   * Block for angle picker.
-   * @this Blockly.Block
-   */
-  init: function () {
-    this.jsonInit({
-      "message0": "%1",
-      "args0": [
-        {
-          "type": "field_percentage",
-          "name": "NUM",
-          "value": 90
-        }
-      ],
-      "output": "Number",
-      "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
-      "colour": Blockly.Colours.textField,
-      "colourSecondary": Blockly.Colours.textField,
-      "colourTertiary": Blockly.Colours.textField
-    });
-  }
-};

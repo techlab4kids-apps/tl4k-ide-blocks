@@ -30,7 +30,6 @@
 #
 # This script also generates:
 #   blocks_compressed.js: The compressed common blocks.
-#   blocks_horizontal_compressed.js: The compressed Scratch horizontal blocks.
 #   blocks_vertical_compressed.js: The compressed Scratch vertical blocks.
 #   msg/js/<LANG>.js for every language <LANG> defined in msg/js/<LANG>.json.
 
@@ -92,10 +91,7 @@ class Gen_uncompressed(threading.Thread):
     self.closure_env = closure_env
 
   def run(self):
-    if self.vertical:
-      target_filename = 'blockly_uncompressed_vertical.js'
-    else:
-      target_filename = 'blockly_uncompressed_horizontal.js'
+    target_filename = 'blockly_uncompressed_vertical.js'
     f = open(target_filename, 'w')
     f.write(HEADER)
     f.write(self.format_js("""
@@ -111,7 +107,7 @@ window.BLOCKLY_DIR = (function() {
   if (!isNodeJS) {
     // Find name of current directory.
     var scripts = document.getElementsByTagName('script');
-    var re = new RegExp('(.+)[\/]blockly_uncompressed(_vertical|_horizontal|)\.js$');
+    var re = new RegExp('(.+)[\/]blockly_uncompressed_vertical\.js$');
     for (var i = 0, script; script = scripts[i]; i++) {
       var match = re.exec(script.src);
       if (match) {
@@ -217,26 +213,20 @@ class Gen_compressed(threading.Thread):
   Uses the Closure Compiler's online API.
   Runs in a separate thread.
   """
-  def __init__(self, search_paths_vertical, search_paths_horizontal, closure_env):
+  def __init__(self, search_paths_vertical, closure_env):
     threading.Thread.__init__(self)
     self.search_paths_vertical = search_paths_vertical
-    self.search_paths_horizontal = search_paths_horizontal
     self.closure_env = closure_env
 
   def run(self):
     self.gen_core(True)
     self.gen_core(False)
-    self.gen_blocks("horizontal")
     self.gen_blocks("vertical")
     self.gen_blocks("common")
 
   def gen_core(self, vertical):
-    if vertical:
-      target_filename = 'blockly_compressed_vertical.js'
-      search_paths = self.search_paths_vertical
-    else:
-      target_filename = 'blockly_compressed_horizontal.js'
-      search_paths = self.search_paths_horizontal
+    target_filename = 'blockly_compressed_vertical.js'
+    search_paths = self.search_paths_vertical
     # Define the parameters for the POST request.
     params = [
       ("compilation_level", "SIMPLE"),
@@ -263,12 +253,9 @@ class Gen_compressed(threading.Thread):
     self.do_compile(params, target_filename, filenames, "")
 
   def gen_blocks(self, block_type):
-    if block_type == "horizontal":
-      target_filename = "blocks_compressed_horizontal.js"
-      filenames = glob.glob(os.path.join("blocks_horizontal", "*.js"))
-    elif block_type == "vertical":
+    if block_type == "vertical":
       target_filename = "blocks_compressed_vertical.js"
-      filenames = glob.glob(os.path.join("blocks_vertical", "*.js"))
+      filenames = glob.glob(os.path.join("blocks_workspace", "*.js"))
     elif block_type == "common":
       target_filename = "blocks_compressed.js"
       filenames = glob.glob(os.path.join("blocks_common", "*.js"))
@@ -552,12 +539,6 @@ class Gen_langfiles(threading.Thread):
       else:
         print("FAILED to create " + f)
 
-def exclude_vertical(item):
-  return not item.endswith("block_render_svg_vertical.js")
-
-def exclude_horizontal(item):
-  return not item.endswith("block_render_svg_horizontal.js")
-
 if __name__ == "__main__":
   try:
     closure_dir = CLOSURE_DIR_NPM
@@ -605,8 +586,7 @@ if __name__ == "__main__":
   search_paths = calcdeps.ExpandDirectories(
       ["core", os.path.join(closure_root, closure_library)])
 
-  search_paths_horizontal = filter(exclude_vertical, search_paths)
-  search_paths_vertical = filter(exclude_horizontal, search_paths)
+  search_paths_vertical = search_paths
 
   closure_env = {
     "closure_dir": closure_dir,
@@ -620,11 +600,9 @@ if __name__ == "__main__":
   # Compressed is limited by network and server speed.
   # Vertical:
   Gen_uncompressed(search_paths_vertical, True, closure_env).start()
-  # Horizontal:
-  Gen_uncompressed(search_paths_horizontal, False, closure_env).start()
 
-  # Compressed forms of vertical and horizontal.
-  Gen_compressed(search_paths_vertical, search_paths_horizontal, closure_env).start()
+  # Compressed forms of vertical
+  Gen_compressed(search_paths_vertical, closure_env).start()
 
   # This is run locally in a separate thread.
   # Gen_langfiles().start()
