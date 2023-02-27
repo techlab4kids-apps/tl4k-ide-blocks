@@ -42,12 +42,6 @@ var runTests = async function () {
     element = await browser.findElement({id: "closureTestRunnerLog"});
     text = await element.getText();
     testHtml(text);
-
-    await browser.get("file://" + path + "/tests/jsunit/horizontal_tests.html");
-    await browser.sleep(5000);
-    element = await browser.findElement({id: "closureTestRunnerLog"});
-    text = await element.getText();
-    testHtml(text);
   }
   finally {
     await browser.quit();

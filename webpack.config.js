@@ -10,7 +10,6 @@ var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 module.exports = [{
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: {
-    horizontal: './shim/horizontal.js',
     vertical: './shim/vertical.js'
   },
   output: {
@@ -28,7 +27,6 @@ module.exports = [{
 }, {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: {
-    horizontal: './shim/horizontal.js',
     vertical: './shim/vertical.js'
   },
   output: {
