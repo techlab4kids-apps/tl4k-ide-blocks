@@ -255,7 +255,7 @@ class Gen_compressed(threading.Thread):
   def gen_blocks(self, block_type):
     if block_type == "vertical":
       target_filename = "blocks_compressed_vertical.js"
-      filenames = glob.glob(os.path.join("blocks_workspace", "*.js"))
+      filenames = glob.glob(os.path.join("blocks_vertical", "*.js"))
     elif block_type == "common":
       target_filename = "blocks_compressed.js"
       filenames = glob.glob(os.path.join("blocks_common", "*.js"))
