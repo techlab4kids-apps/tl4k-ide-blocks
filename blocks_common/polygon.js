@@ -119,7 +119,7 @@ Blockly.Blocks['polygon'] = {
       if (!this.getInput(xName).connection.targetConnection || !this.getInput(yName).connection.targetConnection) {
         const newxBlock = this.workspace.newBlock('math_number');
         const newyBlock = this.workspace.newBlock('math_number');
-        const initialValue = getXYForPoint(point, this.points, this.offset, this.scale)
+        const initialValue = getXYForPoint(point - 1, this.points, this.offset, this.scale)
         newxBlock.setFieldValue(String(initialValue[0]), 'NUM');
         newyBlock.setFieldValue(String(initialValue[1]), 'NUM');
         newxBlock.setShadow(true);
