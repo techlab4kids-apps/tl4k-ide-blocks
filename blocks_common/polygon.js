@@ -8,19 +8,21 @@ goog.provide('Blockly.Blocks.ploygon');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
+goog.require('Blockly.utils')
 
 const getXYForPoint = (point, points, opt_offset, opt_scale) => {
   const offset = Array.isArray(opt_offset) 
     ? opt_offset 
-    : [0,0]
+    : [0,0];
   const scale = typeof opt_scale === 'number' 
     ? opt_scale 
-    : 10
+    : 10;
+  const origin = 360 / points;
   
-  const dir = (360 / points) * point
-  const x = Math.cos(dir) * scale
-  const y = Math.sin(dir) * scale
-  return [x + offset[0],y + offset[1]]
+  const dir = Blockly.utils.toRadians(((origin * point) - (origin / 2)) - 90);
+  const x = Math.cos(dir) * scale;
+  const y = Math.sin(dir) * scale;
+  return [x + offset[0],y + offset[1]];
 }
 
 Blockly.Blocks['polygon'] = {
