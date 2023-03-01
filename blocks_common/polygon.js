@@ -8,7 +8,6 @@ goog.provide('Blockly.Blocks.ploygon');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Colours');
 goog.require('Blockly.constants');
-goog.require('Blockly.utils')
 
 const getXYForPoint = (point, points, opt_offset, opt_scale) => {
   const offset = Array.isArray(opt_offset) 
