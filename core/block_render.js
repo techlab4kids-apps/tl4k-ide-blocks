@@ -959,7 +959,9 @@ Blockly.BlockSvg.prototype.computeInputHeight_ = function(input, row,
     previousRow) {
   if (this.inputList.length === 1 && this.outputConnection &&
       (this.isShadow() &&
-      !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this)) &&
+      !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this) &&
+      (this.type !== 'procedures_prototype' ||
+      this.type !== 'procedures_call')) &&
       this.type !== 'polygon') {
     // "Lone" field blocks are smaller.
     return Blockly.BlockSvg.MIN_BLOCK_Y_SINGLE_FIELD_OUTPUT;
@@ -1020,13 +1022,10 @@ Blockly.BlockSvg.prototype.computeRightEdge_ = function(curEdge, hasStatement) {
     edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X);
   } else if (this.outputConnection) {
     if (this.isShadow() &&
-        !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this)) {
+        !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this) &&
+        this.type !== 'polygon') {
       // Single-fields
-      if (this.type === 'polygon') {
-        edge = edge
-      } else {
-        edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
-      }
+      edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
     } else {
       // Reporters
       edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_OUTPUT);

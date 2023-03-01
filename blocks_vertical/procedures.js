@@ -45,7 +45,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
-  container.setAttribute('opType', JSON.stringify(this.outputType));
+  container.setAttribute('optype', JSON.stringify(this.outputType));
   return container;
 };
 
@@ -63,7 +63,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.warp_ = JSON.parse(xmlElement.getAttribute('warp'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
-  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
+  this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.updateDisplay_();
 };
 
@@ -89,7 +89,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('warp', JSON.stringify(this.warp_));
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
-  container.setAttribute('opType', JSON.stringify(this.outputType));
+  container.setAttribute('optype', JSON.stringify(this.outputType));
   return container;
 };
 
@@ -110,7 +110,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.displayNames_ = JSON.parse(xmlElement.getAttribute('argumentnames'));
   this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
-  this.outputType = JSON.parse(xmlElement.getAttribute('opType'));
+  this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   if (this.updateArgumentReporterNames_) {
@@ -149,30 +149,35 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
 
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
-  // clear the blocks shape so that it doesnt get mangeld by any extensions run
-  this.setPreviousStatement(false, 'procedure')
-  this.setNextStatement(false, 'procedure')	
-  this.setOutput(false, 'procedure')
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   if (this.output_) {
-    try {
-      Blockly.Extensions.apply(`output_${ConectionType}`, this, false)
-      if (this.isDisplayOnly) throw 'your mom :trel:'
-    } catch (err) {
-      // only if this isnt a display block do we try to replicate the old behavior
-      if (!this.isDisplayOnly) this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
-      this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
-      console.warn(err)
+    this.setPreviousStatement(false)
+    this.setNextStatement(false)
+    switch (ConectionType) {
+      case 'string':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'String')
+        break
+      case 'number':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_ROUND);
+        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Number')
+        break
+      case 'boolean':
+        this.setOutputShape(Blockly.OUTPUT_SHAPE_HEXAGONAL);
+        this.setOutput(this.output_, this.isDisplayOnly ? 'procedure' : 'Boolean')
+        break
     }
   } else {
-    try {
-      Blockly.Extensions.apply(`shape_${ConectionType}`, this, false)
-      if (this.isDisplayOnly) throw 'your mom :trel:'
-    } catch (err) {
-      if (!this.isDisplayOnly) this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
-      this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
-      this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')	
-      console.warn(err)
+    this.setOutput(false)
+    switch (ConectionType) {
+      case 'statement':
+        this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+        this.setNextStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+        break
+      case 'end':
+        this.setPreviousStatement(!this.output_, this.isDisplayOnly ? 'procedure' : 'normal')
+        this.setNextStatement(false, 'procedure')
+        break
     }
   }
 
@@ -999,7 +1004,8 @@ Blockly.Blocks['procedures_declaration'] = {
 
 Blockly.Blocks['argument_reporter_boolean'] = {
   init: function() {
-    this.jsonInit({ "message0": " %1",
+    this.jsonInit({ 
+      "message0": " %1",
       "args0": [
         {
           "type": "field_label_serializable",
@@ -1014,7 +1020,8 @@ Blockly.Blocks['argument_reporter_boolean'] = {
 
 Blockly.Blocks['argument_reporter_string_number'] = {
   init: function() {
-    this.jsonInit({ "message0": " %1",
+    this.jsonInit({ 
+      "message0": " %1",
       "args0": [
         {
           "type": "field_label_serializable",

@@ -16,7 +16,6 @@
     <script src="../blocks_vertical/looks.js"></script>
     <script src="../blocks_vertical/procedures.js"></script>
     <script src="../blocks_vertical/operators.js"></script>
-    <script src="../blocks_vertical/pen.js"></script>
     <script src="../blocks_vertical/sound.js"></script>
     <script src="../blocks_vertical/sensing.js"></script>
     <script src="../blocks_vertical/data.js"></script>
@@ -51,6 +50,11 @@
         <button id="okButton" onclick="applyMutation()">ok</button>
         <button id="rndButton" onclick="removeRandomInput()">remove random input</button>
         <button id="addRndButton" onclick="addRandomInput()">add random input</button>
+        <button id="setOutputString" onclick="setOutput('string')">set output to string</button>
+        <button id="setOutputNumber" onclick="setOutput('number')">set output to number</button>
+        <button id="setOutputBoolean" onclick="setOutput('boolean')">set output to boolean</button>
+        <button id="setStatement" onclick="setStatement('statement')">set statement to normal</button>
+        <button id="setStatementEnd" onclick="setStatement('end')">set statement to end</button>
       </td>
     </tr>
   </table>
@@ -62,7 +66,7 @@
   </xml>
 
   <xml id="main_ws_blocks" style="display:none">
-    <block id="]){{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
+    <block id="]){\{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
       <statement name="custom_block">
           <shadow type="procedures_prototype" id="caller_internal">
               <mutation proccode="say %s %n times if %b" argumentnames="[&quot;something&quot;,&quot;this many&quot;,&quot;this is true&quot;]" argumentdefaults="[&quot;&quot;,1,false]" warp="false" argumentids="[&quot;a42&quot;, &quot;b23&quot;, &quot;c99&quot;]"/>
@@ -87,7 +91,7 @@
   </xml>
 
   <xml id="main_ws_blocks_simpler" style="display:none">
-    <block id="]){{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
+    <block id="]){\{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
       <statement name="custom_block">
           <shadow type="procedures_prototype" id="caller_internal">
               <mutation proccode="say %s %n times if %b" argumentnames="[&quot;something&quot;,&quot;this many&quot;,&quot;this is true&quot;]" argumentdefaults="[&quot;&quot;,1,false]" warp="false" argumentids="[&quot;a42&quot;, &quot;b23&quot;, &quot;c99&quot;]"/>
@@ -101,7 +105,7 @@
   </xml>
 
   <xml id="main_ws_blocks_simplest" style="display:none">
-    <block id="]){{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
+    <block id="]){\{Y!7N9ezN+j@Vr`8p" type="procedures_definition" x="25" y="25">
       <statement name="custom_block">
           <shadow type="procedures_prototype" id="caller_internal">
               <mutation proccode="my first function" argumentnames="[]" argumentdefaults="[]" warp="false" argumentids="[]"/>
@@ -135,6 +139,7 @@
     </category>
     <category name="Statements">
       <block type="control_forever"></block>
+      <block type="control_if"></block>
       <block type="sound_stopallsounds"></block>
       <block type="control_start_as_clone"></block>
       <block type="control_stop">
@@ -198,6 +203,20 @@
 
     function addBoolean() {
       mutationRoot.addBooleanExternal();
+    }
+
+    function addTextNumber() {
+      mutationRoot.addStringNumberExternal();
+    }
+
+    function setOutput(type) {
+      mutationRoot.setReturns(true);
+      mutationRoot.setType(type);
+    }
+
+    function setStatement(type) {
+      mutationRoot.setReturns(false);
+      mutationRoot.setType(type);
     }
 
     function addTextNumber() {

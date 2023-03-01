@@ -53,6 +53,7 @@ Blockly.Connection = function(source, type) {
         source.workspace.connectionDBList[Blockly.OPPOSITE_TYPE[type]];
     this.hidden_ = !this.db_;
   }
+  this.generator_ = false
 };
 
 /**
@@ -66,7 +67,7 @@ Blockly.Connection.REASON_CHECKS_FAILED = 4;
 Blockly.Connection.REASON_DIFFERENT_WORKSPACES = 5;
 Blockly.Connection.REASON_SHADOW_PARENT = 6;
 // Fixes #1127, but may be the wrong solution.
-Blockly.Connection.REASON_CUSTOM_PROCEDURE = 7;
+Blockly.Connection.REASON_ARGUMENT_GENERATOR = 7;
 
 /**
  * Connection this connection connects to.  Null if not connected.
@@ -295,6 +296,9 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   }
   var blockA = this.sourceBlock_;
   var blockB = target.getSourceBlock();
+  console.log(this.targetConnection, target.targetConnection)
+  this.targetConnection && console.log(this.targetConnection.sourceBlock_, Blockly.scratchBlocksUtils.isShadowArgumentReporter(this.targetConnection.sourceBlock_))
+  target.targetConnection && console.log(target.targetConnection.sourceBlock_, Blockly.scratchBlocksUtils.isShadowArgumentReporter(target.targetConnection.sourceBlock_))
   if (blockA && blockA == blockB) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {
@@ -305,6 +309,13 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
     return Blockly.Connection.REASON_CHECKS_FAILED;
   } else if (blockA.isShadow() && !blockB.isShadow() && !blockA.type === 'polygon') {
     return Blockly.Connection.REASON_SHADOW_PARENT;
+  } else if ((this.targetConnection && 
+    this.targetConnection.sourceBlock_ && 
+    Blockly.scratchBlocksUtils.isShadowArgumentReporter(this.targetConnection.sourceBlock_)) || 
+    (target.targetConnection && 
+    target.targetConnection.sourceBlock_ && 
+    Blockly.scratchBlocksUtils.isShadowArgumentReporter(target.targetConnection.sourceBlock_))) {
+    return Blockly.Connection.REASON_ARGUMENT_GENERATOR
   }
   return Blockly.Connection.CAN_CONNECT;
 };
@@ -341,8 +352,8 @@ Blockly.Connection.prototype.checkConnection_ = function(target) {
       throw msg;
     case Blockly.Connection.REASON_SHADOW_PARENT:
       throw 'Connecting non-shadow to shadow block.';
-    case Blockly.Connection.REASON_CUSTOM_PROCEDURE:
-      throw 'Trying to replace a shadow on a custom procedure definition.';
+    case Blockly.Connection.REASON_ARGUMENT_GENERATOR:
+      throw 'tried connecting a block to a generator.';
 
     default:
       throw 'Unknown connection failure: this should never happen!';
