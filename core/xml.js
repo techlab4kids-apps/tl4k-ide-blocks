@@ -758,8 +758,16 @@ Blockly.Xml.domToBlockHeadless_ = function(xmlBlock, workspace) {
           blockChild = Blockly.Xml.domToBlockHeadless_(childBlockElement,
               workspace);
           if (blockChild.outputConnection) {
+            if (input.connection.canConnectWithReason_(blockChild.outputConnection) !== Blockly.Connection.CAN_CONNECT) {
+              blockChild.dispose()
+              continue
+            }
             input.connection.connect(blockChild.outputConnection);
           } else if (blockChild.previousConnection) {
+            if (input.connection.canConnectWithReason_(blockChild.previousConnection) !== Blockly.Connection.CAN_CONNECT) {
+              blockChild.dispose()
+              continue
+            }
             input.connection.connect(blockChild.previousConnection);
           } else {
             goog.asserts.fail(

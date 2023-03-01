@@ -31,6 +31,15 @@
   </style>
 </head>
 <body>
+  <p>
+    <input type="button" value="Export to XML" onclick="toXml()">
+    &nbsp;
+    <input type="button" value="Import from XML" onclick="fromXml()" id="import">
+    <br>
+    <textarea id="importExport" style="width: 26%; height: 12em"
+      onchange="taChange();" onkeyup="taChange()"></textarea>
+  </p>
+
   <table width="100%">
     <tr>
       <td>
@@ -252,7 +261,46 @@
       definitionWorkspace.refreshToolboxSelection_()
       editorActions.style.visibility = 'hidden';
     }
-</script>
+
+    if (sessionStorage) {
+      // Restore previously displayed text.
+      var text = sessionStorage.getItem('textarea');
+      if (text) {
+        document.getElementById('importExport').value = text;
+      }
+      taChange();
+    }
+
+    function toXml() {
+      var output = document.getElementById('importExport');
+      var xml = Blockly.Xml.workspaceToDom(definitionWorkspace);
+      output.value = Blockly.Xml.domToPrettyText(xml);
+      output.focus();
+      output.select();
+      taChange();
+    }
+
+    function fromXml() {
+      var input = document.getElementById('importExport');
+      var xml = Blockly.Xml.textToDom(input.value);
+      Blockly.Xml.domToWorkspace(xml, definitionWorkspace);
+      taChange();
+    }
+
+    function taChange() {
+      var textarea = document.getElementById('importExport');
+      if (sessionStorage) {
+        sessionStorage.setItem('textarea', textarea.value)
+      }
+      var valid = true;
+      try {
+        Blockly.Xml.textToDom(textarea.value);
+      } catch (e) {
+        valid = false;
+      }
+      document.getElementById('import').disabled = !valid;
+    }
+  </script>
 
 </body>
 </html>
