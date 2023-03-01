@@ -296,9 +296,6 @@ Blockly.Connection.prototype.canConnectWithReason_ = function(target) {
   }
   var blockA = this.sourceBlock_;
   var blockB = target.getSourceBlock();
-  console.log(this.targetConnection, target.targetConnection)
-  this.targetConnection && console.log(this.targetConnection.sourceBlock_, Blockly.scratchBlocksUtils.isShadowArgumentReporter(this.targetConnection.sourceBlock_))
-  target.targetConnection && console.log(target.targetConnection.sourceBlock_, Blockly.scratchBlocksUtils.isShadowArgumentReporter(target.targetConnection.sourceBlock_))
   if (blockA && blockA == blockB) {
     return Blockly.Connection.REASON_SELF_CONNECTION;
   } else if (target.type != Blockly.OPPOSITE_TYPE[this.type]) {
