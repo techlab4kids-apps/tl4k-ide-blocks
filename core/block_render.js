@@ -1022,10 +1022,13 @@ Blockly.BlockSvg.prototype.computeRightEdge_ = function(curEdge, hasStatement) {
     edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X);
   } else if (this.outputConnection) {
     if (this.isShadow() &&
-        !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this) &&
-        this.type !== 'polygon') {
-      // Single-fields
-      edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
+        !Blockly.scratchBlocksUtils.isShadowArgumentReporter(this)) {
+      if (this.type === 'polygon') {
+        edge = edge
+      } else {
+        // Single-fields
+        edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_SHADOW_OUTPUT);
+      }
     } else {
       // Reporters
       edge = Math.max(edge, Blockly.BlockSvg.MIN_BLOCK_X_OUTPUT);
