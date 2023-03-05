@@ -347,6 +347,16 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '<shadow type="sensing_of_object_menu"></shadow>' +
       '</value>' +
     '</block>' +
+    '<block type="sensing_set_of" id="sensing_set_of">' +
+      '<value name="OBJECT">' +
+        '<shadow type="sensing_of_object_menu"></shadow>' +
+      '</value>' +
+      '<value name="VALUE">' +
+        '<shadow type="text">' +
+          '<field name="TEXT"></field>' +
+        '</shadow>' +
+      '</value>' +
+    '</block>' +
     '<block type="sensing_current" id="sensing_current"></block>' +
     '<block type="sensing_dayssince2000" id="sensing_dayssince2000"></block>' +
   '</category>' +
