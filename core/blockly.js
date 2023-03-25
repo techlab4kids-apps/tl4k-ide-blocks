@@ -504,10 +504,18 @@ Blockly.defineBlocksWithJsonArray = function(jsonArray) {
             'Block definition #' + i +
             ' in JSON array is missing a type attribute. Skipping.');
       } else {
-        if (Blockly.Blocks[typename] && (elem.extensions && !elem.extensions.includes('scratch_extension'))) {
-          console.warn(
-              'Block definition #' + i + ' in JSON array' +
-              ' overwrites prior definition of "' + typename + '".');
+        if (Blockly.Blocks[typename]) {
+          (new Promise((resolve, reject) => {
+            if (elem.extensions && elem.extensions.includes('scratch_extension')) {
+              reject()
+              return
+            }
+            resolve()
+          })).then(() => {
+            console.warn(
+                'Block definition #' + i + ' in JSON array' +
+                ' overwrites prior definition of "' + typename + '".');
+          })
         }
         Blockly.Blocks[typename] = {
           init: Blockly.jsonInitFactory_(elem)
