@@ -718,6 +718,20 @@ Blockly.Blocks["looks_stretchGetY"] = {
   }
 };
 
+Blockly.Blocks["looks_getSpriteVisible"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "visible?",
+      "extensions": [
+        "output_boolean",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
 Blockly.Blocks["looks_sayHeight"] = {
   init: function() {
     this.jsonInit({
