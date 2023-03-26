@@ -737,7 +737,6 @@ Blockly.Blocks["looks_getEffectValue"] = {
     this.jsonInit({
       "inputsInline": true,
       "category": "looks",
-      "checkboxInFlyout": true,
       "message0": "%1 effect",
       "args0": [
         {
