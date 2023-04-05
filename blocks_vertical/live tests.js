@@ -61,8 +61,8 @@ Blockly.Blocks['looks_setVertTransform'] = {
           "name": "PERCENT"
         }
       ],
-      "category": Blockly.Categories.sensing,
-      "extensions": ["colours_sensing", "shape_statement"]
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
     });
   }
 };
@@ -81,8 +81,8 @@ Blockly.Blocks['looks_setHorizTransform'] = {
           "name": "PERCENT"
         }
       ],
-      "category": Blockly.Categories.sensing,
-      "extensions": ["colours_sensing", "shape_statement"]
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
     });
   }
 };
