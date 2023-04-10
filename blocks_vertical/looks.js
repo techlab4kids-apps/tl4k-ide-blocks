@@ -608,7 +608,6 @@ Blockly.Blocks["looks_layersGetLayer"] = {
       "inputsInline": true,
       "category": "looks",
       "message0": "layer",
-      "checkboxInFlyout": true,
       "extensions": [
         "output_number",
         "colours_looks"
