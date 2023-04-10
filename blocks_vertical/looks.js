@@ -582,6 +582,41 @@ Blockly.Blocks['looks_goforwardbackwardlayers'] = {
   }
 };
 
+Blockly.Blocks["looks_layersSetLayer"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "go to layer %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "NUM"
+        }
+      ],
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks["looks_layersGetLayer"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "layer",
+      "checkboxInFlyout": true,
+      "extensions": [
+        "output_number",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
 Blockly.Blocks['looks_backdropnumbername'] = {
   /**
    * Block to report backdrop's number or name
