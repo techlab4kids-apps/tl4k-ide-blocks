@@ -595,7 +595,7 @@ Blockly.Blocks["looks_layersSetLayer"] = {
         }
       ],
       "extensions": [
-        "output_number",
+        "shape_statement",
         "colours_looks"
       ]
     });
