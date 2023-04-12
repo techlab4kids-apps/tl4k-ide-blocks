@@ -308,3 +308,23 @@ Blockly.Blocks["sound_isSoundPlaying"] = {
     });
   }
 };
+
+Blockly.Blocks['sound_getLength'] = {
+  /**
+   * pm: Block to report the length of a sound.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "length of %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
