@@ -104,6 +104,26 @@ Blockly.Blocks['sound_playuntildone'] = {
   }
 };
 
+Blockly.Blocks['sound_stop'] = {
+  /**
+   * pm: Block to stop a sound.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "stop sound %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['sound_stopallsounds'] = {
   /**
    * Block to stop all sounds
