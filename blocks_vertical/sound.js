@@ -209,6 +209,31 @@ Blockly.Blocks['sound_cleareffects'] = {
   }
 };
 
+Blockly.Blocks['sound_getEffectValue'] = {
+  /**
+   * pm: Block to report pitch effect
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 effect",
+      "category": Blockly.Categories.sound,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "EFFECT",
+          "options": [
+            [Blockly.Msg.SOUND_EFFECTS_PITCH, 'PITCH'],
+            [Blockly.Msg.SOUND_EFFECTS_PAN, 'PAN']
+          ]
+        }
+      ],
+      "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
+
 Blockly.Blocks['sound_changevolumeby'] = {
   /**
    * Block to change the sprite's volume by a certain value
@@ -260,6 +285,26 @@ Blockly.Blocks['sound_volume'] = {
       "category": Blockly.Categories.sound,
       "checkboxInFlyout": true,
       "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks["sound_isSoundPlaying"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": Blockly.Categories.sound,
+      "message0": "is %1 playing?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "extensions": [
+        "output_boolean",
+        "colours_sounds"
+      ]
     });
   }
 };
