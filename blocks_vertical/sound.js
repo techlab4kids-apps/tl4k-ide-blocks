@@ -211,7 +211,7 @@ Blockly.Blocks['sound_cleareffects'] = {
 
 Blockly.Blocks['sound_getEffectValue'] = {
   /**
-   * pm: Block to report pitch effect
+   * pm: Block to report sound effect values
    * @this Blockly.Block
    */
   init: function() {
