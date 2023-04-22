@@ -48,6 +48,30 @@ Blockly.Blocks['sensing_touchingobject'] = {
   }
 };
 
+Blockly.Blocks['sensing_objecttouchingobject'] = {
+  /**
+   * pm" Block to Report if an Object is touching another Object.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 touching %2?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "FULLTOUCHINGOBJECTMENU"
+        },
+        {
+          "type": "input_value",
+          "name": "SPRITETOUCHINGOBJECTMENU"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
 Blockly.Blocks['sensing_touchingobjectmenu'] = {
   /**
    * "Touching [Object]" Block Menu.
@@ -63,6 +87,52 @@ Blockly.Blocks['sensing_touchingobjectmenu'] = {
           "options": [
             [Blockly.Msg.SENSING_TOUCHINGOBJECT_POINTER, '_mouse_'],
             [Blockly.Msg.SENSING_TOUCHINGOBJECT_EDGE, '_edge_']
+          ]
+        }
+      ],
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_fulltouchingobjectmenu'] = {
+  /**
+   * pm: "Touching [Object]" Block Menu with more options.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "FULLTOUCHINGOBJECTMENU",
+          "options": [
+            ["mouse-pointer", '_mouse_'],
+            ["edge", '_edge_'],
+            ["this sprite", '_myself_']
+          ]
+        }
+      ],
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_touchingobjectmenusprites'] = {
+  /**
+   * pm: "Touching [Object]" Block Menu with sprite options.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "SPRITETOUCHINGOBJECTMENU",
+          "options": [
+            ["this sprite", '_myself_']
           ]
         }
       ],
