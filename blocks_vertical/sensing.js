@@ -212,6 +212,69 @@ Blockly.Blocks['sensing_keypressed'] = {
   }
 };
 
+Blockly.Blocks['sensing_keyhit'] = {
+  /**
+   * pm: Block to Report if a key is hit on the same tick.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "key %1 hit?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "KEY_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_mousescrolling'] = {
+  /**
+   * pm: Block to report if the mouse is scrolling in a direction.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "is mouse scrolling %1?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SCROLL_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_scrolldirections'] = {
+  /**
+   * pm: Options for scroll direction
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "SCROLL_OPTION",
+          "options": [
+            ['up', 'up'],
+            ['down', 'down']
+          ]
+        }
+      ],
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
 Blockly.Blocks['sensing_keyoptions'] = {
   /**
    * Options for Keys
@@ -283,6 +346,20 @@ Blockly.Blocks['sensing_mousedown'] = {
   init: function() {
     this.jsonInit({
       "message0": Blockly.Msg.SENSING_MOUSEDOWN,
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_mouseclicked'] = {
+  /**
+   * pm: Block to Report if the mouse is clicked on the same tick.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "mouse clicked?",
       "category": Blockly.Categories.sensing,
       "extensions": ["colours_sensing", "output_boolean"]
     });
@@ -568,6 +645,40 @@ Blockly.Blocks["sensing_thing_is_number"] = {
     this.jsonInit({
       "inputsInline": true,
       "message0": "%1 is number?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_thing_has_text"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 has text?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "TEXT1"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["sensing_thing_has_number"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 has number?",
       "args0": [
         {
           "type": "input_value",

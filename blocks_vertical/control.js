@@ -274,6 +274,32 @@ Blockly.Blocks['control_wait'] = {
   }
 };
 
+Blockly.Blocks['control_waitsecondsoruntil'] = {
+  /**
+   * pm: Block to wait (pause) stack for a specified amount of seconds, or until a condition is met.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_waitsecondsoruntil",
+      "message0": "wait %1 seconds or until %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "DURATION"
+        },
+        {
+          "type": "input_value",
+          "name": "CONDITION",
+          "check": "Boolean"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['control_wait_until'] = {
   /**
    * Block to wait until a condition becomes true.
@@ -459,6 +485,27 @@ Blockly.Blocks['control_create_clone_of'] = {
     this.jsonInit({
       "id": "control_start_as_clone",
       "message0": Blockly.Msg.CONTROL_CREATECLONEOF,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CLONE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_delete_clones_of'] = {
+  /**
+   * pm: Block for "delete clones of..."
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_delete_clones_of",
+      "message0": "delete clones of %1",
       "args0": [
         {
           "type": "input_value",

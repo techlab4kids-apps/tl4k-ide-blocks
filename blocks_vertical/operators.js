@@ -592,7 +592,19 @@ Blockly.Blocks["operator_newLine"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "newline",
+      "message0": "new line",
+      "args0": [],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_tabCharacter"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "tab character",
       "args0": [],
       "category": Blockly.Categories.operators,
       "extensions": ["colours_operators", "output_string"]
@@ -604,7 +616,58 @@ Blockly.Blocks["operator_stringify"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 as string",
+      "message0": "%1 as text",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_boolify"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "%1 as question",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_character_to_code"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "character %1 to id",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ONE"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_code_to_character"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "id %1 to character",
       "args0": [
         {
           "type": "input_value",
