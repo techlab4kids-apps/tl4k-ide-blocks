@@ -300,6 +300,22 @@ Blockly.Blocks['control_waitsecondsoruntil'] = {
   }
 };
 
+Blockly.Blocks['control_waittick'] = {
+  /**
+   * pm: Block to wait (pause) stack until the next runtime tick.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_waittick",
+      "message0": "wait until next tick",
+      "args0": [],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['control_wait_until'] = {
   /**
    * Block to wait until a condition becomes true.
