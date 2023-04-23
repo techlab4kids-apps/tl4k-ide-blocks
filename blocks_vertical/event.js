@@ -424,7 +424,7 @@ Blockly.Blocks['event_whenmousescrolled'] = {
   init: function () {
     this.jsonInit({
       "id": "event_whenmousescrolled",
-      "message0": "when mouse is scrolled %1 do",
+      "message0": "when mouse is scrolled %1",
       "args0": [
         {
           "type": "field_dropdown",
