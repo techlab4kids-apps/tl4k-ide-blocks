@@ -552,8 +552,7 @@ Blockly.Blocks['control_delete_this_clone'] = {
 
 Blockly.Blocks['control_get_counter'] = {
   /**
-   * Block to get the counter value. This is an obsolete block that is
-   * implemented for compatibility with Scratch 2.0 projects.
+   * pm: Block to get the counter value.
    * @this Blockly.Block
    */
   init: function() {
@@ -568,8 +567,7 @@ Blockly.Blocks['control_get_counter'] = {
 
 Blockly.Blocks['control_incr_counter'] = {
   /**
-   * Block to add one to the counter value. This is an obsolete block that is
-   * implemented for compatibility with Scratch 2.0 projects.
+   * pm: Block to add one to the counter value.
    * @this Blockly.Block
    */
   init: function() {
@@ -581,10 +579,43 @@ Blockly.Blocks['control_incr_counter'] = {
   }
 };
 
+Blockly.Blocks['control_decr_counter'] = {
+  /**
+   * pm: Block to subtract one from the counter value.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "decrement counter",
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_set_counter'] = {
+  /**
+   * pm: Block to set the counter value.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "set counter to %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['control_clear_counter'] = {
   /**
-   * Block to clear the counter value. This is an obsolete block that is
-   * implemented for compatibility with Scratch 2.0 projects.
+   * pm: Block to clear the counter value.
    * @this Blockly.Block
    */
   init: function() {
