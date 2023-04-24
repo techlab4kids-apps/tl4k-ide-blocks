@@ -560,6 +560,7 @@ Blockly.Blocks['control_get_counter'] = {
     this.jsonInit({
       "message0": Blockly.Msg.CONTROL_COUNTER,
       "category": Blockly.Categories.control,
+      "checkboxInFlyout": true,
       "extensions": ["colours_control", "output_number"]
     });
   }
