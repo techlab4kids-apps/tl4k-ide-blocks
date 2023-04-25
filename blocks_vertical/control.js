@@ -380,8 +380,7 @@ Blockly.Blocks['control_repeat_until'] = {
 
 Blockly.Blocks['control_while'] = {
   /**
-   * Block to repeat until a condition becomes false.
-   * (This is an obsolete "hacked" block, for compatibility with 2.0.)
+   * pm: Block to repeat until a condition becomes false.
    */
   init: function() {
     this.jsonInit({
@@ -421,8 +420,7 @@ Blockly.Blocks['control_while'] = {
 
 Blockly.Blocks['control_for_each'] = {
   /**
-   * Block for for-each. This is an obsolete block that is implemented for
-   * compatibility with Scratch 2.0 projects.
+   * pm: Block for for-each loops.
    * @this Blockly.Block
    */
   init: function() {
@@ -546,6 +544,95 @@ Blockly.Blocks['control_delete_this_clone'] = {
       ],
       "category": Blockly.Categories.control,
       "extensions": ["colours_control", "shape_end"]
+    });
+  }
+};
+
+Blockly.Blocks['control_stop_sprite_menu'] = {
+  /**
+   * pm: Stop-sprite drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "STOP_OPTION",
+          "options": [
+            ["stage", '_stage_']
+          ]
+        }
+      ],
+      "extensions": ["colours_control", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['control_stop_sprite'] = {
+  /**
+   * pm: Block for "stop (...)"
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "id": "control_stop_sprite",
+      "message0": "stop %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "STOP_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['control_run_as_sprite_menu'] = {
+  /**
+   * pm: Run-as-sprite drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "RUN_AS_OPTION",
+          "options": [
+            ["Stage", '_stage_']
+          ]
+        }
+      ],
+      "extensions": ["colours_control", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['control_run_as_sprite'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": 'as %1',
+      "message1": "%1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "RUN_AS_OPTION"
+        }
+      ],
+      "args1": [
+        {
+          "type": "input_statement",
+          "check": 'normal',
+          "name": "SUBSTACK"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
     });
   }
 };

@@ -222,6 +222,58 @@ Blockly.Blocks['looks_hide'] = {
   }
 };
 
+
+Blockly.Blocks['looks_changeVisibilityOfSprite_menu'] = {
+  /**
+   * pm: changeVisibilityOfSprite drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_OPTION",
+          "options": [
+            ["myself", '_myself_']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_changeVisibilityOfSprite'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 %2",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_TYPE",
+          "options": [
+            ["show", "show"],
+            ["hide", "hide"]
+          ]
+        },
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_hideallsprites'] = {
   /**
    * Hide-all-sprites block. Does not actually do anything. This is an
@@ -492,6 +544,20 @@ Blockly.Blocks['looks_nextcostume'] = {
   }
 };
 
+Blockly.Blocks['looks_previouscostume'] = {
+  /**
+   * pm: Block to switch the sprite's costume to the previous one.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "previous costume",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_switchbackdropto'] = {
   /**
    * Block to switch the backdrop to the selected one.
@@ -708,6 +774,20 @@ Blockly.Blocks['looks_nextbackdrop'] = {
   }
 };
 
+Blockly.Blocks['looks_previousbackdrop'] = {
+  /**
+   * pm: Block to switch the backdrop to the previous one.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "previous backdrop",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks["looks_setStretch"] = {
   init: function() {
     this.jsonInit({
@@ -766,6 +846,48 @@ Blockly.Blocks["looks_getSpriteVisible"] = {
       "inputsInline": true,
       "category": "looks",
       "message0": "visible?",
+      "extensions": [
+        "output_boolean",
+        "colours_looks"
+      ]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getOtherSpriteVisible_menu'] = {
+  /**
+   * pm: Sprite-visible drop-down menu.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "VISIBLE_OPTION",
+          "options": [
+            ["myself", '_myself_']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["looks_getOtherSpriteVisible"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "category": "looks",
+      "message0": "is %1 visible?",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
       "extensions": [
         "output_boolean",
         "colours_looks"
