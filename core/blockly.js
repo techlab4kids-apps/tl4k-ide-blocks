@@ -146,7 +146,7 @@ goog.constrain = function(number, min, max) {
 goog.color.hsvaToHex = function(hue, saturation, value, alpha) {
   var hex = goog.color.hsvToHex(hue, saturation, value)
   var alpha = goog.constrain(Math.floor(alpha * 255), 0, 255).toString(16)
-  if (alpha.length < 2) alpha = '0' + alpha
+  if (alpha.length === 1) alpha = '0' + alpha
   console.log('set', alpha)
   return hex + alpha
 }
