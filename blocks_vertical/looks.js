@@ -274,6 +274,48 @@ Blockly.Blocks['looks_changeVisibilityOfSprite'] = {
   }
 };
 
+Blockly.Blocks['looks_changeVisibilityOfSpriteShow'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "show %1",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_changeVisibilityOfSpriteHide'] = {
+  /**
+   * pm: changeVisibilityOfSprite block.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "hide %1",
+      "inputsInline": true,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VISIBLE_OPTION"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_hideallsprites'] = {
   /**
    * Hide-all-sprites block. Does not actually do anything. This is an
