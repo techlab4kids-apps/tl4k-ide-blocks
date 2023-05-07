@@ -320,12 +320,87 @@ Blockly.Blocks['operator_and'] = {
 
 Blockly.Blocks['operator_nand'] = {
   /**
-   * Block for "nand" boolean comparator.
+   * pm: Block for "nand" boolean comparator.
    * @this Blockly.Block
    */
   init: function() {
     this.jsonInit({
       "message0": "%1 nand %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "OPERAND1",
+          "check": "Boolean"
+        },
+        {
+          "type": "input_value",
+          "name": "OPERAND2",
+          "check": "Boolean"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+Blockly.Blocks['operator_nor'] = {
+  /**
+   * pm: Block for "nor" boolean comparator.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 nor %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "OPERAND1",
+          "check": "Boolean"
+        },
+        {
+          "type": "input_value",
+          "name": "OPERAND2",
+          "check": "Boolean"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+Blockly.Blocks['operator_xor'] = {
+  /**
+   * pm: Block for "xor" boolean comparator.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 xor %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "OPERAND1",
+          "check": "Boolean"
+        },
+        {
+          "type": "input_value",
+          "name": "OPERAND2",
+          "check": "Boolean"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
+Blockly.Blocks['operator_xnor'] = {
+  /**
+   * pm: Block for "nor" boolean comparator.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1 xnor %2",
       "args0": [
         {
           "type": "input_value",
