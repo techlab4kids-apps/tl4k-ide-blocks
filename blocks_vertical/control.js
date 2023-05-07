@@ -897,3 +897,23 @@ Blockly.Blocks['control_exitCase'] = {
     });
   }
 };
+
+Blockly.Blocks['control_javascript_command'] = {
+  /**
+   * pm: Block to run javascript code.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};

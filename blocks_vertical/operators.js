@@ -1058,3 +1058,37 @@ Blockly.Blocks["operator_toUpperLowerCase"] = {
     });
   }
 };
+
+Blockly.Blocks["operator_javascript_output"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks["operator_javascript_boolean"] = {
+  init: function () {
+    this.jsonInit({
+      "inputsInline": true,
+      "message0": "javascript %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "JS"
+        }
+      ],
+      "category": Blockly.Categories.operators,
+      "extensions": ["colours_operators", "output_boolean"]
+    });
+  }
+};
