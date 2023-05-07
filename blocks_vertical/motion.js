@@ -801,7 +801,7 @@ Blockly.Blocks['motion_move_sprite_to_scene_side'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "move to scene %1",
+      "message0": "move to stage %1",
       "args0": [
         {
           "type": "field_dropdown",
