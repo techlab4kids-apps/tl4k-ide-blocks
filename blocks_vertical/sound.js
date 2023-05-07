@@ -138,6 +138,20 @@ Blockly.Blocks['sound_stopallsounds'] = {
   }
 };
 
+Blockly.Blocks['sound_playallsounds'] = {
+  /**
+   * pm: Block to play all sounds
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "play all sounds",
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['sound_seteffectto'] = {
   /**
    * Block to set the audio effect
