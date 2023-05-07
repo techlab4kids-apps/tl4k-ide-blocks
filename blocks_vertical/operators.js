@@ -767,7 +767,7 @@ Blockly.Blocks["operator_stringify"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 as text",
+      "message0": "%1",
       "args0": [
         {
           "type": "input_value",
@@ -784,7 +784,7 @@ Blockly.Blocks["operator_boolify"] = {
   init: function () {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "%1 as question",
+      "message0": "%1",
       "args0": [
         {
           "type": "input_value",
