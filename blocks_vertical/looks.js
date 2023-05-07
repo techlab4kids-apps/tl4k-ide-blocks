@@ -956,3 +956,17 @@ Blockly.Blocks["looks_sayWidth"] = {
     });
   }
 };
+
+Blockly.Blocks['looks_stoptalking'] = {
+  /**
+   * pm: Block to stop talking/thinking.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "stop speaking",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};

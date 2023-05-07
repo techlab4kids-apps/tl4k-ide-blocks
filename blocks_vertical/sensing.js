@@ -1038,3 +1038,45 @@ Blockly.Blocks['sensing_isUpperCase'] = {
     });
   }
 };
+
+Blockly.Blocks['sensing_getoperatingsystem'] = {
+  /**
+   * pm: Block to report the users Operating System
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "operating system",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_getbrowser'] = {
+  /**
+   * pm: Block to report the users Operating System
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "browser",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_geturl'] = {
+  /**
+   * pm: Block to report the users Operating System
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "url",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
