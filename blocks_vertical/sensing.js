@@ -570,6 +570,40 @@ Blockly.Blocks['sensing_fingery'] = {
   }
 };
 
+Blockly.Blocks['sensing_setclipboard'] = {
+  /**
+   * pm: Block to add an item to the Clipboard
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "add %1 to clipboard",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "ITEM"
+        }
+      ],
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_getclipboard'] = {
+  /**
+   * pm: Block to report the current item in the Clipboard
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "clipboard item",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_string"]
+    });
+  }
+};
+
 Blockly.Blocks['sensing_setdragmode'] = {
   /**
    * Block to set drag mode.
@@ -590,6 +624,20 @@ Blockly.Blocks['sensing_setdragmode'] = {
       ],
       "category": Blockly.Categories.sensing,
       "extensions": ["colours_sensing", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sensing_getdragmode'] = {
+  /**
+   * pm: Block to report drag mode.
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "draggable?",
+      "category": Blockly.Categories.sensing,
+      "extensions": ["colours_sensing", "output_boolean"]
     });
   }
 };
