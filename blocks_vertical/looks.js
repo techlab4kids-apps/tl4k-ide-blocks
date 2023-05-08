@@ -1012,3 +1012,54 @@ Blockly.Blocks['looks_stoptalking'] = {
     });
   }
 };
+
+Blockly.Blocks['looks_getinputofcostume'] = {
+  /**
+   * pm: Block to report an attribute on a costume
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "%1 of %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "INPUT"
+        },
+        {
+          "type": "input_value",
+          "name": "COSTUME"
+        },
+      ],
+      "category": Blockly.Categories.looks,
+      "inputsInline": true,
+      "extensions": ["colours_looks", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['looks_getinput_menu'] = {
+  /**
+   * pm: List of options for the first input of looks_getinputofcostume.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_dropdown",
+          "name": "INPUT",
+          "options": [
+            ['width', 'width'],
+            ['height', 'height'],
+            ['rotation center x', 'rotation center x'],
+            ['rotation center y', 'rotation center y'],
+            ['drawing mode', 'drawing mode']
+          ]
+        }
+      ],
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
