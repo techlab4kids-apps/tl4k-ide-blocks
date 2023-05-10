@@ -124,6 +124,101 @@ Blockly.Blocks['sound_stop'] = {
   }
 };
 
+Blockly.Blocks['sound_pause'] = {
+  /**
+   * pm: Block to pause a sound.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "pause sound %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_set_stop_fadeout_to'] = {
+  /**
+   * pm: Block to set the fadeout time on a sound.
+   * The fadeout time is used when the sound is stopped in any way.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "set fade out to %1 seconds on %2",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        },
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_play_at_seconds'] = {
+  /**
+   * pm: Block to start a sound at a specific time position.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "start sound %1 at %2 seconds",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        },
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_play_at_seconds_until_done'] = {
+  /**
+   * pm: Block to start a sound at a specific time position.
+   * This block will wait until the sound is actually finished
+   * before continuing the stack.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "play sound %1 starting at %2 seconds until done",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "VALUE"
+        },
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['sound_stopallsounds'] = {
   /**
    * Block to stop all sounds
@@ -132,6 +227,20 @@ Blockly.Blocks['sound_stopallsounds'] = {
   init: function() {
     this.jsonInit({
       "message0": Blockly.Msg.SOUND_STOPALLSOUNDS,
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "shape_statement"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_pauseallsounds'] = {
+  /**
+   * pm: Block to pause all sounds
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": "pause all sounds",
       "category": Blockly.Categories.sound,
       "extensions": ["colours_sounds", "shape_statement"]
     });
@@ -331,6 +440,46 @@ Blockly.Blocks['sound_getLength'] = {
   init: function() {
     this.jsonInit({
       "message0": "length of %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_getTimePosition'] = {
+  /**
+   * pm: Block to report the current time position of a sound.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "current time position of %1",
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "SOUND_MENU"
+        }
+      ],
+      "category": Blockly.Categories.sound,
+      "extensions": ["colours_sounds", "output_number"]
+    });
+  }
+};
+
+Blockly.Blocks['sound_getSoundVolume'] = {
+  /**
+   * pm: Block to report the volume of a sound at the current position.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "current volume of %1",
       "args0": [
         {
           "type": "input_value",
