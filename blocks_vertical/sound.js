@@ -180,11 +180,11 @@ Blockly.Blocks['sound_play_at_seconds'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "VALUE"
+          "name": "SOUND_MENU"
         },
         {
           "type": "input_value",
-          "name": "SOUND_MENU"
+          "name": "VALUE"
         }
       ],
       "category": Blockly.Categories.sound,
@@ -206,11 +206,11 @@ Blockly.Blocks['sound_play_at_seconds_until_done'] = {
       "args0": [
         {
           "type": "input_value",
-          "name": "VALUE"
+          "name": "SOUND_MENU"
         },
         {
           "type": "input_value",
-          "name": "SOUND_MENU"
+          "name": "VALUE"
         }
       ],
       "category": Blockly.Categories.sound,
