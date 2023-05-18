@@ -64,6 +64,8 @@
         <button id="setOutputBoolean" onclick="setOutput('boolean')">set output to boolean</button>
         <button id="setStatement" onclick="setStatement('statement')">set statement to normal</button>
         <button id="setStatementEnd" onclick="setStatement('end')">set statement to end</button>
+        <input type="file" id="customIcon" onchange="changeIcon()" accept=".svg, .png, .bmp, .jpg, .jpeg, .jfif, .webp, .gif"/>
+        <button id="removeIcon" onclick="removeIcon()">remove icon</button>
       </td>
     </tr>
   </table>
@@ -230,6 +232,21 @@
 
     function addTextNumber() {
       mutationRoot.addStringNumberExternal();
+    }
+
+    function changeIcon() {
+      var fileReader = new FileReader();
+      fileReader.onload = e => {
+        mutationRoot.setImage(e.target.result);
+      };
+      var fileElement = document.getElementById('customIcon')
+      var file = fileElement.files[0]
+      fileReader.readAsDataURL(file)
+      fileElement.value = null
+    }
+
+    function removeIcon() {
+      mutationRoot.unsetImage()
     }
 
     function removeRandomInput() {

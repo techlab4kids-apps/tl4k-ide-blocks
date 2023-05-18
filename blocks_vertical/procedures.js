@@ -46,6 +46,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
+  container.innerText = this.image;
   return container;
 };
 
@@ -64,6 +65,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
+  this.image = xmlElement.innerText;
   this.updateDisplay_();
 };
 
@@ -90,6 +92,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
+  container.innerText = this.image;
   return container;
 };
 
@@ -113,6 +116,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
+  this.image = xmlElement.innerText;
   if (this.updateArgumentReporterNames_) {
     this.updateArgumentReporterNames_(prevArgIds, prevDisplayNames);
   }
@@ -237,6 +241,16 @@ Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_ = function() {
   this.inputList = [];
 };
 
+Blockly.ScratchBlocks.ProcedureUtils.createIcon_ = function() {
+  if (this.image.startsWith('data:') || this.image.startsWith('http')) {
+    const iconField = new Blockly.FieldImage(this.image, 40, 40);
+    const separatorField = new Blockly.FieldVerticalSeparator();
+    this.appendDummyInput()
+      .appendField(iconField)
+      .appendField(separatorField);
+  }
+};
+
 /**
  * Create all inputs specified by the new procCode, and populate them with
  * shadow blocks or reconnected old blocks as appropriate.
@@ -246,6 +260,7 @@ Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_ = function() {
  * @this Blockly.Block
  */
 Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) {
+  this.createIcon_()
   // Split the proc into components, by %n, %b, and %s (ignoring escaped).
   var procComponents = this.procCode_.split(/(?=[^\\]%[nbs])/);
   procComponents = procComponents.map(function(c) {
@@ -722,6 +737,16 @@ Blockly.ScratchBlocks.ProcedureUtils.setType = function(type) {
   this.updateDisplay_();
 }
 
+Blockly.ScratchBlocks.ProcedureUtils.setImage = function(image) {
+  this.image = image
+  this.updateDisplay_();
+}
+
+Blockly.ScratchBlocks.ProcedureUtils.unsetImage = function() {
+  this.image = ''
+  this.updateDisplay_();
+}
+
 /**
  * Externally-visible function to set the warp on procedure declaration.
  * @param {boolean} warp The value of the warp_ property.
@@ -888,12 +913,14 @@ Blockly.Blocks['procedures_call'] = {
     this.isDisplayOnly = false
     this.edited = false
     this.outputType = 'statement'
+    this.image = ''
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
   removeAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_,
   disconnectOldBlocks_: Blockly.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
   deleteShadows_: Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_,
+  createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
 
@@ -929,12 +956,14 @@ Blockly.Blocks['procedures_prototype'] = {
     this.isDisplayOnly = true
     this.edited = false
     this.outputType = 'statement'
+    this.image = ''
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
   removeAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_,
   disconnectOldBlocks_: Blockly.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
   deleteShadows_: Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_,
+  createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
 
@@ -968,12 +997,14 @@ Blockly.Blocks['procedures_declaration'] = {
     this.isDisplayOnly = true
     this.edited = false
     this.outputType = 'statement'
+    this.image = ''
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
   removeAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_,
   disconnectOldBlocks_: Blockly.ScratchBlocks.ProcedureUtils.disconnectOldBlocks_,
   deleteShadows_: Blockly.ScratchBlocks.ProcedureUtils.deleteShadows_,
+  createIcon_: Blockly.ScratchBlocks.ProcedureUtils.createIcon_,
   createAllInputs_: Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_,
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_,
 
@@ -996,6 +1027,8 @@ Blockly.Blocks['procedures_declaration'] = {
   getEdited: Blockly.ScratchBlocks.ProcedureUtils.getEdited,
   setEdited: Blockly.ScratchBlocks.ProcedureUtils.setEdited,
   setType: Blockly.ScratchBlocks.ProcedureUtils.setType,
+  setImage: Blockly.ScratchBlocks.ProcedureUtils.setImage,
+  unsetImage: Blockly.ScratchBlocks.ProcedureUtils.unsetImage,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
