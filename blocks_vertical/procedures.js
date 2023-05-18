@@ -242,6 +242,7 @@ Blockly.ScratchBlocks.ProcedureUtils.removeAllInputs_ = function() {
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.createIcon_ = function() {
+  if (!this.image) return
   if (this.image.startsWith('data:') || this.image.startsWith('http')) {
     const iconField = new Blockly.FieldImage(this.image, 40, 40);
     const separatorField = new Blockly.FieldVerticalSeparator();
