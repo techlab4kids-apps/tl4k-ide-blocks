@@ -66,6 +66,10 @@
         <button id="setStatementEnd" onclick="setStatement('end')">set statement to end</button>
         <input type="file" id="customIcon" onchange="changeIcon()" accept=".svg, .png, .bmp, .jpg, .jpeg, .jfif, .webp, .gif"/>
         <button id="removeIcon" onclick="removeIcon()">remove icon</button>
+        <input type="color" id="blockColorPrimary" onchange="setColor()">
+        <input type="color" id="blockColorSecondary" onchange="setColor()">
+        <input type="color" id="blockColorTertiary" onchange="setColor()">
+        <button id="removeIcon" onclick="removeColor()">reset color</button>
       </td>
     </tr>
   </table>
@@ -188,6 +192,9 @@
         definitionWorkspace);
 
     Blockly.Procedures.externalProcedureDefCallback = function (mutation, cb) {
+      var primary = document.getElementById('blockColorPrimary')
+      var secondary = document.getElementById('blockColorSecondary')
+      var tertiary = document.getElementById('blockColorTertiary')
       editorActions.style.visibility = 'visible';
       callback = cb;
       declarationWorkspace.clear();
@@ -195,6 +202,10 @@
       mutationRoot.domToMutation(mutation);
       mutationRoot.initSvg();
       mutationRoot.render(false);
+      var color = mutationRoot.color
+      primary.value = color.primary
+      secondary.value = color.secondary
+      tertiary.value = color.tertiary
     }
 
     function applyMutation() {
@@ -247,6 +258,17 @@
 
     function removeIcon() {
       mutationRoot.unsetImage()
+    }
+
+    function setColor() {
+      var primary = document.getElementById('blockColorPrimary').value
+      var secondary = document.getElementById('blockColorSecondary').value
+      var tertiary = document.getElementById('blockColorTertiary').value
+      mutationRoot.setColor(primary, secondary, tertiary)
+    }
+
+    function removeColor() {
+      mutationRoot.removeColor()
     }
 
     function removeRandomInput() {

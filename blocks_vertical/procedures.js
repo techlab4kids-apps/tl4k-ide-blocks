@@ -46,6 +46,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerMutationToDom = function() {
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
+  container.setAttribute('color', JSON.stringify(this.color));
   container.innerText = this.image;
   return container;
 };
@@ -65,6 +66,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
+  this.color = JSON.parse(xmlElement.getAttribute('color'));
   this.image = xmlElement.innerText;
   this.updateDisplay_();
 };
@@ -92,6 +94,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionMutationToDom = function(
   container.setAttribute('returns', JSON.stringify(this.output_));
   container.setAttribute('edited', JSON.stringify(this.edited));
   container.setAttribute('optype', JSON.stringify(this.outputType));
+  container.setAttribute('color', JSON.stringify(this.color));
   container.innerText = this.image;
   return container;
 };
@@ -116,6 +119,8 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
+  this.image = xmlElement.innerText;
+  this.color = JSON.parse(xmlElement.getAttribute('color'));
   this.image = xmlElement.innerText;
   if (this.updateArgumentReporterNames_) {
     this.updateArgumentReporterNames_(prevArgIds, prevDisplayNames);
@@ -154,6 +159,7 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+  if (this.color) this.setColour(this.color.primary, this.color.secondary, this.color.tertiary)
   if (this.output_) {
     this.setPreviousStatement(false)
     this.setNextStatement(false)
@@ -748,6 +754,20 @@ Blockly.ScratchBlocks.ProcedureUtils.unsetImage = function() {
   this.updateDisplay_();
 }
 
+Blockly.ScratchBlocks.ProcedureUtils.setColor = function(primary, secondary, tertiary) {
+  this.color = {
+    primary,
+    secondary,
+    tertiary
+  }
+  this.updateDisplay_();
+}
+
+Blockly.ScratchBlocks.ProcedureUtils.removeColor = function() {
+  this.color = Blockly.Colours.more
+  this.updateDisplay_();
+}
+
 /**
  * Externally-visible function to set the warp on procedure declaration.
  * @param {boolean} warp The value of the warp_ property.
@@ -915,6 +935,7 @@ Blockly.Blocks['procedures_call'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
+    this.color = Blockly.Colours.more
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -958,6 +979,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
+    this.color = Blockly.Colours.more
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -999,6 +1021,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
+    this.color = Blockly.Colours.more
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -1030,6 +1053,8 @@ Blockly.Blocks['procedures_declaration'] = {
   setType: Blockly.ScratchBlocks.ProcedureUtils.setType,
   setImage: Blockly.ScratchBlocks.ProcedureUtils.setImage,
   unsetImage: Blockly.ScratchBlocks.ProcedureUtils.unsetImage,
+  setColor: Blockly.ScratchBlocks.ProcedureUtils.setColor,
+  removeColor: Blockly.ScratchBlocks.ProcedureUtils.removeColor,
   addLabelExternal: Blockly.ScratchBlocks.ProcedureUtils.addLabelExternal,
   addBooleanExternal: Blockly.ScratchBlocks.ProcedureUtils.addBooleanExternal,
   addStringNumberExternal: Blockly.ScratchBlocks.ProcedureUtils.addStringNumberExternal,
