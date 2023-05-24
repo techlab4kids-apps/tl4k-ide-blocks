@@ -159,15 +159,20 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
+  
   if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   this.setColour(...this.color)
   if (
       this.outputConnection && 
       this.outputConnection.targetConnection && 
-      this.outputConnection.targetConnection.parentBlock_ &&
-      (this.outputConnection.targetConnection.parentBlock_.type === 'procedures_definition' ||
-      this.outputConnection.targetConnection.parentBlock_.type === 'procedures_definition_return')) {
-    this.outputConnection.targetConnection.parentBlock_.setColour(...this.color)
+      this.outputConnection.targetConnection.sourceBlock_.type === 'procedures_definition_return') {
+    this.outputConnection.targetConnection.sourceBlock_.setColour(...this.color)
+  }
+  if (
+      this.previousConnection && 
+      this.previousConnection.targetConnection && 
+      this.previousConnection.targetConnection.sourceBlock_.type === 'procedures_definition') {
+    this.previousConnection.targetConnection.sourceBlock_.setColour(...this.color)
   }
   if (this.output_) {
     this.setPreviousStatement(false)
@@ -443,6 +448,8 @@ Blockly.ScratchBlocks.ProcedureUtils.createArgumentReporter_ = function(
     var newBlock = this.workspace.newBlock(blockType);
     newBlock.setShadow(true);
     newBlock.setFieldValue(displayName, 'VALUE');
+    newBlock.color = this.color
+    newBlock.setColour(...this.color)
     if (!this.isInsertionMarker()) {
       newBlock.initSvg();
       newBlock.render(false);
@@ -883,6 +890,21 @@ Blockly.ScratchBlocks.ProcedureUtils.updateArgumentReporterNames_ = function(pre
   }
 };
 
+Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom = function() {
+  var dom = document.createElement('mutation');
+  dom.setAttribute('color', JSON.stringify(this.color))
+  return dom
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation = function(dom) {
+  this.color = JSON.parse(dom.getAttribute('color'))
+  this.updateDisplay_()
+};
+
+Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay = function(dom) {
+  this.setColour(...this.color)
+};
+
 Blockly.Blocks['procedures_definition'] = {
   /**
    * Block for defining a procedure with no return value.
@@ -1077,9 +1099,12 @@ Blockly.Blocks['argument_reporter_boolean'] = {
           "text": ""
         }
       ],
-      "extensions": ["colours_more", "output_boolean"]
+      "extensions": ["output_boolean"]
     });
-  }
+  },
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
 };
 
 Blockly.Blocks['argument_reporter_string_number'] = {
@@ -1093,9 +1118,12 @@ Blockly.Blocks['argument_reporter_string_number'] = {
           "text": ""
         }
       ],
-      "extensions": ["colours_more", "output_number", "output_string"]
+      "extensions": ["output_number", "output_string"]
     });
-  }
+  },
+  updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
+  mutationToDom: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom,
+  domToMutation: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation
 };
 
 Blockly.Blocks['argument_editor_boolean'] = {
