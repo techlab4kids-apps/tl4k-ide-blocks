@@ -1112,7 +1112,7 @@ Blockly.Blocks['argument_reporter_boolean'] = {
           "text": ""
         }
       ],
-      "extensions": ["output_boolean"]
+      "extensions": ["colours_more", "output_boolean"]
     });
   },
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
@@ -1131,7 +1131,7 @@ Blockly.Blocks['argument_reporter_string_number'] = {
           "text": ""
         }
       ],
-      "extensions": ["output_number", "output_string"]
+      "extensions": ["colours_more", "output_number", "output_string"]
     });
   },
   updateDisplay_: Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay,
