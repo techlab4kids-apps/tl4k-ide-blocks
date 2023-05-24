@@ -67,6 +67,10 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.color = JSON.parse(xmlElement.getAttribute('color'));
+  // compat bc dum poopoo code
+  if (this.color.primary) {
+    this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
+  }
   this.image = xmlElement.innerText;
   this.updateDisplay_();
 };
@@ -120,6 +124,10 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.image = xmlElement.innerText;
   this.color = JSON.parse(xmlElement.getAttribute('color'));
+  // compat bc dum poopoo code
+  if (this.color.primary) {
+    this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
+  }
   this.image = xmlElement.innerText;
   this.updateDisplay_();
   if (this.updateArgumentReporterNames_) {
