@@ -203,9 +203,9 @@
       mutationRoot.initSvg();
       mutationRoot.render(false);
       var color = mutationRoot.color
-      primary.value = color.primary
-      secondary.value = color.secondary
-      tertiary.value = color.tertiary
+      primary.value = color[0]
+      secondary.value = color[1]
+      tertiary.value = color[2]
     }
 
     function applyMutation() {

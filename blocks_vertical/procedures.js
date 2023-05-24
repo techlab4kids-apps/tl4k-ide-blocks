@@ -117,11 +117,11 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.argumentDefaults_ = JSON.parse(xmlElement.getAttribute('argumentdefaults'));
   this.output_ = JSON.parse(xmlElement.getAttribute('returns'));
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
-  this.updateDisplay_();
   this.edited = JSON.parse(xmlElement.getAttribute('edited'));
   this.image = xmlElement.innerText;
   this.color = JSON.parse(xmlElement.getAttribute('color'));
   this.image = xmlElement.innerText;
+  this.updateDisplay_();
   if (this.updateArgumentReporterNames_) {
     this.updateArgumentReporterNames_(prevArgIds, prevDisplayNames);
   }
@@ -159,7 +159,16 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.createAllInputs_(connectionMap);
   this.deleteShadows_(connectionMap);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
-  if (this.color) this.setColour(this.color.primary, this.color.secondary, this.color.tertiary)
+  if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
+  this.setColour(...this.color)
+  if (
+      this.outputConnection && 
+      this.outputConnection.targetConnection && 
+      this.outputConnection.targetConnection.parentBlock_ &&
+      (this.outputConnection.targetConnection.parentBlock_.type === 'procedures_definition' ||
+      this.outputConnection.targetConnection.parentBlock_.type === 'procedures_definition_return')) {
+    this.outputConnection.targetConnection.parentBlock_.setColour(...this.color)
+  }
   if (this.output_) {
     this.setPreviousStatement(false)
     this.setNextStatement(false)
@@ -755,16 +764,12 @@ Blockly.ScratchBlocks.ProcedureUtils.unsetImage = function() {
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.setColor = function(primary, secondary, tertiary) {
-  this.color = {
-    primary,
-    secondary,
-    tertiary
-  }
+  this.color = [primary, secondary, tertiary]
   this.updateDisplay_();
 }
 
 Blockly.ScratchBlocks.ProcedureUtils.removeColor = function() {
-  this.color = Blockly.Colours.more
+  this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   this.updateDisplay_();
 }
 
@@ -935,7 +940,7 @@ Blockly.Blocks['procedures_call'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
-    this.color = Blockly.Colours.more
+    this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -979,7 +984,7 @@ Blockly.Blocks['procedures_prototype'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
-    this.color = Blockly.Colours.more
+    this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
@@ -1021,7 +1026,7 @@ Blockly.Blocks['procedures_declaration'] = {
     this.edited = false
     this.outputType = 'statement'
     this.image = ''
-    this.color = Blockly.Colours.more
+    this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   },
   // Shared.
   getProcCode: Blockly.ScratchBlocks.ProcedureUtils.getProcCode,
