@@ -908,9 +908,8 @@ Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom = function() 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation = function(dom) {
   try {
     this.color = JSON.parse(dom.getAttribute('color'))
-  } finally {
     this.updateDisplay_()
-  }
+  } finally {}
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay = function(dom) {
