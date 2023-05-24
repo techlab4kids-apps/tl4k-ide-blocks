@@ -906,10 +906,11 @@ Blockly.ScratchBlocks.ProcedureUtils.argumentReporterMutationToDom = function() 
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterDomToMutation = function(dom) {
-  // we have no connection to the blocks color so we just dont do anything
-  if (!dom.getAttribute('color')) return
-  this.color = JSON.parse(dom.getAttribute('color'))
-  this.updateDisplay_()
+  try {
+    this.color = JSON.parse(dom.getAttribute('color'))
+  } finally {
+    this.updateDisplay_()
+  }
 };
 
 Blockly.ScratchBlocks.ProcedureUtils.argumentReporterUpdateDisplay = function(dom) {
