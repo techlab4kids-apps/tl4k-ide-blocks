@@ -505,7 +505,8 @@ Blockly.defineBlocksWithJsonArray = function(jsonArray) {
             ' in JSON array is missing a type attribute. Skipping.');
       } else {
         if (Blockly.Blocks[typename]) {
-          if (!elem.extensions && !elem.extensions.includes('scratch_extension')) {
+          if (!elem.extensions && 
+              !elem.extensions.includes('scratch_extension')) {
             console.warn(
                 'Block definition #' + i + ' in JSON array' +
                 ' overwrites prior definition of "' + typename + '".');
