@@ -125,6 +125,7 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   this.image = xmlElement.innerText;
   this.color = JSON.parse(xmlElement.getAttribute('color'));
   // compat bc dum poopoo code
+  if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   if (this.color && this.color.primary) {
     this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
   }
@@ -168,20 +169,18 @@ Blockly.ScratchBlocks.ProcedureUtils.updateDisplay_ = function() {
   this.deleteShadows_(connectionMap);
   this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE);
   // only change the color if we have a color to change to
-  if (this.color) {
-    this.setColour(...this.color)
-    if (
-        this.outputConnection && 
-        this.outputConnection.targetConnection && 
-        this.outputConnection.targetConnection.sourceBlock_.type === 'procedures_definition_return') {
-      this.outputConnection.targetConnection.sourceBlock_.setColour(...this.color)
-    }
-    if (
-        this.previousConnection && 
-        this.previousConnection.targetConnection && 
-        this.previousConnection.targetConnection.sourceBlock_.type === 'procedures_definition') {
-      this.previousConnection.targetConnection.sourceBlock_.setColour(...this.color)
-    }
+  this.setColour(...this.color)
+  if (
+      this.outputConnection && 
+      this.outputConnection.targetConnection && 
+      this.outputConnection.targetConnection.sourceBlock_.type === 'procedures_definition_return') {
+    this.outputConnection.targetConnection.sourceBlock_.setColour(...this.color)
+  }
+  if (
+      this.previousConnection && 
+      this.previousConnection.targetConnection && 
+      this.previousConnection.targetConnection.sourceBlock_.type === 'procedures_definition') {
+    this.previousConnection.targetConnection.sourceBlock_.setColour(...this.color)
   }
   if (this.output_) {
     this.setPreviousStatement(false)
