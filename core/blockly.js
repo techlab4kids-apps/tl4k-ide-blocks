@@ -507,7 +507,7 @@ Blockly.defineBlocksWithJsonArray = function(jsonArray) {
         if (Blockly.Blocks[typename]) {
           (new Promise((resolve, reject) => {
             if (elem.extensions && elem.extensions.includes('scratch_extension')) {
-              reject()
+              reject("your mom")
               return
             }
             resolve()
