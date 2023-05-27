@@ -68,6 +68,7 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   this.outputType = JSON.parse(xmlElement.getAttribute('optype'));
   this.color = JSON.parse(xmlElement.getAttribute('color'));
   // compat bc dum poopoo code
+  if (!this.color) this.color = [Blockly.Colours.more.primary, Blockly.Colours.more.secondary, Blockly.Colours.more.tertiary]
   if (this.color && this.color.primary) {
     this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
   }
