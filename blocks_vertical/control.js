@@ -34,7 +34,7 @@ Blockly.Blocks['your_mom'] = {
       "args0": [
         {
           "type": "field_image",
-          "src": "https://cdn.discordapp.com/emojis/1039714598959452261.webp?size=128&quality=lossless",
+          "src": "https://penguinmod.site/dump/1039714598959452261.webp",
           "width": 15,
           "height": 15,
           "alt": "*",
@@ -46,7 +46,7 @@ Blockly.Blocks['your_mom'] = {
       "nextStatement": null,
       "colour": "#ff0000",
       "tooltip": "your mom :trel:",
-      "helpUrl": "https://tenor.com/view/urmom-your-mom-baldi-defaultdance-gif-19665250"
+      "helpUrl": "https://penguinmod.site/dump/urmom-your-mom.gif"
     })
   }
 }
