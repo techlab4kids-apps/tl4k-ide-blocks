@@ -613,6 +613,28 @@ Blockly.Blocks['control_run_as_sprite'] = {
   }
 };
 
+Blockly.Blocks['control_inline_stack_output'] = {
+  /**
+   * pm: Block to run a stack and output a return from it.
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": 'inline block',
+      "message1": "%1",
+      "args1": [
+        {
+          "type": "input_statement",
+          "check": 'normal',
+          "name": "SUBSTACK"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "output_string"]
+    });
+  }
+};
+
 Blockly.Blocks['control_get_counter'] = {
   /**
    * pm: Block to get the counter value.
