@@ -9,9 +9,6 @@ jobs:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '2.7.4'
       - uses: actions/setup-node@v3
         with:
           node-version: 16
@@ -20,7 +17,8 @@ jobs:
       
       - name: Rebuild
         run: |
-         npm install
+         npm i pnpm
+         pnpm install --shamefully-hoist
          npm run translate
        
       - name: Upload built-dist
