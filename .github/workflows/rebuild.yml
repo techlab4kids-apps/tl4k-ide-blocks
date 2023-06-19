@@ -17,9 +17,8 @@ jobs:
       
       - name: Rebuild
         run: |
-         npm i pnpm
          sudo apt install python2-minimal
-         pnpm install --shamefully-hoist
+         npm install
          npm run translate
        
       - name: Upload built-dist
