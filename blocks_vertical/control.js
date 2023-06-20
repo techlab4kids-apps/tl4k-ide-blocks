@@ -745,6 +745,24 @@ Blockly.Blocks['control_all_at_once'] = {
   }
 };
 
+Blockly.Blocks['control_new_script'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": "new script",
+      "message1": "%1", // Statement
+      "args1": [
+        {
+          "type": "input_statement",
+          "check": 'normal',
+          "name": "SUBSTACK"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks["control_backToGreenFlag"] = {
   init: function() {
     this.jsonInit({
