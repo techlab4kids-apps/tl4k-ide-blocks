@@ -50,28 +50,23 @@ Blockly.Blocks['polygon'] = {
     return container;
   },
   domToMutation: function(xmlElement) {
-    console.log('loading block settings...')
     const newPoints = JSON.parse(xmlElement.getAttribute('points'))
     const newColor = xmlElement.getAttribute('color') || ''
     const newOffset = JSON.parse(xmlElement.getAttribute('midle') || '""')
     const newScale = JSON.parse(xmlElement.getAttribute('scale') || '""')
     const newExpanded = JSON.parse(xmlElement.getAttribute('expanded') || 'false')
     if (newPoints !== this.points) {
-      console.log('new points')
       this.clear()
       this.points = newPoints
       this.generate()
     }
     if (typeof newColor === 'string') {
-      console.log('setting color')
       this.color = newColor
     }
     if (newOffset && Array.isArray(newOffset)) {
-      console.log('setting center position')
       this.offset = newOffset
     }
     if (typeof newScale === 'number') {
-      console.log('setting scale')
       this.length = newScale
     }
     if (typeof newExpanded === 'boolean' && newExpanded !== this.expanded) {
@@ -81,7 +76,6 @@ Blockly.Blocks['polygon'] = {
   },
   clear: function() {
     const connections = {}
-    console.log('clearing block...')
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
       const yName = `y${point}`
@@ -99,7 +93,6 @@ Blockly.Blocks['polygon'] = {
   generate: function() {
     const connections = this.oldConnections
     // create all the node inputs
-    console.log(`creating ${this.points} points...`)
     for (let point = 1; point <= this.points; point++) {
       const xName = `x${point}`
       const yName = `y${point}`
@@ -152,13 +145,11 @@ Blockly.Blocks['polygon'] = {
       yInput.appendField('y: ')
     }
 
-    console.log('initializing block...')
     this.setColour(this.color, this.color, this.color)
     this.setOutputShape(Blockly.OUTPUT_SHAPE_SQUARE)
     this.setOutput(true, 'math_polygon')
     this.setShadow(true);
 
-    console.log('creating colapse/expand button...')
     const thisBlock = this;
     const button = new Blockly.FieldCheckbox(
       this.expanded, 
