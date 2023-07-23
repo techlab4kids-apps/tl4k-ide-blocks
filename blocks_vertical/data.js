@@ -46,9 +46,11 @@ Blockly.Blocks['data_variable'] = {
           "variableType": ""
         }
       ],
+      "output": null,
       "category": Blockly.Categories.data,
       "checkboxInFlyout": true,
-      "extensions": ["contextMenu_getVariableBlock", "colours_data", "output_string"]
+      "extensions": ["contextMenu_getVariableBlock", "colours_data"],
+      "outputShape": Blockly.OUTPUT_SHAPE_ROUND
     });
   }
 };
