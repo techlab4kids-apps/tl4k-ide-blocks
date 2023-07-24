@@ -948,9 +948,29 @@ Blockly.Blocks['control_case_next'] = {
 };
 
 Blockly.Blocks['control_exitCase'] = {
+  init: function () {
+    this.jsonInit({
+      "message0": 'exit case %1',
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "arrow-down.svg",
+          "width": 24,
+          "height": 24,
+          "alt": "↓",
+          "flip_rtl": true
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_end"]
+    });
+  }
+};
+
+Blockly.Blocks['control_exitLoop'] = {
   init: function() {
     this.jsonInit({
-      "message0": 'escape block %1',
+      "message0": 'escape loop %1',
       "args0": [
         {
           "type": "field_image",
