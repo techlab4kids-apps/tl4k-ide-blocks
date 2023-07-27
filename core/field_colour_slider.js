@@ -275,7 +275,7 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
   var thisField = this;
   Blockly.FieldColourSlider.activateEyedropper_(function(value) {
     // Update the internal hue/saturation/brightness values so sliders update.
-    var hsv = goog.color.hexToHsv(value);
+    var hsv = goog.color.hexToHsva(value);
     thisField.hue_ = hsv[0];
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
