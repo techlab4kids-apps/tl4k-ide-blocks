@@ -89,12 +89,12 @@ Blockly.FieldColourSlider.prototype.init = function(block) {
     return;
   }
   Blockly.FieldColourSlider.superClass_.init.call(this, block);
-  this.setValue(this.getValue(true));
+  this.setValue(this.getValue());
 };
 
 /**
  * Return the current colour.
- * @return {string} Current colour in '#rrggbbaa' format.
+ * @return {string} Current colour in '#rrggbb' format.
  */
 Blockly.FieldColourSlider.prototype.getValue = function() {
   return this.colour_;
@@ -114,9 +114,7 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
   if (this.sourceBlock_) {
     // Set the primary, secondary and tertiary colour to this value.
     // The renderer expects to be able to use the secondary colour as the fill for a shadow.
-    var main = colour.slice(0, 7)
-
-    this.sourceBlock_.setColour(main, main, this.sourceBlock_.getColourTertiary());
+    this.sourceBlock_.setColour(colour, colour, this.sourceBlock_.getColourTertiary());
   }
   this.updateSliderHandles_();
   this.updateDom_();
@@ -133,16 +131,13 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
   for(var n = 0; n <= 360; n += 20) {
     switch (channel) {
       case 'hue':
-        stops.push(goog.color.hsvaToHex(n, this.saturation_, this.brightness_, this.transparency_));
+        stops.push(goog.color.hsvToHex(n, this.saturation_, this.brightness_));
         break;
       case 'saturation':
-        stops.push(goog.color.hsvaToHex(this.hue_, n / 360, this.brightness_, this.transparency_));
+        stops.push(goog.color.hsvToHex(this.hue_, n / 360, this.brightness_));
         break;
       case 'brightness':
-        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, 255 * n / 360, this.transparency_));
-        break;
-      case 'transparency':
-        stops.push(goog.color.hsvaToHex(this.hue_, this.saturation_, this.brightness_, n / 360));
+        stops.push(goog.color.hsvToHex(this.hue_, this.saturation_, 255 * n / 360));
         break;
       default:
         throw new Error("Unknown channel for colour sliders: " + channel);
@@ -159,16 +154,16 @@ Blockly.FieldColourSlider.prototype.createColourStops_ = function(channel) {
  */
 Blockly.FieldColourSlider.prototype.setGradient_ = function(node, channel) {
   var gradient = this.createColourStops_(channel).join(',');
-  goog.style.setStyle(node, 'background-image',
-      '-moz-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
-  goog.style.setStyle(node, 'background-image',
-      '-webkit-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
-  goog.style.setStyle(node, 'background-image',
-      '-o-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
-  goog.style.setStyle(node, 'background-image',
-      '-ms-linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
-  goog.style.setStyle(node, 'background-image',
-      'linear-gradient(left, ' + gradient + '), url("static/assets/482dc5011057fe26e9542e9476601bf2.png")');
+  goog.style.setStyle(node, 'background',
+      '-moz-linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background',
+      '-webkit-linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background',
+      '-o-linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background',
+      '-ms-linear-gradient(left, ' + gradient + ')');
+  goog.style.setStyle(node, 'background',
+      'linear-gradient(left, ' + gradient + ')');
 };
 
 /**
@@ -181,13 +176,11 @@ Blockly.FieldColourSlider.prototype.updateDom_ = function() {
     this.setGradient_(this.hueSlider_.getElement(), 'hue');
     this.setGradient_(this.saturationSlider_.getElement(), 'saturation');
     this.setGradient_(this.brightnessSlider_.getElement(), 'brightness');
-    this.setGradient_(this.transparencySlider_.getElement(), 'transparency');
 
     // Update the readouts
     this.hueReadout_.textContent = Math.floor(100 * this.hue_ / 360).toFixed(0);
     this.saturationReadout_.textContent = Math.floor(100 * this.saturation_).toFixed(0);
     this.brightnessReadout_.textContent = Math.floor(100 * this.brightness_ / 255).toFixed(0);
-    this.transparencyReadout_.textContent = Math.floor(100 * this.transparency_).toFixed(0);
   }
 };
 
@@ -204,9 +197,22 @@ Blockly.FieldColourSlider.prototype.updateSliderHandles_ = function() {
     this.hueSlider_.setValue(this.hue_);
     this.saturationSlider_.setValue(this.saturation_);
     this.brightnessSlider_.setValue(this.brightness_);
-    this.transparencySlider_.setValue(this.transparency_);
     this.sliderCallbacksEnabled_ = true;
   }
+};
+
+/**
+ * Get the text from this field.  Used when the block is collapsed.
+ * @return {string} Current text.
+ */
+Blockly.FieldColourSlider.prototype.getText = function() {
+  var colour = this.colour_;
+  // Try to use #rgb format if possible, rather than #rrggbb.
+  var m = colour.match(/^#(.)\1(.)\2(.)\3$/);
+  if (m) {
+    colour = '#' + m[1] + m[2] + m[3];
+  }
+  return colour;
 };
 
 /**
@@ -249,13 +255,8 @@ Blockly.FieldColourSlider.prototype.sliderCallbackFactory_ = function(channel) {
       case 'brightness':
         thisField.brightness_ = channelValue;
         break;
-      case 'transparency':
-        thisField.transparency_ = channelValue;
-        break;
-      default:
-        throw new Error('invalid channel type: ' + channel)
     }
-    var colour = goog.color.hsvaToHex(thisField.hue_, thisField.saturation_, thisField.brightness_, thisField.transparency_);
+    var colour = goog.color.hsvToHex(thisField.hue_, thisField.saturation_, thisField.brightness_);
     if (thisField.sourceBlock_) {
       // Call any validation function, and allow it to override.
       colour = thisField.callValidator(colour);
@@ -274,11 +275,10 @@ Blockly.FieldColourSlider.prototype.activateEyedropperInternal_ = function() {
   var thisField = this;
   Blockly.FieldColourSlider.activateEyedropper_(function(value) {
     // Update the internal hue/saturation/brightness values so sliders update.
-    var hsv = goog.color.hexToHsva(value);
+    var hsv = goog.color.hexToHsv(value);
     thisField.hue_ = hsv[0];
     thisField.saturation_ = hsv[1];
     thisField.brightness_ = hsv[2];
-    thisField.transparency_ = hsv[3];
     thisField.setValue(value);
   });
 };
@@ -294,11 +294,10 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
 
   // Init color component values that are used while the editor is open
   // in order to keep the slider values stable.
-  var hsv = goog.color.hexToHsva(this.getValue(true));
+  var hsv = goog.color.hexToHsv(this.getValue());
   this.hue_ = hsv[0];
   this.saturation_ = hsv[1];
   this.brightness_ = hsv[2];
-  this.transparency_ = hsv[3];
 
   var hueElements = this.createLabelDom_(Blockly.Msg.COLOUR_HUE_LABEL);
   div.appendChild(hueElements[0]);
@@ -333,18 +332,6 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   this.brightnessSlider_.setMoveToPointEnabled(true);
   this.brightnessSlider_.render(div);
 
-  var transparencyElements =
-      this.createLabelDom_('Transparency');
-  div.appendChild(transparencyElements[0]);
-  this.transparencyReadout_ = transparencyElements[1];
-  this.transparencySlider_ = new goog.ui.Slider();
-  this.transparencySlider_.setUnitIncrement(0.01);
-  this.transparencySlider_.setStep(0.001);
-  this.transparencySlider_.setMinimum(0);
-  this.transparencySlider_.setMaximum(1.0);
-  this.transparencySlider_.setMoveToPointEnabled(true);
-  this.transparencySlider_.render(div);
-
   if (Blockly.FieldColourSlider.activateEyedropper_) {
     var button = document.createElement('button');
     button.setAttribute('class', 'scratchEyedropper');
@@ -363,7 +350,7 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
 
   // Set value updates the slider positions
   // Do this before attaching callbacks to avoid extra events from initial set
-  this.setValue(this.getValue(true));
+  this.setValue(this.getValue());
 
   // Enable callbacks for the sliders
   this.sliderCallbacksEnabled_ = true;
@@ -377,9 +364,6 @@ Blockly.FieldColourSlider.prototype.showEditor_ = function() {
   Blockly.FieldColourSlider.brightnessChangeEventKey_ = goog.events.listen(this.brightnessSlider_,
       goog.ui.Component.EventType.CHANGE,
       this.sliderCallbackFactory_('brightness'));
-  Blockly.FieldColourSlider.transparencyChangeEventKey_ = goog.events.listen(this.transparencySlider_,
-      goog.ui.Component.EventType.CHANGE,
-      this.sliderCallbackFactory_('transparency'));
 };
 
 Blockly.FieldColourSlider.prototype.dispose = function() {
@@ -391,9 +375,6 @@ Blockly.FieldColourSlider.prototype.dispose = function() {
   }
   if (Blockly.FieldColourSlider.brightnessChangeEventKey_) {
     goog.events.unlistenByKey(Blockly.FieldColourSlider.brightnessChangeEventKey_);
-  }
-  if (Blockly.FieldColourSlider.transparencyChangeEventKey_) {
-    goog.events.unlistenByKey(Blockly.FieldColourSlider.transparencyChangeEventKey_);
   }
   if (Blockly.FieldColourSlider.eyedropperEventData_) {
     Blockly.unbindEvent_(Blockly.FieldColourSlider.eyedropperEventData_);
