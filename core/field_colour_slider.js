@@ -110,7 +110,7 @@ Blockly.FieldColourSlider.prototype.setValue = function(colour) {
     Blockly.Events.fire(new Blockly.Events.BlockChange(
         this.sourceBlock_, 'field', this.name, this.colour_, colour));
   }
-  colour = colour.slice(7)
+  colour = colour.slice(0, -2)
   this.colour_ = colour;
   if (this.sourceBlock_) {
     // Set the primary, secondary and tertiary colour to this value.
