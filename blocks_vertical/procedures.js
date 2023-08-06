@@ -72,6 +72,8 @@ Blockly.ScratchBlocks.ProcedureUtils.callerDomToMutation = function(xmlElement) 
   if (this.color && this.color.primary) {
     this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
   }
+  // @todo figure out why the fuck we are even getting 8 digit hex colors in the first place
+  this.color = this.color.map(c => c.slice(0, 7))
   this.image = xmlElement.innerText;
   this.updateDisplay_();
 };
@@ -130,6 +132,8 @@ Blockly.ScratchBlocks.ProcedureUtils.definitionDomToMutation = function(xmlEleme
   if (this.color && this.color.primary) {
     this.color = [this.color.primary, this.color.secondary, this.color.tertiary]
   }
+  // @todo figure out why the fuck we are even getting 8 digit hex colors in the first place
+  this.color = this.color.map(c => c.slice(0, 7))
   this.image = xmlElement.innerText;
   this.updateDisplay_();
   if (this.updateArgumentReporterNames_) {
