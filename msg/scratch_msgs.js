@@ -22128,7 +22128,7 @@ Blockly.ScratchMsgs.locales["zh-cn"] =
     "CONTROL_COUNTER": "计数器",
     "CONTROL_INCRCOUNTER": "计数器加一",
     "CONTROL_CLEARCOUNTER": "计数器归零",
-    "CONTROL_ALLATONCE": "所有脚本",
+    "CONTROL_ALLATONCE": "一帧完成",
     "DATA_SETVARIABLETO": "将 %1 设为 %2",
     "DATA_CHANGEVARIABLEBY": "将 %1 增加 %2",
     "DATA_SHOWVARIABLE": "显示变量 %1",
