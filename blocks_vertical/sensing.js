@@ -597,7 +597,7 @@ Blockly.Blocks['sensing_getclipboard'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "clipboard item",
+      "message0": Blockly.Msg.SENSING_CLIPBOARDITEM,
       "category": Blockly.Categories.sensing,
       "extensions": ["colours_sensing", "output_string"]
     });

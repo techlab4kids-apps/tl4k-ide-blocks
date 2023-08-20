@@ -772,7 +772,7 @@ Blockly.Blocks["operator_getLettersFromIndexToIndexInText"] = {
   init: function() {
     this.jsonInit({
       "inputsInline": true,
-      "message0": "letters from %1 to %2 in %3",
+      "message0": Blockly.Msg.OPERATORS_LETTERSFROMTOIN,
       "args0": [
         {
           "type": "input_value",
