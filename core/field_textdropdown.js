@@ -49,8 +49,9 @@ goog.require('goog.userAgent');
  */
 Blockly.FieldTextDropdown = function(text, menuGenerator, opt_validator, opt_restrictor) {
   this.menuGenerator_ = menuGenerator;
+  this.dropdownValue_ = false;
   Blockly.FieldDropdown.prototype.trimOptions_.call(this);
-  Blockly.FieldTextDropdown.superClass_.constructor.call(this, text, opt_validator, opt_restrictor);
+  Blockly.FieldTextDropdown.superClass_.constructor.call(this, text || '', opt_validator, opt_restrictor);
   this.addArgType('textdropdown');
 };
 goog.inherits(Blockly.FieldTextDropdown, Blockly.FieldTextInput);
@@ -116,6 +117,25 @@ Blockly.FieldTextDropdown.prototype.dispose = function() {
     Blockly.Touch.clearTouchIdentifier();
   }
   Blockly.FieldTextDropdown.superClass_.dispose.call(this);
+};
+
+/**
+ * Runs when an item is run.
+ */
+Blockly.FieldTextDropdown.prototype.onItemSelected = function(_, menuItem) {
+  this.setValue(menuItem.getValue())
+}
+
+/**
+ * Return a list of the options for this dropdown.
+ * @return {!Array.<!Array>} Array of option tuples:
+ *     (human-readable text or image, language-neutral name).
+ */
+Blockly.FieldTextDropdown.prototype.getOptions = function() {
+  if (goog.isFunction(this.menuGenerator_)) {
+    return this.menuGenerator_.call(this);
+  }
+  return /** @type {!Array.<!Array.<string>>} */ (this.menuGenerator_);
 };
 
 /**
