@@ -47,11 +47,11 @@ goog.require('goog.userAgent');
  * @extends {Blockly.FieldTextInput}
  * @constructor
  */
-Blockly.FieldTextDropdown = function(text, menuGenerator, opt_validator, opt_restrictor) {
+Blockly.FieldTextDropdown = function(menuGenerator, opt_validator, opt_restrictor) {
   this.menuGenerator_ = menuGenerator;
   this.dropdownValue_ = false;
   Blockly.FieldDropdown.prototype.trimOptions_.call(this);
-  Blockly.FieldTextDropdown.superClass_.constructor.call(this, this.getOptions_()[0][0] || '', opt_validator, opt_restrictor);
+  Blockly.FieldTextDropdown.superClass_.constructor.call(this, this.getOptions()[0][0] || '', opt_validator, opt_restrictor);
   this.addArgType('textdropdown');
 };
 goog.inherits(Blockly.FieldTextDropdown, Blockly.FieldTextInput);
@@ -66,7 +66,7 @@ goog.inherits(Blockly.FieldTextDropdown, Blockly.FieldTextInput);
  */
 Blockly.FieldTextDropdown.fromJson = function(element) {
   var field =
-      new Blockly.FieldTextDropdown(element['text'], element['options']);
+      new Blockly.FieldTextDropdown(element['options']);
   if (typeof element['spellcheck'] == 'boolean') {
     field.setSpellcheck(element['spellcheck']);
   }
