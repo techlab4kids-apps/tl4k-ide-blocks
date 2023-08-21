@@ -86,3 +86,27 @@ Blockly.Blocks['looks_setHorizTransform'] = {
     });
   }
 };
+
+Blockly.Blocks['field_textdropdown_test'] = {
+  init: function() {
+    this.jsonInit({
+      "message0": "%1",
+      "args0": [
+        {
+          "type": "field_textdropdown",
+          "name": "TEXT",
+          "options": [
+            ['item1', 'item1'],
+            ['item2', 'item2'],
+            ['item3', 'item3']
+          ]
+        }
+      ],
+      "output": "String",
+      "outputShape": Blockly.OUTPUT_SHAPE_ROUND,
+      "colour": Blockly.Colours.textField,
+      "colourSecondary": Blockly.Colours.textField,
+      "colourTertiary": Blockly.Colours.textField
+    })
+  }
+}

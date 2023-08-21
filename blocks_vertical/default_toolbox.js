@@ -347,16 +347,6 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '<shadow type="sensing_of_object_menu"></shadow>' +
       '</value>' +
     '</block>' +
-    '<block type="sensing_set_of" id="sensing_set_of">' +
-      '<value name="OBJECT">' +
-        '<shadow type="sensing_of_object_menu"></shadow>' +
-      '</value>' +
-      '<value name="VALUE">' +
-        '<shadow type="text">' +
-          '<field name="TEXT"></field>' +
-        '</shadow>' +
-      '</value>' +
-    '</block>' +
     '<block type="sensing_current" id="sensing_current"></block>' +
     '<block type="sensing_dayssince2000" id="sensing_dayssince2000"></block>' +
   '</category>' +
@@ -528,6 +518,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
           '<field name="NUM"></field>' +
         '</shadow>' +
       '</value>' +
+    '</block>' +
   '</category>' +
   '<category name="%{BKY_CATEGORY_VARIABLES}" id="data" colour="#FF8C1A" secondaryColour="#DB6E00" custom="VARIABLE">' +
   '</category>' +
@@ -542,7 +533,7 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
           '<field name="NUM">1</field>' +
         '</shadow>' +
       '</value>' +
-      '</block>' +
+    '</block>' +
     '<block type="extension_wedo_motor" id="extension_wedo_motor"></block>' +
     '<block type="extension_wedo_hat" id="extension_wedo_hat"></block>' +
     '<block type="extension_wedo_boolean" id="extension_wedo_boolean"></block>' +
@@ -571,5 +562,6 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
         '</shadow>' +
       '</value>' +
     '</block>' +
+    '<block type="field_textdropdown_test" id="extension_wedo_boolean"></block>' +
   '</category>' +
   '</xml>';
