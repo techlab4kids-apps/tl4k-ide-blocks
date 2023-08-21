@@ -47,12 +47,11 @@ goog.require('goog.userAgent');
  * @extends {Blockly.FieldTextInput}
  * @constructor
  */
-Blockly.FieldTextDropdown = function(menuGenerator, opt_validator, opt_restrictor) {
+Blockly.FieldTextDropdown = function(text, menuGenerator, opt_validator, opt_restrictor) {
   this.menuGenerator_ = menuGenerator;
   this.dropdownValue_ = false;
   Blockly.FieldDropdown.prototype.trimOptions_.call(this);
-  var firstItem = this.getOptions()[0]
-  Blockly.FieldTextDropdown.superClass_.constructor.call(this, (firstItem && firstItem[0]) || text || '', opt_validator, opt_restrictor);
+  Blockly.FieldTextDropdown.superClass_.constructor.call(this, this.getOptions()[0][0] || text || '', opt_validator, opt_restrictor);
   this.addArgType('textdropdown');
 };
 goog.inherits(Blockly.FieldTextDropdown, Blockly.FieldTextInput);
