@@ -213,6 +213,18 @@
         }
       }
 
+      function errorStack() {
+        if (Blockly.selected) {
+          workspace.errorStack(Blockly.selected.id, true);
+        }
+      }
+
+      function unerrorStack() {
+        if (Blockly.selected) {
+          workspace.errorStack(Blockly.selected.id, false);
+        }
+      }
+
       function sprinkles(n) {
         var prototypes = [];
         var toolbox = workspace.options.languageTree;
@@ -300,7 +312,8 @@
         if (Blockly.selected) {
           workspace.reportValue(
             Blockly.selected.id,
-            document.getElementById('reportValue').value
+            document.getElementById('reportValue').value,
+            document.getElementById('isError').checked
           );
         }
       }
@@ -572,6 +585,8 @@
       <input type="button" value="Unglow last clicked block" onclick="unglowBlock()" />
       <input type="button" value="Stack glow last clicked block" onclick="glowStack()" />
       <input type="button" value="Stack unglow last clicked block" onclick="unglowStack()" />
+      <input type="button" value="Stack error glow last clicked block" onclick="errorStack()" />
+      <input type="button" value="Stack error unglow last clicked block" onclick="unerrorStack()" />
     </p>
 
     <p>
@@ -593,6 +608,8 @@
       Report:
       <input id="reportValue" type="text" value="123" />
       <input type="button" value="Report last clicked block" onclick="reportDemo()" />
+      Error:
+      <input type="checkbox" id="isError">
     </p>
   </body>
 </html>

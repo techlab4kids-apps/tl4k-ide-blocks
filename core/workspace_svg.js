@@ -986,12 +986,28 @@ Blockly.WorkspaceSvg.prototype.glowStack = function(id, isGlowingStack) {
 };
 
 /**
+ * Error/unerror a stack in the workspace.
+ * @param {?string} id ID of block which starts the stack.
+ * @param {boolean} isGlowingStack Whether to glow the stack.
+ */
+Blockly.WorkspaceSvg.prototype.errorStack = function(id, isGlowingStack) {
+  var block = null;
+  if (id) {
+    block = this.getBlockById(id);
+    if (!block) {
+      throw 'Tried to error stack on block that does not exist.';
+    }
+  }
+  block.setErrorStack(isGlowingStack);
+};
+
+/**
  * Visually report a value associated with a block.
  * In Scratch, appears as a pop-up next to the block when a reporter block is clicked.
  * @param {?string} id ID of block to report associated value.
  * @param {?string} value String value to visually report.
  */
-Blockly.WorkspaceSvg.prototype.reportValue = function(id, value) {
+Blockly.WorkspaceSvg.prototype.reportValue = function(id, value, isError) {
   var block = this.getBlockById(id);
   if (!block) {
     throw 'Tried to report value on block that does not exist.';
@@ -1005,7 +1021,9 @@ Blockly.WorkspaceSvg.prototype.reportValue = function(id, value) {
   contentDiv.appendChild(valueReportBox);
   Blockly.DropDownDiv.setColour(
       Blockly.Colours.valueReportBackground,
-      Blockly.Colours.valueReportBorder
+      isError 
+        ? Blockly.Colours.blockError 
+        : Blockly.Colours.valueReportBorder
   );
   Blockly.DropDownDiv.showPositionedByBlock(this, block);
 };

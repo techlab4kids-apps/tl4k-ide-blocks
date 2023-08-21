@@ -177,6 +177,53 @@ Blockly.createDom_ = function(container, options) {
       },
       stackGlowFilter);
 
+  var stackGlowFilterError = Blockly.utils.createSvgElement('filter',
+      {
+        'id': 'blocklyStackGlowFilterError' + rnd,
+        'height': '160%',
+        'width': '180%',
+        y: '-30%',
+        x: '-40%'
+      },
+      defs);
+  options.stackGlowBlurError = Blockly.utils.createSvgElement('feGaussianBlur',
+      {
+        'in': 'SourceGraphic',
+        'stdDeviation': Blockly.Colours.stackGlowSize
+      },
+      stackGlowFilterError);
+  // Set all gaussian blur pixels to 1 opacity before applying flood
+  var componentTransferError = Blockly.utils.createSvgElement('feComponentTransfer', {'result': 'outBlur'}, stackGlowFilterError);
+  Blockly.utils.createSvgElement('feFuncA',
+      {
+        'type': 'table',
+        'tableValues': '0' + goog.string.repeat(' 1', 16)
+      },
+      componentTransferError);
+  // Color the highlight
+  Blockly.utils.createSvgElement('feFlood',
+      {
+        'flood-color': Blockly.Colours.blockError,
+        'flood-opacity': Blockly.Colours.stackGlowOpacity,
+        'result': 'outColor'
+      },
+      stackGlowFilterError);
+  Blockly.utils.createSvgElement('feComposite',
+      {
+        'in': 'outColor',
+        'in2': 'outBlur',
+        'operator': 'in',
+        'result': 'outGlow'
+      },
+      stackGlowFilterError);
+  Blockly.utils.createSvgElement('feComposite',
+      {
+        'in': 'SourceGraphic',
+        'in2': 'outGlow',
+        'operator': 'over'
+      },
+      stackGlowFilterError);
+
   // Filter for replacement marker
   var replacementGlowFilter = Blockly.utils.createSvgElement('filter',
       {
@@ -254,6 +301,7 @@ Blockly.createDom_ = function(container, options) {
       },
       disabledPattern);
   options.stackGlowFilterId = stackGlowFilter.id;
+  options.stackGlowFilterErrorId = stackGlowFilterError.id;
   options.replacementGlowFilterId = replacementGlowFilter.id;
   options.disabledPatternId = disabledPattern.id;
 
@@ -491,6 +539,6 @@ Blockly.inject.loadSounds_ = function(pathToMedia, workspace) {
  */
 Blockly.updateToolbox = function(tree) {
   console.warn('Deprecated call to Blockly.updateToolbox, ' +
-               'use workspace.updateToolbox instead.');
+                'use workspace.updateToolbox instead.');
   Blockly.getMainWorkspace().updateToolbox(tree);
 };
