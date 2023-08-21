@@ -66,7 +66,7 @@ goog.inherits(Blockly.FieldTextDropdown, Blockly.FieldTextInput);
  */
 Blockly.FieldTextDropdown.fromJson = function(element) {
   var field =
-      new Blockly.FieldTextDropdown(element['options']);
+      new Blockly.FieldTextDropdown(element['text'], element['options']);
   if (typeof element['spellcheck'] == 'boolean') {
     field.setSpellcheck(element['spellcheck']);
   }
