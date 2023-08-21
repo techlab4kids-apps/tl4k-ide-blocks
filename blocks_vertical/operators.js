@@ -497,7 +497,7 @@ Blockly.Blocks['operator_join3'] = {
    */
   init: function() {
     this.jsonInit({
-      "message0": "join %1 %2 %3",
+      "message0": Blockly.Msg.OPERATORS_JOIN3,
       "args0": [
         {
           "type": "input_value",

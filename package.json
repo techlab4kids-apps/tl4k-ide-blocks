@@ -16,6 +16,7 @@
     "prepublish": "python2 build.py && webpack",
     "test:unit": "node tests/jsunit/test_runner.js",
     "test:lint": "eslint .",
+    "test:external": "echo Hello from scratch-blocks folder",
     "test:messages": "npm run translate && node i18n/test_scratch_msgs.js",
     "test": "npm run test:lint && npm run test:messages && npm run test:unit",
     "version": "json -f package.json -I -e \"this.repository.sha = '$(git log -n1 --pretty=format:%H)'\"",

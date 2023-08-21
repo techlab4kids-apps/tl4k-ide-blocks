@@ -577,7 +577,7 @@ Blockly.Blocks['sensing_setclipboard'] = {
    */
   init: function () {
     this.jsonInit({
-      "message0": "add %1 to clipboard",
+      "message0": Blockly.Msg.SENSING_ADDTOCLIPBOARD,
       "args0": [
         {
           "type": "input_value",
