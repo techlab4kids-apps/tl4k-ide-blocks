@@ -152,7 +152,7 @@ Blockly.Icon.prototype.renderIcon = function(cursorX) {
   }
   this.iconGroup_.setAttribute('display', 'block');
 
-  var TOP_MARGIN = 5;
+  var TOP_MARGIN = 17;
   var width = this.SIZE;
   if (this.block_.RTL) {
     cursorX -= width;

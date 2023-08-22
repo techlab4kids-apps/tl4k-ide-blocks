@@ -35,6 +35,7 @@ goog.require('Blockly.DropDownDiv');
 goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
 goog.require('Blockly.FieldCheckbox');
+goog.require('Blockly.FieldCheckboxOriginal');
 goog.require('Blockly.FieldColour');
 goog.require('Blockly.FieldColourSlider');
 // Date picker commented out since it increases footprint by 60%.

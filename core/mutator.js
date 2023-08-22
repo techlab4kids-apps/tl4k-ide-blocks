@@ -206,10 +206,10 @@ Blockly.Mutator.prototype.resizeBubble_ = function() {
     width = workspaceSize.width + workspaceSize.x;
   }
   var height = workspaceSize.height + doubleBorderWidth * 3;
-  if (this.workspace_.flyout_) {
-    var flyoutMetrics = this.workspace_.flyout_.getMetrics_();
-    height = Math.max(height, flyoutMetrics.contentHeight + 20);
-  }
+  // if (this.workspace_.flyout_) {
+  //   var flyoutMetrics = this.workspace_.flyout_.getMetrics_();
+  //   height = Math.max(height, flyoutMetrics.contentHeight + 20);
+  // }
   width += doubleBorderWidth * 3;
   // Only resize if the size difference is significant.  Eliminates shuddering.
   if (Math.abs(this.workspaceWidth_ - width) > doubleBorderWidth ||
@@ -248,6 +248,7 @@ Blockly.Mutator.prototype.setVisible = function(visible) {
     this.bubble_ = new Blockly.Bubble(
         /** @type {!Blockly.WorkspaceSvg} */ (this.block_.workspace),
         this.createEditor_(), this.block_.svgPath_, this.iconXY_, null, null);
+    this.bubble_.setColour("#00000055");
     var tree = this.workspace_.options.languageTree;
     if (tree) {
       this.workspace_.flyout_.init(this.workspace_);

@@ -110,3 +110,96 @@ Blockly.Blocks['field_textdropdown_test'] = {
     })
   }
 }
+
+Blockly.Blocks['motion_mutatorCheckboxTest_checkboxMutatorMenu'] = {
+  init: function () {
+    this.setInputsInline(false);
+    this.setColour("#c1c1c1");
+  }
+};
+Blockly.Blocks['motion_mutatorCheckboxTest'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": 'checkbox mutator',
+      "args0": [],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
+    this.setMutator(new Blockly.Mutator([]));
+
+    this.BORDER_FIELDS = ["ABC", "DEF"];
+    this.FIELD_NAMES = ["first", "second"];
+
+    this.inputs_ = [false, false];
+  },
+
+  mutationToDom: function () {
+    // console.log('mutationToDom');
+    if (!this.inputs_) {
+      return null;
+    }
+    const container = document.createElement("mutation");
+    for (let i = 0; i < this.inputs_.length; i++) {
+      if (this.inputs_[i]) {
+        container.setAttribute(this.BORDER_FIELDS[i], this.inputs_[i]);
+      }
+    }
+    return container;
+  },
+
+  domToMutation: function (xmlElement) {
+    // console.log('domToMutation');
+    for (let i = 0; i < this.inputs_.length; i++) {
+      this.inputs_[i] = xmlElement.getAttribute(this.BORDER_FIELDS[i].toLowerCase()) == "true";
+    }
+    this.updateShape_();
+  },
+
+  decompose: function (workspace) {
+    // console.log('decompose');
+    const containerBlock = workspace.newBlock('motion_mutatorCheckboxTest_checkboxMutatorMenu');
+    for (let i = 0; i < this.inputs_.length; i++) {
+      // BaseBlockly.Msg[this.BORDER_FIELDS[i]] = this.FIELD_NAMES[i];
+      containerBlock.appendDummyInput()
+        .setAlign(Blockly.ALIGN_RIGHT)
+        .appendField(this.FIELD_NAMES[i])
+        .appendField(new Blockly.FieldCheckboxOriginal(this.inputs_[i] ? "TRUE" : "FALSE"), this.BORDER_FIELDS[i].toUpperCase());
+    }
+    containerBlock.initSvg();
+    containerBlock.moveBy(4, 22);
+    return containerBlock;
+  },
+
+  compose: function (containerBlock) {
+    // console.log('compose');
+    // Set states
+    for (let i = 0; i < this.inputs_.length; i++) {
+      const field = this.BORDER_FIELDS[i].toUpperCase();
+      const value = containerBlock.getFieldValue(field);
+      // console.log(value);
+      this.inputs_[i] = value == "TRUE";
+    }
+    this.updateShape_();
+  },
+
+  updateShape_: function () {
+    // console.log('updateShape_');
+    for (let i = 0; i < this.inputs_.length; i++) {
+      if ((!this.inputs_[i]) && (this.getInput(this.BORDER_FIELDS[i].toUpperCase()))) {
+        this.removeInput(this.BORDER_FIELDS[i].toUpperCase());
+      }
+    }
+    for (let i = 0; i < this.inputs_.length; i++) {
+      if ((this.inputs_[i]) && (!(this.getInput(this.BORDER_FIELDS[i].toUpperCase())))) {
+        // BaseBlockly.Msg[this.BORDER_FIELDS[i]] = this.FIELD_NAMES[i];
+        this.appendValueInput(this.BORDER_FIELDS[i].toUpperCase())
+          // .setAlign(Blockly.ALIGN_RIGHT)
+          // todo: insert string/number input?
+          .appendField(this.FIELD_NAMES[i]);
+      }
+    }
+  }
+};

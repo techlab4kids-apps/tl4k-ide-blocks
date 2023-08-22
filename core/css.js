@@ -559,16 +559,16 @@ Blockly.Css.CONTENT = [
   '}',
 
   '.blocklyIconGroup {',
-    'cursor: default;',
+    'cursor: pointer;',
   '}',
 
   '.blocklyIconGroup:not(:hover),',
   '.blocklyIconGroupReadonly {',
-    'opacity: .6;',
+    'opacity: 1;',
   '}',
 
   '.blocklyIconShape {',
-    'fill: #00f;',
+    'fill: #303030;',
     'stroke: #fff;',
     'stroke-width: 1px;',
   '}',
