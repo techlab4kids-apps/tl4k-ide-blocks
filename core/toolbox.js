@@ -565,15 +565,23 @@ Blockly.Toolbox.prototype.selectCategoryById = function(id) {
 Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var selectedItem = item;
   var RTL = this.RTL
-  return function(e) {
-    if (e.button == 0) {
-      if (!this.workspace_.isDragging()) {
-        this.setSelectedItem(selectedItem);
-        Blockly.Touch.clearTouchIdentifier();
+  if (item.getMenuOptions()) {
+    return function(e) {
+      if (e.button == 0) {
+        if (!this.workspace_.isDragging()) {
+          this.setSelectedItem(selectedItem);
+          Blockly.Touch.clearTouchIdentifier();
+        }
+      } else if (e.button == 2) {
+        var menuOptions = selectedItem.getMenuOptions()
+        Blockly.ContextMenu.show(e, menuOptions, RTL)
       }
-    } else if (e.button == 2) {
-      var menuOptions = item.getMenuOptions()
-      Blockly.ContextMenu.show(e, menuOptions, RTL)
+    };
+  }
+  return function(e) {
+    if (!this.workspace_.isDragging()) {
+      this.setSelectedItem(selectedItem);
+      Blockly.Touch.clearTouchIdentifier();
     }
   };
 };
@@ -679,15 +687,20 @@ Blockly.Toolbox.Category = function(parent, parentHtml, domTree) {
   this.iconURI_ = domTree.getAttribute('iconURI');
   this.showStatusButton_ = domTree.getAttribute('showStatusButton');
   var optionsName = domTree.getAttribute('options');
-  this.menuOptions_ = Blockly.Toolbox.menus_[optionsName]
-  if (optionsName) {
+  var options = Blockly.Toolbox.menus_[optionsName]
+  if (options) {
     // wrap all the callbacks so they know who is calling
-    for (var i = 0; i < this.menuOptions_.length; i++) {
-      var callback = this.menuOptions_[i].callback
+    this.menuOptions_ = []
+    for (var i = 0; i < options.length; i++) {
+      var callback = options[i].callback
       var self = this
-      this.menuOptions_[i].callback = function() {
-        callback(self.id_)
-      }
+      this.menuOptions_.push({
+        text: options[i].text,
+        enabled: options[i].enabled,
+        callback: function() {
+          callback(self.id_)
+        }
+      })
     }
   }
   this.contents_ = [];
