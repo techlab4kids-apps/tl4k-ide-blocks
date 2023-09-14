@@ -680,12 +680,14 @@ Blockly.Toolbox.Category = function(parent, parentHtml, domTree) {
   this.showStatusButton_ = domTree.getAttribute('showStatusButton');
   var optionsName = domTree.getAttribute('options');
   this.menuOptions_ = Blockly.Toolbox.menus_[optionsName]
-  // wrap all the callbacks so they know who is calling
-  for (var i = 0; i < this.menuOptions_.length; i++) {
-    var callback = this.menuOptions_[i].callback
-    var self = this
-    this.menuOptions_[i].callback = function() {
-      callback(self.id_)
+  if (optionsName) {
+    // wrap all the callbacks so they know who is calling
+    for (var i = 0; i < this.menuOptions_.length; i++) {
+      var callback = this.menuOptions_[i].callback
+      var self = this
+      this.menuOptions_[i].callback = function() {
+        callback(self.id_)
+      }
     }
   }
   this.contents_ = [];
