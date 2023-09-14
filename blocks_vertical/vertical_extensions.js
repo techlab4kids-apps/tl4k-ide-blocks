@@ -241,6 +241,7 @@ Blockly.ScratchBlocks.VerticalExtensions.PROCEDURE_CALL_CONTEXTMENU = {
 Blockly.ScratchBlocks.VerticalExtensions.SCRATCH_EXTENSION = function() {
   this.isScratchExtension = true;
 };
+
 /**
  * Register all extensions for scratch-blocks.
  * @package

@@ -28,7 +28,7 @@
     <script src="../blocks_vertical/data.js"></script>
     <script src="../blocks_vertical/extensions.js"></script>
     <script src="../blocks_vertical/default_toolbox.js"></script>
-    <script src="../blocks_vertical/live tests.js"></script>
+    <script src="../blocks_vertical/live_tests.js"></script>
 
     <script>
       'use strict';
@@ -71,6 +71,16 @@
         var locale = match ? match[1] : 'en';
         Blockly.ScratchMsgs.setLocale(locale);
         document.forms.options.elements.locale.value = locale;
+
+        Blockly.Toolbox.registerMenu('extensionControls', [
+          {
+            text: 'Remove Extension',
+            enabled: true,
+            callback: function() {
+              alert('idk')
+            }
+          }
+        ])
 
         // Create main workspace.
         workspace = Blockly.inject('blocklyDiv', {

@@ -30,6 +30,7 @@ goog.require('Blockly.Events.Ui');
 goog.require('Blockly.HorizontalFlyout');
 goog.require('Blockly.Touch');
 goog.require('Blockly.VerticalFlyout');
+goog.require('Blockly.ContextMenu');
 goog.require('goog.dom');
 goog.require('goog.dom.TagName');
 goog.require('goog.events');
@@ -83,6 +84,11 @@ Blockly.Toolbox = function(workspace) {
   this.toolboxPosition = workspace.options.toolboxPosition;
 
 };
+
+Blockly.Toolbox.menus_ = {}
+Blockly.Toolbox.registerMenu = function(name, options) {
+  Blockly.Toolbox.menus_[name] = options
+}
 
 /**
  * Width of the toolbox, which changes only in vertical layout.
@@ -558,10 +564,16 @@ Blockly.Toolbox.prototype.selectCategoryById = function(id) {
  */
 Blockly.Toolbox.prototype.setSelectedItemFactory = function(item) {
   var selectedItem = item;
-  return function() {
-    if (!this.workspace_.isDragging()) {
-      this.setSelectedItem(selectedItem);
-      Blockly.Touch.clearTouchIdentifier();
+  var RTL = this.RTL
+  return function(e) {
+    if (e.button == 0) {
+      if (!this.workspace_.isDragging()) {
+        this.setSelectedItem(selectedItem);
+        Blockly.Touch.clearTouchIdentifier();
+      }
+    } else if (e.button == 2) {
+      var menuOptions = item.getMenuOptions()
+      Blockly.ContextMenu.show(e, menuOptions, RTL)
     }
   };
 };
@@ -666,6 +678,8 @@ Blockly.Toolbox.Category = function(parent, parentHtml, domTree) {
   this.custom_ = domTree.getAttribute('custom');
   this.iconURI_ = domTree.getAttribute('iconURI');
   this.showStatusButton_ = domTree.getAttribute('showStatusButton');
+  var optionsName = domTree.getAttribute('options');
+  this.menuOptions_ = Blockly.Toolbox.menus_[optionsName]
   this.contents_ = [];
   if (!this.custom_) {
     this.parseContents_(domTree);
@@ -730,6 +744,10 @@ Blockly.Toolbox.Category.prototype.createDom = function() {
   Blockly.bindEvent_(
       this.item_, 'mouseup', toolbox, toolbox.setSelectedItemFactory(this));
 };
+
+Blockly.Toolbox.Category.prototype.getMenuOptions = function() {
+  return this.menuOptions_
+}
 
 /**
  * Set the selected state of this category.
