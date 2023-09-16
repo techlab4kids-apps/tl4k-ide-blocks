@@ -34,6 +34,7 @@ goog.require('Blockly.BlockSvg.render');
 goog.require('Blockly.DropDownDiv');
 goog.require('Blockly.Events');
 goog.require('Blockly.FieldAngle');
+goog.require('Blockly.FieldButton');
 goog.require('Blockly.FieldCheckbox');
 goog.require('Blockly.FieldCheckboxOriginal');
 goog.require('Blockly.FieldColour');
@@ -42,6 +43,8 @@ goog.require('Blockly.FieldColourSlider');
 // Add it only if you need it.
 //goog.require('Blockly.FieldDate');
 goog.require('Blockly.FieldDropdown');
+goog.require('Blockly.FieldExpandableAdd');
+goog.require('Blockly.FieldExpandableRemove');
 goog.require('Blockly.FieldIconMenu');
 goog.require('Blockly.FieldImage');
 goog.require('Blockly.FieldNote');
