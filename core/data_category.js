@@ -42,8 +42,8 @@ goog.require('Blockly.Workspace');
  */
 Blockly.VariableCategory = function(workspace) {
   var variableModelList = workspace.getVariablesOfType('');
-  var localVars = variableModeList.filter(v => v.isLocal);
-  var globalVars = variableModeList.filter(v => !v.isLocal);
+  var localVars = variableModelList.filter(v => v.isLocal);
+  var globalVars = variableModelList.filter(v => !v.isLocal);
   localVars.sort(Blockly.VariableModel.compareByName);
   globalVars.sort(Blockly.VariableModel.compareByName);
   var xmlList = [];
@@ -73,8 +73,8 @@ Blockly.VariableCategory = function(workspace) {
 };
 Blockly.VariableCategory.ListCategory = function(workspace) {
   var variableModelList = workspace.getVariablesOfType('list');
-  var localVars = variableModeList.filter(v => v.isLocal);
-  var globalVars = variableModeList.filter(v => !v.isLocal);
+  var localVars = variableModelList.filter(v => v.isLocal);
+  var globalVars = variableModelList.filter(v => !v.isLocal);
   localVars.sort(Blockly.VariableModel.compareByName);
   globalVars.sort(Blockly.VariableModel.compareByName);
   var xmlList = [];
