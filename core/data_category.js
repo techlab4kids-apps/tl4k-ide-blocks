@@ -50,16 +50,15 @@ Blockly.VariableCategory = function(workspace) {
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'VARIABLE');
 
-  Blockly.VariableCategory.addLabel(xmlList, "Public Variables")
-  for (var i = 0; i < globalVars.length; i++) {
-    Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
-  }
-  Blockly.VariableCategory.addLabel(xmlList, "Private Variables")
-  for (var i = 0; i < localVars.length; i++) {
-    Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
-  }
-
   if (variableModelList.length > 0) {
+    Blockly.VariableCategory.addLabel(xmlList, "Public Variables")
+    for (var i = 0; i < globalVars.length; i++) {
+      Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
+    }
+    Blockly.VariableCategory.addLabel(xmlList, "Private Variables")
+    for (var i = 0; i < localVars.length; i++) {
+      Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
+    }
     xmlList[xmlList.length - 1].setAttribute('gap', 24);
     var firstVariable = variableModelList[0];
 
@@ -81,16 +80,15 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'LIST');
 
-  Blockly.VariableCategory.addLabel(xmlList, "Public Lists")
-  for (var i = 0; i < globalVars.length; i++) {
-    Blockly.VariableCategory.addDataList(xmlList, globalVars[i]);
-  }
-  Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
-  for (var i = 0; i < localVars.length; i++) {
-    Blockly.VariableCategory.addDataList(xmlList, localVars[i]);
-  }
-
   if (variableModelList.length > 0) {
+    Blockly.VariableCategory.addLabel(xmlList, "Public Lists")
+    for (var i = 0; i < globalVars.length; i++) {
+      Blockly.VariableCategory.addDataList(xmlList, globalVars[i]);
+    }
+    Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
+    for (var i = 0; i < localVars.length; i++) {
+      Blockly.VariableCategory.addDataList(xmlList, localVars[i]);
+    }
     xmlList[xmlList.length - 1].setAttribute('gap', 24);
     var firstList = variableModelList[0];
 
