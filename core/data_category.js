@@ -89,7 +89,7 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
       Blockly.VariableCategory.addDataList(xmlList, globalVars[i]);
     }
   }
-  if (lovalVars > 0) { 
+  if (localVars > 0) { 
     Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
     for (var i = 0; i < localVars.length; i++) {
       Blockly.VariableCategory.addDataList(xmlList, localVars[i]);
