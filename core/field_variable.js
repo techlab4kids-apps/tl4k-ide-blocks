@@ -233,7 +233,7 @@ Blockly.FieldVariable.prototype.typeIsAllowed_ = function(type) {
 Blockly.FieldVariable.prototype.getVariableTypes_ = function() {
   // TODO (#1513): Try to avoid calling this every time the field is edited.
   var variableTypes = this.variableTypes;
-  if (variableTypes === null) {
+  if (!variableTypes) {
     // If variableTypes is null, return all variable types.
     if (this.sourceBlock_) {
       var workspace = this.sourceBlock_.workspace;
