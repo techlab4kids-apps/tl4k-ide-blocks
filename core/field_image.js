@@ -87,7 +87,7 @@ Blockly.FieldImage.prototype.EDITABLE = true;
  * @type {boolean}
  * @public
  */
-Blockly.FieldLabelSerializable.prototype.SERIALIZABLE = false;
+Blockly.FieldImage.prototype.SERIALIZABLE = false;
 
 /**
  * Install this image on a block.
