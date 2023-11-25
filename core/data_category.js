@@ -42,13 +42,21 @@ goog.require('Blockly.Workspace');
  */
 Blockly.VariableCategory = function(workspace) {
   var variableModelList = workspace.getVariablesOfType('');
-  variableModelList.sort(Blockly.VariableModel.compareByName);
+  var localVars = variableModeList.filter(v => v.isLocal);
+  var globalVars = variableModeList.filter(v => !v.isLocal);
+  localVars.sort(Blockly.VariableModel.compareByName);
+  globalVars.sort(Blockly.VariableModel.compareByName);
   var xmlList = [];
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'VARIABLE');
 
-  for (var i = 0; i < variableModelList.length; i++) {
-    Blockly.VariableCategory.addDataVariable(xmlList, variableModelList[i]);
+  Blockly.VariableCategory.addLabel(xmlList, "Public Variables")
+  for (var i = 0; i < globalVars.length; i++) {
+    Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
+  }
+  Blockly.VariableCategory.addLabel(xmlList, "Private Variables")
+  for (var i = 0; i < localVars.length; i++) {
+    Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
   }
 
   if (variableModelList.length > 0) {
@@ -64,16 +72,22 @@ Blockly.VariableCategory = function(workspace) {
   return xmlList;
 };
 Blockly.VariableCategory.ListCategory = function(workspace) {
-  var variableModelList = workspace.getVariablesOfType('');
-  variableModelList.sort(Blockly.VariableModel.compareByName);
-  var firstVariable = variableModelList[0];
+  var variableModelList = workspace.getVariablesOfType('list');
+  var localVars = variableModeList.filter(v => v.isLocal);
+  var globalVars = variableModeList.filter(v => !v.isLocal);
+  localVars.sort(Blockly.VariableModel.compareByName);
+  globalVars.sort(Blockly.VariableModel.compareByName);
   var xmlList = [];
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'LIST');
-  variableModelList = workspace.getVariablesOfType(Blockly.LIST_VARIABLE_TYPE);
-  variableModelList.sort(Blockly.VariableModel.compareByName);
-  for (var i = 0; i < variableModelList.length; i++) {
-    Blockly.VariableCategory.addDataList(xmlList, variableModelList[i]);
+
+  Blockly.VariableCategory.addLabel(xmlList, "Public Lists")
+  for (var i = 0; i < globalVars.length; i++) {
+    Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
+  }
+  Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
+  for (var i = 0; i < localVars.length; i++) {
+    Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
   }
 
   if (variableModelList.length > 0) {
@@ -420,6 +434,12 @@ Blockly.VariableCategory.addCreateButton = function(xmlList, workspace, type) {
   workspace.registerButtonCallback(callbackKey, callback);
   xmlList.push(button);
 };
+
+Blockly.VariableCategory.addLabel = function(xmlList, text) {
+  var labelText = '<label text="' + text + '"></label>';
+  var label = Blockly.Xml.textToDom(labelText).firstChild;
+  xmlList.push(label);
+}
 
 /**
  * Construct a variable block with the given variable, blockType, and optional
