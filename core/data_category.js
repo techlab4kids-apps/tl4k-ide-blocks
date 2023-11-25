@@ -49,13 +49,13 @@ Blockly.VariableCategory = function(workspace) {
   var xmlList = [];
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'VARIABLE');
-  if (globalVars > 0) {
+  if (globalVars.length > 0) {
     Blockly.VariableCategory.addLabel(xmlList, "Public Variables")
     for (var i = 0; i < globalVars.length; i++) {
       Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
     }
   }
-  if (localVars > 0) { 
+  if (localVars.length > 0) { 
     Blockly.VariableCategory.addLabel(xmlList, "Private Variables")
     for (var i = 0; i < localVars.length; i++) {
       Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
@@ -83,13 +83,13 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
   var xmlList = [];
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'LIST');
-  if (globalVars > 0) {
+  if (globalVars.length > 0) {
     Blockly.VariableCategory.addLabel(xmlList, "Public Lists")
     for (var i = 0; i < globalVars.length; i++) {
       Blockly.VariableCategory.addDataList(xmlList, globalVars[i]);
     }
   }
-  if (localVars > 0) { 
+  if (localVars.length > 0) { 
     Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
     for (var i = 0; i < localVars.length; i++) {
       Blockly.VariableCategory.addDataList(xmlList, localVars[i]);
