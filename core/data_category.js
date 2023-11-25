@@ -436,7 +436,7 @@ Blockly.VariableCategory.addCreateButton = function(xmlList, workspace, type) {
 };
 
 Blockly.VariableCategory.addLabel = function(xmlList, text) {
-  var labelText = '<label text="' + text + '"></label>';
+  var labelText = '<xml><label text="' + text + '"></label></xml>';
   var label = Blockly.Xml.textToDom(labelText).firstChild;
   xmlList.push(label);
 }
