@@ -107,9 +107,14 @@ Blockly.FieldVariable.prototype.initModel = function() {
   }
   this.workspace_ = this.sourceBlock_.workspace;
   // Initialize this field if it's in a broadcast block in the flyout
-  var variable = this.initFlyoutBroadcast_(this.workspace_);
-  if (!variable) {
-    var variable = Blockly.Variables.getOrCreateVariablePackage(
+  var variable = Blockly.Variables.getVariable(this.workspace_, this.value_);
+  var vars = this.workspace_.getVariablesOfType(this.defaultType_);
+  if (this.workspace_.isFlyout && !variable && vars.length > 0) {
+    vars.sort(Blockly.VariableModel.compareByName);
+    variable = vars[0];
+  }
+  if (vars.length < 1) {
+    variable = Blockly.Variables.getOrCreateVariablePackage(
         this.workspace_, null, this.defaultVariableName, this.defaultType_);
   }
   // Don't fire a change event for this setValue.  It would have null as the
@@ -119,29 +124,6 @@ Blockly.FieldVariable.prototype.initModel = function() {
     this.setValue(variable.getId());
   } finally {
     Blockly.Events.enable();
-  }
-};
-
-/**
- * Initialize broadcast blocks in the flyout.
- * Implicit deletion of broadcast messages from the scratch vm may cause
- * broadcast blocks in the flyout to change which variable they display as the
- * selected option when the workspace is refreshed.
- * Re-sort the broadcast messages by name, and set the field value to the id
- * of the variable that comes first in sorted order.
- * @param {!Blockly.Workspace} workspace The flyout workspace containing the
- * broadcast block.
- * @return {string} The variable of type 'broadcast_msg' that comes
- * first in sorted order.
- */
-Blockly.FieldVariable.prototype.initFlyoutBroadcast_ = function(workspace) {
-  // Using shorter name for this constant
-  var broadcastMsgType = Blockly.BROADCAST_MESSAGE_VARIABLE_TYPE;
-  var broadcastVars = workspace.getVariablesOfType(broadcastMsgType);
-  if(workspace.isFlyout && this.defaultType_ == broadcastMsgType &&
-      broadcastVars.length != 0) {
-    broadcastVars.sort(Blockly.VariableModel.compareByName);
-    return broadcastVars[0];
   }
 };
 

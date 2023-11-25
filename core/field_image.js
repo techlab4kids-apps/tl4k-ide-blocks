@@ -42,7 +42,7 @@ goog.require('goog.userAgent');
  * @extends {Blockly.Field}
  * @constructor
  */
-Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl) {
+Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl, opt_onclick, opt_id) {
   this.sourceBlock_ = null;
 
   // Ensure height and width are numbers.  Strings are bad at math.
@@ -51,6 +51,8 @@ Blockly.FieldImage = function(src, width, height, opt_alt, flip_rtl) {
   this.size_ = new goog.math.Size(this.width_, this.height_);
   this.text_ = opt_alt || '';
   this.flipRTL_ = flip_rtl;
+  this.onclick_ = opt_onclick || function() {}
+  this.id_ = opt_id || ''
   this.setValue(src);
 };
 goog.inherits(Blockly.FieldImage, Blockly.Field);
@@ -77,7 +79,15 @@ Blockly.FieldImage.fromJson = function(options) {
 /**
  * Editable fields are saved by the XML renderer, non-editable fields are not.
  */
-Blockly.FieldImage.prototype.EDITABLE = false;
+Blockly.FieldImage.prototype.EDITABLE = true;
+
+/**
+ * Serializable fields are saved by the XML renderer, non-serializable fields
+ * are not.  This field should not be serialized.
+ * @type {boolean}
+ * @public
+ */
+Blockly.FieldLabelSerializable.prototype.SERIALIZABLE = false;
 
 /**
  * Install this image on a block.
@@ -188,6 +198,14 @@ Blockly.FieldImage.prototype.render_ = function() {
  */
 Blockly.FieldImage.prototype.updateWidth = function() {
   // NOP
+};
+
+/**
+ * for making image-based buttons
+ * @private
+ */
+Blockly.FieldImage.prototype.showEditor_ = function() {
+  this.onclick_(this.id_)
 };
 
 Blockly.Field.register('field_image', Blockly.FieldImage);

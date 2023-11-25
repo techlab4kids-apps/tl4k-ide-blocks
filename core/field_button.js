@@ -38,8 +38,10 @@ goog.require('Blockly.Field');
  */
 Blockly.FieldButton = function(state, opt_validator) {
   Blockly.FieldButton.superClass_.constructor.call(this, '', opt_validator);
-  this.label_ = state.label;
+  this.text_ = state.image_url ? '' : state.label;
   this.opcode_ = state.opcode;
+  this.color_ = state.color || {};
+  this.updateTextNode_()
   this.addArgType('button');
 };
 goog.inherits(Blockly.FieldButton, Blockly.Field);
@@ -78,16 +80,23 @@ Blockly.FieldButton.prototype.init = function() {
       'ry': 4,
       'width': this.size_.width,
       'height': this.size_.height,
-      'fill': this.sourceBlock_.getColour(),
-      'stroke': this.sourceBlock_.getColourTertiary(),
+      'fill': this.color_.primary || this.sourceBlock_.getColour(),
+      'stroke': this.color_.tertiary || this.sourceBlock_.getColourTertiary(),
       'cursor': this.CURSOR
     }
   );
+  this.textElement_.remove();
+  this.textElement_ = Blockly.utils.createSvgElement('text',
+    {
+      'class': 'blocklyText',
+      'y': this.size_.height / 2 + Blockly.BlockSvg.FIELD_TOP_PADDING,
+      'text-anchor': 'middle',
+      'dominant-baseline': 'middle',
+      'dy': goog.userAgent.EDGE_OR_IE ? Blockly.Field.IE_TEXT_OFFSET : '0',
+      'fill': this.color_.text || null,
+    }, null);
+  this.fieldGroup_.append(this.textElement_)
   this.fieldGroup_.insertBefore(this.box_, this.textElement_);
-  var textNode = document.createTextNode(this.label_);
-  // textNode.style.fill = "#ffffff";
-  this.textElement_.append(textNode);
-  this.fieldGroup_.append(this.textElement_);
 };
 
 /**
@@ -97,7 +106,6 @@ Blockly.FieldButton.prototype.init = function() {
 Blockly.FieldButton.prototype.getValue = function() {
   return '';
 };
-
 /**
  * Triggers when the button is clicked.
  * @private

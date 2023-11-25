@@ -225,6 +225,8 @@ Blockly.Blocks['control_fieldbutton'] = {
   onFieldButtonClicked_: function (opcode) {
     if (opcode === "alert") {
       alert('wow');
+    } else if (opcode === "flaberghasted") {
+      alert(':rivflabbergasted:')
     }
   }
 };
