@@ -332,6 +332,36 @@ Blockly.Blocks['looks_hideallsprites'] = {
   }
 };
 
+Blockly.Blocks["looks_setTintColor"] = {
+  init: function() {
+    this.jsonInit({
+      "inputsInline": true,
+      "args0":[
+        {
+          "type":"input_value",
+          "name":"color"
+        }
+      ],
+      "message0":"set tint color to %1",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+Blockly.Blocks['looks_tintColor'] = {
+  /**
+   * pm: Block to report the tint color effect in hex code
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": "tint color",
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "output_string"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_changeeffectby'] = {
   /**
    * Block to change graphic effect.
