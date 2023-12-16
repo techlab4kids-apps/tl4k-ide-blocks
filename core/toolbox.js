@@ -766,6 +766,7 @@ Blockly.Toolbox.Category.prototype.createDom = function() {
           'src': 'https://turbobuilder-steel.vercel.app/favicon.png',
           'style': 'display: none;'
         })
+    this.bubble_.appendChild(tbIcon)
   }
   this.item_.appendChild(this.bubble_);
   this.item_.appendChild(this.label_);
