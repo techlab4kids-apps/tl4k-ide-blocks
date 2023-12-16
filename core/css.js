@@ -1355,6 +1355,7 @@ Blockly.Css.CONTENT = [
     'position: absolute;',
     'top: -3px;',
     'right: -3px;',
+    'z-index: 2',
   '}',
 
   '.scratchCategoryItemIcon {',
