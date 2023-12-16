@@ -760,6 +760,12 @@ Blockly.Toolbox.Category.prototype.createDom = function() {
         {'class': 'scratchCategoryItemBubble'});
     this.bubble_.style.backgroundColor = this.colour_;
     this.bubble_.style.borderColor = this.secondaryColour_;
+    var tbIcon = goog.dom.createDom('img',
+        {
+          'class': 'tbBubbleIcon',
+          'src': 'https://turbobuilder-steel.vercel.app/favicon.png',
+          'style': 'display: none;'
+        })
   }
   this.item_.appendChild(this.bubble_);
   this.item_.appendChild(this.label_);

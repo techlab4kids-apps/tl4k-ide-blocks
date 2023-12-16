@@ -1346,6 +1346,17 @@ Blockly.Css.CONTENT = [
     'margin: 0 auto 0.125rem;',
   '}',
 
+  '.tbBubbleIcon {',
+    'width: 16px;',
+    'height: 16px;',
+    'background: #0006;',
+    'backdrop-filter: blur(2px);',
+    'border-radius: 8px;',
+    'position: absolute;',
+    'top: -3px;',
+    'right: -3px;',
+  '}',
+
   '.scratchCategoryItemIcon {',
     'width: 1.25rem;',
     'height: 1.25rem;',
