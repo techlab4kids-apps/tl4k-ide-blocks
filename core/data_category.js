@@ -50,13 +50,13 @@ Blockly.VariableCategory = function(workspace) {
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'VARIABLE');
   if (globalVars.length > 0) {
-    Blockly.VariableCategory.addLabel(xmlList, "Public Variables")
+    Blockly.VariableCategory.addLabel(xmlList, "Variables for all sprites")
     for (var i = 0; i < globalVars.length; i++) {
       Blockly.VariableCategory.addDataVariable(xmlList, globalVars[i]);
     }
   }
   if (localVars.length > 0) { 
-    Blockly.VariableCategory.addLabel(xmlList, "Private Variables")
+    Blockly.VariableCategory.addLabel(xmlList, "Variables for this sprite")
     for (var i = 0; i < localVars.length; i++) {
       Blockly.VariableCategory.addDataVariable(xmlList, localVars[i]);
     }
