@@ -1019,8 +1019,8 @@ Blockly.WorkspaceSvg.prototype.reportValue = function(id, value, isError) {
   var contentDiv = Blockly.DropDownDiv.getContentDiv();
   var valueReportBox = goog.dom.createElement('div');
   valueReportBox.setAttribute('class', 'valueReportBox');
-  if (!value.toReporterContent) {
-    valueReportBox.textContent = value;
+  if (typeof value !== 'object' || typeof value.toReporterContent !== 'function') {
+    valueReportBox.textContent = String(value);
   } else {
     valueReportBox.appendChild(value.toReporterContent());
   }
