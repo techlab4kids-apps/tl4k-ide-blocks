@@ -1017,14 +1017,14 @@ Blockly.WorkspaceSvg.prototype.reportValue = function(id, value, isError) {
   Blockly.DropDownDiv.hideWithoutAnimation();
   Blockly.DropDownDiv.clearContent();
   var contentDiv = Blockly.DropDownDiv.getContentDiv();
+  var valueReportBox = goog.dom.createElement('div');
+  valueReportBox.setAttribute('class', 'valueReportBox');
   if (!value.toReporterContent) {
-    var valueReportBox = goog.dom.createElement('div');
-    valueReportBox.setAttribute('class', 'valueReportBox');
     valueReportBox.textContent = value;
-    contentDiv.appendChild(valueReportBox);
   } else {
-    contentDiv.appendChild(value.toReporterContent())
+    valueReportBox.appendChild(value.toReporterContent());
   }
+  contentDiv.appendChild(valueReportBox);
   Blockly.DropDownDiv.setColour(
       Blockly.Colours.valueReportBackground,
       isError 
