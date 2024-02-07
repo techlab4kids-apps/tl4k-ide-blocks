@@ -307,8 +307,13 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
     if (component.substring(0, 1) == '%') {
       var argumentType = component.substring(1, 2);
       if (!(argumentType == 'n' || argumentType == 'b' || argumentType == 's')) {
+        labelText = component.trim();
+        continue
+        /*
+        // user error shouldnt literally nuke the app, ignore invalid markers instead of erroring on them
         throw new Error(
             'Found an custom procedure with an invalid type: ' + argumentType);
+        */
       }
       labelText = component.substring(2).trim();
 
