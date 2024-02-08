@@ -93,7 +93,7 @@ Blockly.FieldButton.prototype.init = function() {
       'text-anchor': 'middle',
       'dominant-baseline': 'middle',
       'dy': goog.userAgent.EDGE_OR_IE ? Blockly.Field.IE_TEXT_OFFSET : '0',
-      'fill': this.color_.text || null,
+      'fill': this.color_.text || "#fff",
     }, null);
   this.fieldGroup_.append(this.textElement_)
   this.fieldGroup_.insertBefore(this.box_, this.textElement_);

@@ -64,11 +64,6 @@ Blockly.FieldCheckboxOriginal.fromJson = function(options) {
 Blockly.FieldCheckboxOriginal.CHECK_CHAR = '\u2713';
 
 /**
- * Character for the checkmark when it is not checked.
- */
-Blockly.FieldCheckboxOriginal.UNCHECKED_CHAR = 'X';
-
-/**
  * Mouse cursor style when over the hotspot that initiates editability.
  */
 Blockly.FieldCheckboxOriginal.prototype.CURSOR = 'default';
@@ -82,21 +77,59 @@ Blockly.FieldCheckboxOriginal.prototype.init = function() {
     return;
   }
   Blockly.FieldCheckboxOriginal.superClass_.init.call(this);
+  this.size_.width = 32;
+  var notInShadow = !this.sourceBlock_.isShadow();
   // The checkbox doesn't use the inherited text element.
-  // Instead it uses a custom checkmark element that is either visible or not.
-  this.checkElement_ = Blockly.utils.createSvgElement('text',
-      {'class': 'blocklyText blocklyCheckbox', 'x': -1, 'y': 22},
-      this.fieldGroup_);
-  var textNode = document.createTextNode(Blockly.FieldCheckboxOriginal.CHECK_CHAR);
-  this.checkTextNode_ = textNode;
-  this.checkElement_.appendChild(textNode);
-  // this.checkElement_.style.display = this.state_ ? 'block' : 'none';
-  this.checkTextNode_.nodeValue = this.state_ ?
-    Blockly.FieldCheckboxOriginal.CHECK_CHAR :
-    Blockly.FieldCheckboxOriginal.UNCHECKED_CHAR;
-  this.checkElement_.style.display = 'block';
+  // Instead it uses a custom checkmark image that is either visible or not.
+  this.checkElement_ = Blockly.utils.createSvgElement('image',
+      {
+        'class': 'blocklyCheckbox',
+        'width': 31,
+        'height': 32,
+        'x': 0,
+        'y': 0
+    }, this.fieldGroup_);
+  this.checkElement_.setAttributeNS('http://www.w3.org/1999/xlink',
+    'xlink:href', Blockly.mainWorkspace.options.pathToMedia + 'checkmark-dark.svg');
+
+  if (notInShadow) {
+    this.box_ = Blockly.utils.createSvgElement('rect',
+      {
+        'rx': Blockly.BlockSvg.CORNER_RADIUS,
+        'ry': Blockly.BlockSvg.CORNER_RADIUS,
+        'x': 0,
+        'y': 0,
+        'width': this.size_.width,
+        'height': this.size_.height,
+        'fill': "#fff",
+        'stroke': this.sourceBlock_.getColourTertiary(),
+        'cursor': 'pointer'
+      }
+    );
+    this.fieldGroup_.insertBefore(this.box_, this.checkElement_);
+  }
+  this.checkElement_.style.display = this.state_ ? 'block' : 'none';
   this.checkElement_.style.cursor = 'pointer';
 };
+
+/**
+ * overide the width update so that this field has a width of 32
+ **/
+// Blockly.FieldCheckboxOriginal.prototype.updateWidth = function () {
+//   // call the orignal updateWidth
+//   Blockly.FieldCheckboxOriginal.superClass_.updateWidth.call(this);
+//   this.size_.width = 32;
+// }
+// /**
+//  * overide the width update so that this field has a width of 32
+//  **/
+// Blockly.FieldCheckboxOriginal.prototype.getSize = function () {
+//   const size = Blockly.FieldCheckboxOriginal.superClass_.getSize.call(this);
+//   return {
+//     ...size,
+//     width: 32
+//   };
+// }
 
 /**
  * Return 'TRUE' if the checkbox is checked, 'FALSE' otherwise.
@@ -121,11 +154,7 @@ Blockly.FieldCheckboxOriginal.prototype.setValue = function(newBool) {
     }
     this.state_ = newState;
     if (this.checkElement_) {
-      // this.checkElement_.style.display = newState ? 'block' : 'none';
-      this.checkTextNode_.nodeValue = this.state_ ?
-        Blockly.FieldCheckboxOriginal.CHECK_CHAR :
-        Blockly.FieldCheckboxOriginal.UNCHECKED_CHAR;
-      this.checkElement_.style.display = 'block';
+      this.checkElement_.style.display = newState ? 'block' : 'none';
     }
   }
 };

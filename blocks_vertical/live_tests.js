@@ -162,7 +162,7 @@ Blockly.Blocks['motion_mutatorCheckboxTest'] = {
     for (let i = 0; i < this.inputs_.length; i++) {
       // BaseBlockly.Msg[this.BORDER_FIELDS[i]] = this.FIELD_NAMES[i];
       containerBlock.appendDummyInput()
-        .setAlign(Blockly.ALIGN_RIGHT)
+        // .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(this.FIELD_NAMES[i])
         .appendField(new Blockly.FieldCheckboxOriginal(this.inputs_[i] ? "TRUE" : "FALSE"), this.BORDER_FIELDS[i].toUpperCase());
     }
@@ -228,6 +228,29 @@ Blockly.Blocks['control_fieldbutton'] = {
     } else if (opcode === "flaberghasted") {
       alert(':rivflabbergasted:')
     }
+  }
+};
+
+Blockly.Blocks['control_fieldcheckboxoriginal'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function () {
+    this.jsonInit({
+      "message0": 'mm checkbox %1 gagag %2',
+      "args0": [
+        {
+          "type": "field_checkbox_original",
+          "name": "BUTTON"
+        },
+        {
+          "type": "field_checkbox_original",
+          "name": "BUTT2ON"
+        }
+      ],
+      "category": Blockly.Categories.control,
+      "extensions": ["colours_control", "shape_statement"]
+    });
   }
 };
 
