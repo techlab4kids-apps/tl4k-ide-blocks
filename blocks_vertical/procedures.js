@@ -304,15 +304,17 @@ Blockly.ScratchBlocks.ProcedureUtils.createAllInputs_ = function(connectionMap) 
   var argumentCount = 0;
   for (var i = 0, component; component = procComponents[i]; i++) {
     var labelText;
-    if (component.substring(0, 1) == '%') {
-      var argumentType = component.substring(1, 2);
+    var argumentType = component.substring(1, 2);
+    var id = this.argumentIds_[argumentCount];
+    // user error shouldnt literally nuke the app, ignore invalid markers instead of erroring on them
+    if (component.substring(0, 1) == '%' && (argumentType == 'n' || argumentType == 'b' || argumentType == 's') && id) {
+      /*
       if (!(argumentType == 'n' || argumentType == 'b' || argumentType == 's')) {
         throw new Error(
             'Found an custom procedure with an invalid type: ' + argumentType);
       }
+      */
       labelText = component.substring(2).trim();
-
-      var id = this.argumentIds_[argumentCount];
 
       var input = this.appendValueInput(id);
       if (argumentType == 'b') {

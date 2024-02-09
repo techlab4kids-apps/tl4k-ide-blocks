@@ -84,13 +84,13 @@ Blockly.VariableCategory.ListCategory = function(workspace) {
 
   Blockly.VariableCategory.addCreateButton(xmlList, workspace, 'LIST');
   if (globalVars.length > 0) {
-    Blockly.VariableCategory.addLabel(xmlList, "Public Lists")
+    Blockly.VariableCategory.addLabel(xmlList, "Lists for all sprites")
     for (var i = 0; i < globalVars.length; i++) {
       Blockly.VariableCategory.addDataList(xmlList, globalVars[i]);
     }
   }
-  if (localVars.length > 0) { 
-    Blockly.VariableCategory.addLabel(xmlList, "Private Lists")
+  if (localVars.length > 0) {
+    Blockly.VariableCategory.addLabel(xmlList, "Lists for this sprite")
     for (var i = 0; i < localVars.length; i++) {
       Blockly.VariableCategory.addDataList(xmlList, localVars[i]);
     }

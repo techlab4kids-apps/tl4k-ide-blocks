@@ -541,7 +541,9 @@ Blockly.Blocks.defaultToolbox = '<xml id="toolbox-categories" style="display: no
     '<block type="extension_wedo_motor" id="extension_wedo_motor"></block>' +
     '<block type="extension_wedo_hat" id="extension_wedo_hat"></block>' +
     '<block type="extension_wedo_boolean" id="extension_wedo_boolean"></block>' +
-    '<block type="control_fieldbutton" id="extension_wedo_boolean"></block>' +
+  '<block type="control_fieldbutton" id="control_fieldbutton"></block>' +
+  '<block type="control_fieldcheckboxoriginal" id="control_fieldcheckboxoriginal"></block>' +
+  '<block type="motion_mutatorCheckboxTest" id="motion_mutatorCheckboxTest"></block>' +
     '<block type="operators_expandablejoininputs" id="extension_wedo_boolean"></block>' +
     '<block type="extension_wedo_tilt_reporter" id="extension_wedo_reporter">' +
       '<value name="TILT">' +
