@@ -367,10 +367,12 @@ Blockly.FieldDropdown.prototype.isOptionListDynamic = function() {
  *     (human-readable text or image, language-neutral name).
  */
 Blockly.FieldDropdown.prototype.getOptions = function() {
-  if (goog.isFunction(this.menuGenerator_)) {
-    return this.menuGenerator_.call(this);
-  }
-  return /** @type {!Array.<!Array.<string>>} */ (this.menuGenerator_);
+  /** @type {!Array.<!Array.<string>>} */
+  var list = goog.isFunction(this.menuGenerator_)
+    ? this.menuGenerator_.call(this)
+    : this.menuGenerator_;
+
+  return list.length ? list : [['', '']];
 };
 
 /**

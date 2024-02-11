@@ -506,14 +506,29 @@ Blockly.Flyout.prototype.show = function(xmlList) {
           return block.id === id;
         });
 
-
-        // If we found a recycled item, reuse the BlockSVG from last time.
-        // Otherwise, convert the XML block to a BlockSVG.
-        var curBlock;
-        if (recycled > -1) {
-          curBlock = this.recycleBlocks_.splice(recycled, 1)[0];
-        } else {
-          curBlock = Blockly.Xml.domToBlock(xml, this.workspace_);
+        try {
+          // If we found a recycled item, reuse the BlockSVG from last time.
+          // Otherwise, convert the XML block to a BlockSVG.
+          var curBlock;
+          if (recycled > -1) {
+            curBlock = this.recycleBlocks_.splice(recycled, 1)[0];
+          } else {
+            curBlock = Blockly.Xml.domToBlock(xml, this.workspace_);
+          }
+        } catch (err) {
+          var type = xml.getAttribute('type');
+          console.error('failed to load block "' + type + '" for toolbox;', err)
+          // when a block errors, obscure it from the ui so it doesnt cause death
+          var errorString = 
+            '<xml><label text="ERR: Block with type ' + 
+              goog.string.htmlEscape('"' + type + '"') + 
+            ' failed to load"></label></xml>'
+          var errorXML = Blockly.Xml.textToDom(errorString).firstChild
+          var curButton = new Blockly.FlyoutButton(this.workspace_,
+              this.targetWorkspace_, errorXML, true);
+          contents.push({type: 'button', button: curButton});
+          gaps.push(default_gap);
+          continue;
         }
 
         if (curBlock.disabled) {
