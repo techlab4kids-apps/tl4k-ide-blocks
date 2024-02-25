@@ -96,6 +96,25 @@ Blockly.Blocks['looks_thinkforsecs'] = {
   }
 };
 
+Blockly.Blocks['looks_tutorialmod_alert'] = {
+  /**
+   * @this Blockly.Block
+   */
+  init: function(){
+    this.jsonInit({
+      "message0": Blockly.Msg.LOOKS_TUTORIALMOD_ALERT, 
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "MESSAGE"
+        }
+      ],
+      "category": Blockly.Categories.looks,
+      "extensions": ["colours_looks", "shape_statement"]
+    });
+  }
+};
+
 Blockly.Blocks['looks_think'] = {
   /**
    * Block to think.
