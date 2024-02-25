@@ -823,6 +823,20 @@ Blockly.Blocks['sensing_username'] = {
     });
   }
 };
+Blockly.Blocks['sensing_unix'] = {
+  /**
+   * Block to report user's username
+   * @this Blockly.Block
+   */
+  init: function() {
+    this.jsonInit({
+      "message0": Blockly.Msg.SENSING_UNIX,
+      "category": Blockly.Categories.sensing,
+      "checkboxInFlyout": false,
+      "extensions": ["colours_sensing", "output_number"]
+    });
+  }
+};
 
 Blockly.Blocks['sensing_userid'] = {
   /**
