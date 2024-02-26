@@ -831,6 +831,15 @@ Blockly.Blocks['sensing_unix'] = {
   init: function() {
     this.jsonInit({
       "message0": Blockly.Msg.SENSING_UNIX,
+      "args0": [
+        {
+          "type": "field_image",
+          "src": Blockly.mainWorkspace.options.pathToMedia + "clock.svg",
+          "width": 24,
+          "height": 24,
+          "alt": "clock"
+        }
+      ],
       "category": Blockly.Categories.sensing,
       "checkboxInFlyout": false,
       "extensions": ["colours_sensing", "output_number"]

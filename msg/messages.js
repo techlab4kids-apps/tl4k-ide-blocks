@@ -227,7 +227,7 @@ Blockly.Msg.PROCEDURES_DEFINITION = 'define %1';
 
 // Sensing blocks
 Blockly.Msg.SENSING_TOUCHINGOBJECT = 'touching %1?';
-Blockly.Msg.SENSING_UNIX = 'unix timestamp'
+Blockly.Msg.SENSING_UNIX = '%1 unix timestamp'
 Blockly.Msg.SENSING_TOUCHINGOBJECT_POINTER = 'mouse-pointer';
 Blockly.Msg.SENSING_TOUCHINGOBJECT_EDGE = 'edge';
 Blockly.Msg.SENSING_TOUCHINGCOLOR = 'touching color %1?';
