@@ -841,7 +841,7 @@ Blockly.Blocks['sensing_unix'] = {
         }
       ],
       "category": Blockly.Categories.sensing,
-      "checkboxInFlyout": false,
+      "checkboxInFlyout": true,
       "extensions": ["colours_sensing", "output_number"]
     });
   }
